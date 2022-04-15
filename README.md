@@ -14,16 +14,18 @@
 ## Pre-requisites
 
 -   Visual Studio (I'm using Enterprise)
+-   MySQL (Workbench / XAMPP / wampserver)
 
 ## Setup Guide
 
 1. Clone this repository to your computer
-2. Visual Studio NuGet Package Manager
-	- Install [MySQL.Data]
+2. Import "5head.sql" into MySQL
+3. Visual Studio NuGet Package Manager
+    - Install all necessary dependencies including [MySQL.Data]
 
 ## Documentations
 
-- 
+-
 
 ### Background Information
 
@@ -35,4 +37,4 @@ To insert project requirements here
 
 ### Dependencies
 
-	MySQL.Data
+    MySQL.Data
