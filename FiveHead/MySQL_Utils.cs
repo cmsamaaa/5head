@@ -3,6 +3,13 @@
  * C# ASP.NET
  */
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.IO;
+using System.Configuration;
+using System.Text;
+using System.Data;
 
 // MySQL Libraries
 using MySql.Data.MySqlClient; 
@@ -11,7 +18,7 @@ namespace FiveHead.Scripts.Libraries
 {
     public class MySQL_Utils
     {
-        public MySqlConnection conn_open(string connStr)
+        public MySqlConnection conn_open(String connStr)
         {
             MySqlConnection conn = null;
 
@@ -23,21 +30,19 @@ namespace FiveHead.Scripts.Libraries
             return conn;
         }
 
-        public MySqlCommand cmd_set_connection(string cmd, MySqlConnection conn)
+        public MySqlCommand cmd_set_connection(MySqlCommand cmd, MySqlConnection conn)
         {
-            MySqlCommand mySqlCmd = null;
-
             if (conn != null)
             {
-                mySqlCmd = new MySqlCommand(cmd, conn);
+                cmd.Connection = conn;
             }
 
-            return mySqlCmd;
+            return cmd;
         }
 
-        public MySqlDataAdapter adapter_set_query(string cmd, MySqlConnection conn)
+        public MySqlDataAdapter adapter_set_query(MySqlCommand cmd)
         {
-            MySqlDataAdapter da = new MySqlDataAdapter(cmd, conn);
+            MySqlDataAdapter da = new MySqlDataAdapter(cmd);
             return da;
         }
 
