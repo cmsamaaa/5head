@@ -14,27 +14,6 @@ namespace FiveHead.DAL
         DBConn dbConn = new DBConn();
         private string errMsg;
 
-        public Account convertToAccount(DataRow dr)
-        {
-            int accountID = Convert.ToInt32(dr["accountID"].ToString());
-            string username = dr["username"].ToString();
-            string password = dr["password"].ToString();
-            string encryptID = dr["encryptID"].ToString();
-            bool deactivated = Convert.ToBoolean(dr["deactivated"].ToString());
-            return new Account(accountID, username, password, encryptID, deactivated);
-        }
-
-        public List<Account> convertToAccountList(DataTable dt)
-        {
-            List<Account> accountList = new List<Account>();
-            foreach(DataRow dr in dt.Rows)
-            {
-                Account account = convertToAccount(dr);
-                accountList.Add(account);
-            }
-            return accountList;
-        }
-
         public int CreateAccount(Account account)
         {
             StringBuilder sql;
@@ -135,7 +114,7 @@ namespace FiveHead.DAL
             }
 
             if (ds.Tables[0].Rows.Count > 0)
-                return ds.Tables[0].ToList<Account>()[0];
+                return new Account(ds.Tables[0].ToList<Account>()[0]);
             else
                 return null;
         }
@@ -173,7 +152,7 @@ namespace FiveHead.DAL
             }
 
             if (ds.Tables[0].Rows.Count > 0)
-                return ds.Tables[0].ToList<Account>()[0];
+                return new Account(ds.Tables[0].ToList<Account>()[0]);
             else
                 return null;
         }

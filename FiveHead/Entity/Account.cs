@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace FiveHead.Entity
 {
@@ -50,11 +47,11 @@ namespace FiveHead.Entity
             if (account == null)
                 throw new ArgumentNullException();
 
-            this.AccountID = account.accountID;
-            this.Username = account.username;
-            this.Password = account.password;
-            this.EncryptID = account.encryptID;
-            this.Deactivated = account.deactivated;
+            this.AccountID = account.AccountID;
+            this.Username = account.Username;
+            this.Password = account.Password;
+            this.EncryptID = account.EncryptID;
+            this.Deactivated = account.Deactivated;
         }
 
         public int AccountID { get => accountID; set => accountID = value; }
