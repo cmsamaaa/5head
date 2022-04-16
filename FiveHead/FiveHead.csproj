@@ -105,12 +105,27 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Admin\Login.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="Register.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Admin\Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\MasterPage_Admin.Master.cs">
+      <DependentUpon>MasterPage_Admin.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\MasterPage_Admin.Master.designer.cs">
+      <DependentUpon>MasterPage_Admin.Master</DependentUpon>
+    </Compile>
     <Compile Include="BLL\AccountsBLL.cs" />
     <Compile Include="DAL\AccountsDAL.cs" />
     <Compile Include="DAL\DBConn.cs" />
@@ -121,6 +136,7 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Entity\Account.cs" />
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -144,12 +160,14 @@
       <DependentUpon>Register.aspx</DependentUpon>
     </Compile>
     <Compile Include="Scripts\Libraries\Encryption.cs" />
+    <Compile Include="Scripts\Libraries\Extensions.cs" />
     <Compile Include="Scripts\Libraries\RNGCrypto.cs" />
     <Compile Include="Scripts\Libraries\MySQL_Utils.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="connections.config" />
     <Content Include="MasterPage_Login.Master" />
+    <Content Include="Admin\MasterPage_Admin.Master" />
     <None Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

@@ -1,8 +1,10 @@
 ﻿using FiveHead.Scripts.Libraries;
+using FiveHead.Entity;
 using System;
 using System.Data;
 using System.Text;
 using MySql.Data.MySqlClient;
+using System.Collections.Generic;
 
 namespace FiveHead.DAL
 {
@@ -12,7 +14,28 @@ namespace FiveHead.DAL
         DBConn dbConn = new DBConn();
         private string errMsg;
 
-        public int CreateAccount(string username, string password, string encryptID)
+        public Account convertToAccount(DataRow dr)
+        {
+            int accountID = Convert.ToInt32(dr["accountID"].ToString());
+            string username = dr["username"].ToString();
+            string password = dr["password"].ToString();
+            string encryptID = dr["encryptID"].ToString();
+            bool deactivated = Convert.ToBoolean(dr["deactivated"].ToString());
+            return new Account(accountID, username, password, encryptID, deactivated);
+        }
+
+        public List<Account> convertToAccountList(DataTable dt)
+        {
+            List<Account> accountList = new List<Account>();
+            foreach(DataRow dr in dt.Rows)
+            {
+                Account account = convertToAccount(dr);
+                accountList.Add(account);
+            }
+            return accountList;
+        }
+
+        public int CreateAccount(Account account)
         {
             StringBuilder sql;
             MySqlCommand sqlCmd;
@@ -28,9 +51,9 @@ namespace FiveHead.DAL
             try
             {
                 sqlCmd = mySQL.cmd_set_connection(sql.ToString(), conn);
-                sqlCmd.Parameters.AddWithValue("@username", username);
-                sqlCmd.Parameters.AddWithValue("@password", password);
-                sqlCmd.Parameters.AddWithValue("@encryptID", encryptID);
+                sqlCmd.Parameters.AddWithValue("@username", account.Username);
+                sqlCmd.Parameters.AddWithValue("@password", account.Password);
+                sqlCmd.Parameters.AddWithValue("@encryptID", account.EncryptID);
                 conn.Open();
                 result = sqlCmd.ExecuteNonQuery();
             }
@@ -46,14 +69,14 @@ namespace FiveHead.DAL
             return result;
         }
 
-        public DataSet GetAllAccounts()
+        public List<Account> GetAllAccounts()
         {
             StringBuilder sql;
             MySqlDataAdapter da;
-            DataSet accountData;
+            DataSet ds;
 
             MySqlConnection conn = dbConn.GetConnection();
-            accountData = new DataSet();
+            ds = new DataSet();
             sql = new StringBuilder();
             sql.AppendLine("SELECT *");
             sql.AppendLine(" ");
@@ -63,7 +86,7 @@ namespace FiveHead.DAL
             try
             {
                 da = mySQL.adapter_set_query(sql.ToString(), conn);
-                da.Fill(accountData);
+                da.Fill(ds);
             }
             catch (Exception ex)
             {
@@ -74,17 +97,20 @@ namespace FiveHead.DAL
                 dbConn.CloseConnection(conn);
             }
 
-            return accountData;
+            if (ds.Tables[0].Rows.Count > 0)
+                return ds.Tables[0].ToList<Account>();
+            else
+                return null;
         }
 
-        public DataSet GetAccountByUsername(string username)
+        public Account GetAccountByUsername(string username)
         {
             StringBuilder sql;
             MySqlDataAdapter da;
-            DataSet accountData;
+            DataSet ds;
 
             MySqlConnection conn = dbConn.GetConnection();
-            accountData = new DataSet();
+            ds = new DataSet();
             sql = new StringBuilder();
             sql.AppendLine("SELECT *");
             sql.AppendLine(" ");
@@ -97,7 +123,7 @@ namespace FiveHead.DAL
             {
                 da = mySQL.adapter_set_query(sql.ToString(), conn);
                 da.SelectCommand.Parameters.AddWithValue("username", username);
-                da.Fill(accountData);
+                da.Fill(ds);
             }
             catch (Exception ex)
             {
@@ -108,17 +134,20 @@ namespace FiveHead.DAL
                 dbConn.CloseConnection(conn);
             }
 
-            return accountData;
+            if (ds.Tables[0].Rows.Count > 0)
+                return ds.Tables[0].ToList<Account>()[0];
+            else
+                return null;
         }
 
-        public DataSet GetAccount(string username, string password)
+        public Account GetAccount(string username, string password)
         {
             StringBuilder sql;
             MySqlDataAdapter da;
-            DataSet accountData;
+            DataSet ds;
 
             MySqlConnection conn = dbConn.GetConnection();
-            accountData = new DataSet();
+            ds = new DataSet();
             sql = new StringBuilder();
             sql.AppendLine("SELECT *");
             sql.AppendLine(" ");
@@ -132,7 +161,7 @@ namespace FiveHead.DAL
                 da = mySQL.adapter_set_query(sql.ToString(), conn);
                 da.SelectCommand.Parameters.AddWithValue("username", username);
                 da.SelectCommand.Parameters.AddWithValue("password", password);
-                da.Fill(accountData);
+                da.Fill(ds);
             }
             catch (Exception ex)
             {
@@ -143,7 +172,10 @@ namespace FiveHead.DAL
                 dbConn.CloseConnection(conn);
             }
 
-            return accountData;
+            if (ds.Tables[0].Rows.Count > 0)
+                return ds.Tables[0].ToList<Account>()[0];
+            else
+                return null;
         }
 
         public int UpdatePassword(string username, string password)
