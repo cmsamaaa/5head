@@ -40,8 +40,7 @@
     -   Describes how objects interact with each other, where the front-end and DAL can indirectly communicate with each other
 
 ### Login Information
-
-    Administrator Account
+-   Administrator Account
     Username: admin
     Password: 123
 
