@@ -51,15 +51,15 @@ namespace FiveHead
             string username, password;
             bool result;
 
-            username = tb_Username.Text;
-            password = tb_Password.Text;
+            username = tb_Username.Text.Trim();
+            password = tb_Password.Text.Trim();
 
             AccountsBLL account = new AccountsBLL();
             result = account.Authenticate(username, password);
 
             if (result == true)
             {
-                Session["username"] = tb_Username.Text.Trim();
+                Session["username"] = username;
                 Response.Redirect("~/Login.aspx?login=true", true);
             }
             else

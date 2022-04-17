@@ -8,6 +8,7 @@ namespace FiveHead.Entity
         private string username;
         private string password;
         private string encryptKey;
+        private int profileID;
         private bool deactivated;
 
         public Account()
@@ -30,13 +31,14 @@ namespace FiveHead.Entity
             this.EncryptKey = encryptKey;
         }
 
-        public Account(int accountID, string username, string password, string encryptKey, bool deactivated) : this (username, password, encryptKey)
+        public Account(int accountID, string username, string password, string encryptKey, int profileID, bool deactivated) : this (username, password, encryptKey)
         {
             this.AccountID = accountID;
+            this.profileID = profileID;
             this.Deactivated = deactivated;
         }
 
-        public Account(Account account) : this(account.AccountID, account.Username, account.Password, account.EncryptKey, account.Deactivated)
+        public Account(Account account) : this(account.AccountID, account.Username, account.Password, account.EncryptKey, account.ProfileID, account.Deactivated)
         {
             if (account == null)
                 throw new ArgumentNullException();
@@ -46,6 +48,7 @@ namespace FiveHead.Entity
         public string Username { get => username; set => username = value; }
         public string Password { get => password; set => password = value; }
         public string EncryptKey { get => encryptKey; set => encryptKey = value; }
+        public int ProfileID { get => profileID; set => profileID = value; }
         public bool Deactivated { get => deactivated; set => deactivated = value; }
     }
 }

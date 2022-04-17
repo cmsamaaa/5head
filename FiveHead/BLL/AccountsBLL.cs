@@ -9,6 +9,7 @@ namespace FiveHead.BLL
     {
         Account account;
         AccountsDAL dataLayer = new AccountsDAL();
+        ProfilesBLL profilesBLL = new ProfilesBLL();
         Encryption crypt = new Encryption();
 
         public int CreateAccount(string username, string password)
@@ -44,6 +45,17 @@ namespace FiveHead.BLL
         public bool Authenticate(string username, string password)
         {
             return GetAccount(username, password) == null ? false : true;
+        }
+
+        public bool Admin_Authentication(string username, string password)
+        {
+            account = GetAccount(username, password);
+            Profile profile = profilesBLL.GetProfileByID(account.ProfileID);
+
+            if (profile.ProfileName.Equals("Administrator"))
+                return true;
+
+            return false;
         }
 
         public int UpdatePassword(string username, string password, string encryptKey)

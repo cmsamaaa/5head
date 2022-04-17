@@ -16,9 +16,9 @@ namespace FiveHead
 
             if (cb_Agree.Checked)
             {
-                username = tb_Username.Text;
-                password = tb_Password.Text;
-                confirmPassword = tb_ConfirmPassword.Text;
+                username = tb_Username.Text.Trim();
+                password = tb_Password.Text.Trim();
+                confirmPassword = tb_ConfirmPassword.Text.Trim();
 
                 if (password.Equals(confirmPassword))
                 {
