@@ -23,16 +23,16 @@ namespace FiveHead.DAL
             result = 0;
 
             sql = new StringBuilder();
-            sql.AppendLine("INSERT INTO Accounts (username, password, encryptID)");
+            sql.AppendLine("INSERT INTO Accounts (username, password, encryptKey)");
             sql.AppendLine(" ");
-            sql.AppendLine("VALUES (@username, @password, @encryptID)");
+            sql.AppendLine("VALUES (@username, @password, @encryptKey)");
             MySqlConnection conn = dbConn.GetConnection();
             try
             {
                 sqlCmd = mySQL.cmd_set_connection(sql.ToString(), conn);
                 sqlCmd.Parameters.AddWithValue("@username", account.Username);
                 sqlCmd.Parameters.AddWithValue("@password", account.Password);
-                sqlCmd.Parameters.AddWithValue("@encryptID", account.EncryptID);
+                sqlCmd.Parameters.AddWithValue("@encryptKey", account.EncryptKey);
                 conn.Open();
                 result = sqlCmd.ExecuteNonQuery();
             }

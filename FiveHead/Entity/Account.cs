@@ -7,7 +7,7 @@ namespace FiveHead.Entity
         private int accountID;
         private string username;
         private string password;
-        private string encryptID;
+        private string encryptKey;
         private bool deactivated;
 
         public Account()
@@ -20,44 +20,32 @@ namespace FiveHead.Entity
             this.Username = username;
         }
 
-        public Account(string username, string password)
+        public Account(string username, string password) : this(username)
         {
-            this.Username = username;
             this.Password = password;
         }
 
-        public Account(string username, string password, string encryptID)
+        public Account(string username, string password, string encryptKey) : this(username, password)
         {
-            this.Username = username;
-            this.Password = password;
-            this.EncryptID = encryptID;
+            this.EncryptKey = encryptKey;
         }
 
-        public Account(int accountID, string username, string password, string encryptID, bool deactivated)
+        public Account(int accountID, string username, string password, string encryptKey, bool deactivated) : this (username, password, encryptKey)
         {
             this.AccountID = accountID;
-            this.Username = username;
-            this.Password = password;
-            this.EncryptID = encryptID;
             this.Deactivated = deactivated;
         }
 
-        public Account(Account account)
+        public Account(Account account) : this(account.AccountID, account.Username, account.Password, account.EncryptKey, account.Deactivated)
         {
             if (account == null)
                 throw new ArgumentNullException();
-
-            this.AccountID = account.AccountID;
-            this.Username = account.Username;
-            this.Password = account.Password;
-            this.EncryptID = account.EncryptID;
-            this.Deactivated = account.Deactivated;
         }
 
         public int AccountID { get => accountID; set => accountID = value; }
         public string Username { get => username; set => username = value; }
         public string Password { get => password; set => password = value; }
-        public string EncryptID { get => encryptID; set => encryptID = value; }
+        public string EncryptKey { get => encryptKey; set => encryptKey = value; }
         public bool Deactivated { get => deactivated; set => deactivated = value; }
     }
 }

@@ -7,7 +7,7 @@
 -   [Pre-requisites](#pre-requisites)
 -   [Setup Guide](#setup-guide)
 -   [Documentations](#documentations)
--   [Background Information](#background-information)
+-   [Login Information](#login-information)
 -   [Requirements](#requirements)
 -   [Dependencies](#dependencies)
 
@@ -39,9 +39,11 @@
     -   Main code that controls/runs all application logic
     -   Describes how objects interact with each other, where the front-end and DAL can indirectly communicate with each other
 
-### Background Information
+### Login Information
 
-To insert background information here
+    Administrator Account
+    Username: admin
+    Password: 123
 
 ### Requirements
 
