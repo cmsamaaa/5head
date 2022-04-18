@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Apr 17, 2022 at 10:49 AM
+-- Generation Time: Apr 18, 2022 at 08:06 AM
 -- Server version: 8.0.21
 -- PHP Version: 7.3.21
 
@@ -37,14 +37,16 @@ CREATE TABLE IF NOT EXISTS `accounts` (
   `deactivated` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`accountID`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `accounts`
 --
 
 INSERT INTO `accounts` (`accountID`, `username`, `password`, `encryptKey`, `profileID`, `deactivated`) VALUES
-(0, 'admin', 'Dm9c0iFRidUmWE2KEb7e4Q==', 't4J8TQqHvILd', 1, 0);
+(0, 'admin', 'Dm9c0iFRidUmWE2KEb7e4Q==', 't4J8TQqHvILd', 1, 0),
+(5, 'staff1', 'xtA5ul3ByOEv11lk2lzdsA==', 'tyfw42kkyeoS', 4, 0),
+(6, 'staff2', 'Da7DhRJ0HUtVx+sE2eBkCA==', '5eIK8-6iPPJp', 5, 0);
 
 -- --------------------------------------------------------
 
@@ -71,6 +73,29 @@ INSERT INTO `profiles` (`profileID`, `profileName`, `permissionLevel`) VALUES
 (3, 'Restaurant Manager', 3),
 (4, 'Restaurant Staff', 2),
 (5, 'Customer', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `staffs`
+--
+
+DROP TABLE IF EXISTS `staffs`;
+CREATE TABLE IF NOT EXISTS `staffs` (
+  `staffID` int NOT NULL AUTO_INCREMENT,
+  `staffName` text NOT NULL,
+  `accountID` int NOT NULL,
+  PRIMARY KEY (`staffID`),
+  UNIQUE KEY `accountID` (`accountID`)
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `staffs`
+--
+
+INSERT INTO `staffs` (`staffID`, `staffName`, `accountID`) VALUES
+(1, 'Jackson Lim', 5),
+(2, 'Jane Ho', 6);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
