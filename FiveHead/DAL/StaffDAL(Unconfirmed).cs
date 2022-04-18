@@ -32,7 +32,7 @@ namespace FiveHead.DAL
                 sqlCmd = mySQL.cmd_set_connection(sql.ToString(), conn);
                 sqlCmd.Parameters.AddWithValue("@accountID", account.AccountID);
                 sqlCmd.Parameters.AddWithValue("@staffID", account.StaffID);
-                sqlCmd.Parameters.AddWithValue("@encryptKey", account.StaffName);
+                sqlCmd.Parameters.AddWithValue("@staffName", account.StaffName);
                 conn.Open();
                 result = sqlCmd.ExecuteNonQuery();
             }

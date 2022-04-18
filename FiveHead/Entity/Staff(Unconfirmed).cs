@@ -13,7 +13,6 @@ namespace FiveHead.Entity
 
         }
 
-
         public Staff(int accountID)
         {
             this.accountID = accountID;

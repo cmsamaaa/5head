@@ -1833,6 +1833,7 @@
     <Compile Include="BLL\AccountsBLL.cs" />
     <Compile Include="BLL\ProfilesBLL.cs" />
     <Compile Include="DAL\AccountsDAL.cs" />
+    <Compile Include="DAL\StaffDAL%28Unconfirmed%29.cs" />
     <Compile Include="DAL\DBConn.cs" />
     <Compile Include="DAL\ProfilesDAL.cs" />
     <Compile Include="Default.aspx.cs">
@@ -1843,6 +1844,7 @@
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
     <Compile Include="Entity\Account.cs" />
+    <Compile Include="Entity\Staff%28Unconfirmed%29.cs" />
     <Compile Include="Entity\Profile.cs" />
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
