@@ -36,6 +36,10 @@ namespace FiveHead.BLL
         public Account GetAccount(string username, string password)
         {
             account = GetAccountByUsername(username);
+
+            if(account == null)
+                return null;
+
             string encryptKey = account.EncryptKey;
             string encryptPassword = crypt.Encrypt(encryptKey, password);
 
