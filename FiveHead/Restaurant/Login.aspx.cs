@@ -41,7 +41,7 @@ namespace FiveHead.Restaurant
             password = tb_Password.Value.Trim();
 
             StaffsBLL staff = new StaffsBLL();
-            result = staff.Admin_Authentication(username, password);
+            result = staff.Authenticate(username, password);
 
             if (result == true)
             {
