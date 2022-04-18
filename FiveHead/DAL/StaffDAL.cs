@@ -154,7 +154,7 @@ namespace FiveHead.DAL
             return result;
         }
 
-        public int SuspendAccount(string username)
+        public int DeleteStaff(int staffID)
         {
             StringBuilder sql;
             MySqlCommand sqlCmd;
@@ -163,49 +163,14 @@ namespace FiveHead.DAL
             result = 0;
 
             sql = new StringBuilder();
-            sql.AppendLine("UPDATE Accounts");
+            sql.AppendLine("DELETE FROM Staffs");
             sql.AppendLine(" ");
-            sql.AppendLine("SET deactivated=@deactivated");
-            sql.AppendLine(" ");
-            sql.AppendLine("WHERE username=@username");
+            sql.AppendLine("WHERE staffID=@staffID");
             MySqlConnection conn = dbConn.GetConnection();
             try
             {
                 sqlCmd = mySQL.cmd_set_connection(sql.ToString(), conn);
-                sqlCmd.Parameters.AddWithValue("@username", username);
-                sqlCmd.Parameters.AddWithValue("@deactivated", true);
-                conn.Open();
-                result = sqlCmd.ExecuteNonQuery();
-            }
-            catch (Exception ex)
-            {
-                errMsg = ex.Message;
-            }
-            finally
-            {
-                dbConn.CloseConnection(conn);
-            }
-
-            return result;
-        }
-
-        public int DeleteAccount(string username)
-        {
-            StringBuilder sql;
-            MySqlCommand sqlCmd;
-            int result;
-
-            result = 0;
-
-            sql = new StringBuilder();
-            sql.AppendLine("DELETE FROM Accounts");
-            sql.AppendLine(" ");
-            sql.AppendLine("WHERE username=@username");
-            MySqlConnection conn = dbConn.GetConnection();
-            try
-            {
-                sqlCmd = mySQL.cmd_set_connection(sql.ToString(), conn);
-                sqlCmd.Parameters.AddWithValue("@username", username);
+                sqlCmd.Parameters.AddWithValue("staffID", staffID);
                 conn.Open();
                 result = sqlCmd.ExecuteNonQuery();
             }
