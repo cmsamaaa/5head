@@ -14,7 +14,7 @@ namespace FiveHead.DAL
         DBConn dbConn = new DBConn();
         private string errMsg;
 
-        public int CreateAccount(Staff account)
+        public int CreateStaff(Staff staff)
         {
             StringBuilder sql;
             MySqlCommand sqlCmd;
@@ -23,16 +23,16 @@ namespace FiveHead.DAL
             result = 0;
 
             sql = new StringBuilder();
-            sql.AppendLine("INSERT INTO Staffs (accountID, staffID, staffName)");
+            sql.AppendLine("INSERT INTO Staffs (staffID, staffName, accountID)");
             sql.AppendLine(" ");
-            sql.AppendLine("VALUES (@accountID, @staffID, @staffName)");
+            sql.AppendLine("VALUES (@staffID, @staffName, @accountID)");
             MySqlConnection conn = dbConn.GetConnection();
             try
             {
                 sqlCmd = mySQL.cmd_set_connection(sql.ToString(), conn);
-                sqlCmd.Parameters.AddWithValue("@accountID", account.AccountID);
-                sqlCmd.Parameters.AddWithValue("@staffID", account.StaffID);
-                sqlCmd.Parameters.AddWithValue("@staffName", account.StaffName);
+                sqlCmd.Parameters.AddWithValue("@staffID", staff.StaffID);
+                sqlCmd.Parameters.AddWithValue("@staffName", staff.StaffName);
+                sqlCmd.Parameters.AddWithValue("@accountID", staff.AccountID);
                 conn.Open();
                 result = sqlCmd.ExecuteNonQuery();
             }
@@ -48,7 +48,7 @@ namespace FiveHead.DAL
             return result;
         }
 
-        public List<Account> GetAllAccounts()
+        public List<Staff> GetAllStaff()
         {
             StringBuilder sql;
             MySqlDataAdapter da;
@@ -77,12 +77,12 @@ namespace FiveHead.DAL
             }
 
             if (ds.Tables[0].Rows.Count > 0)
-                return ds.Tables[0].ToList<Account>();
+                return ds.Tables[0].ToList<Staff>();
             else
                 return null;
         }
 
-        public Account GetAccountByStaffID(string staffID)
+        public Staff GetStaffByID(int staffID)
         {
             StringBuilder sql;
             MySqlDataAdapter da;
@@ -114,12 +114,12 @@ namespace FiveHead.DAL
             }
 
             if (ds.Tables[0].Rows.Count > 0)
-                return new Account(ds.Tables[0].ToList<Account>()[0]);
+                return new Staff(ds.Tables[0].ToList<Staff>()[0]);
             else
                 return null;
         }
 
-        public int UpdatePassword(string username, string password)
+        public int UpdateStaffName(int staffID, string staffName)
         {
             StringBuilder sql;
             MySqlCommand sqlCmd;
@@ -128,17 +128,17 @@ namespace FiveHead.DAL
             result = 0;
 
             sql = new StringBuilder();
-            sql.AppendLine("UPDATE Accounts");
+            sql.AppendLine("UPDATE Staffs");
             sql.AppendLine(" ");
-            sql.AppendLine("SET password=@password");
+            sql.AppendLine("SET staffName=@staffName");
             sql.AppendLine(" ");
-            sql.AppendLine("WHERE username=@username");
+            sql.AppendLine("WHERE staffID=@staffID");
             MySqlConnection conn = dbConn.GetConnection();
             try
             {
                 sqlCmd = mySQL.cmd_set_connection(sql.ToString(), conn);
-                sqlCmd.Parameters.AddWithValue("@username", username);
-                sqlCmd.Parameters.AddWithValue("@password", password);
+                sqlCmd.Parameters.AddWithValue("@staffID", staffID);
+                sqlCmd.Parameters.AddWithValue("@staffName", staffName);
                 conn.Open();
                 result = sqlCmd.ExecuteNonQuery();
             }

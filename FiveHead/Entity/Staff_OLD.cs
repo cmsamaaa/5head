@@ -2,23 +2,23 @@
 
 namespace FiveHead.Entity
 {
-    public class Staff
+    public class Staff_OLD
     {
         private int accountID;
         private int staffID;
         private string staffName;
 
-        public Staff()
+        public Staff_OLD()
         {
 
         }
 
-        public Staff(int accountID)
+        public Staff_OLD(int accountID)
         {
             this.accountID = accountID;
         }
 
-        public Staff(int accountID, int staffID, string staffName) : this(accountID)
+        public Staff_OLD(int accountID, int staffID, string staffName) : this(accountID)
         {
             this.staffID = staffID;
             this.staffName = staffName;
