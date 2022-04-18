@@ -109,6 +109,7 @@
     <Content Include="Admin\css\sb-admin-2.css" />
     <Content Include="Admin\css\sb-admin-2.min.css" />
     <Content Include="Admin\Dashboard.aspx" />
+    <Content Include="Admin\img\favicon.png" />
     <Content Include="Admin\img\galaxy-brain-1.png" />
     <Content Include="Admin\img\galaxy-brain-2.png" />
     <Content Include="Admin\img\galaxy-brain-3.png" />
@@ -1799,6 +1800,64 @@
     <Content Include="Default.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="Register.aspx" />
+    <Content Include="Restaurant\css\style.css" />
+    <Content Include="Restaurant\Dashboard.aspx" />
+    <Content Include="Restaurant\images\auth\lockscreen-bg.jpg" />
+    <Content Include="Restaurant\images\auth\login-bg.jpg" />
+    <Content Include="Restaurant\images\auth\register-bg.jpg" />
+    <Content Include="Restaurant\images\faces\face1.jpg" />
+    <Content Include="Restaurant\images\faces\face10.jpg" />
+    <Content Include="Restaurant\images\faces\face11.jpg" />
+    <Content Include="Restaurant\images\faces\face12.jpg" />
+    <Content Include="Restaurant\images\faces\face13.jpg" />
+    <Content Include="Restaurant\images\faces\face14.jpg" />
+    <Content Include="Restaurant\images\faces\face15.jpg" />
+    <Content Include="Restaurant\images\faces\face16.jpg" />
+    <Content Include="Restaurant\images\faces\face17.jpg" />
+    <Content Include="Restaurant\images\faces\face18.jpg" />
+    <Content Include="Restaurant\images\faces\face19.jpg" />
+    <Content Include="Restaurant\images\faces\face2.jpg" />
+    <Content Include="Restaurant\images\faces\face20.jpg" />
+    <Content Include="Restaurant\images\faces\face21.jpg" />
+    <Content Include="Restaurant\images\faces\face22.jpg" />
+    <Content Include="Restaurant\images\faces\face23.jpg" />
+    <Content Include="Restaurant\images\faces\face24.jpg" />
+    <Content Include="Restaurant\images\faces\face25.jpg" />
+    <Content Include="Restaurant\images\faces\face26.jpg" />
+    <Content Include="Restaurant\images\faces\face27.jpg" />
+    <Content Include="Restaurant\images\faces\face3.jpg" />
+    <Content Include="Restaurant\images\faces\face4.jpg" />
+    <Content Include="Restaurant\images\faces\face5.jpg" />
+    <Content Include="Restaurant\images\faces\face6.jpg" />
+    <Content Include="Restaurant\images\faces\face7.jpg" />
+    <Content Include="Restaurant\images\faces\face8.jpg" />
+    <Content Include="Restaurant\images\faces\face9.jpg" />
+    <Content Include="Restaurant\images\favicon.png" />
+    <Content Include="Restaurant\images\logo-mini.svg" />
+    <Content Include="Restaurant\images\logo.svg" />
+    <Content Include="Restaurant\images\undraw_profile.svg" />
+    <Content Include="Restaurant\js\chart.js" />
+    <Content Include="Restaurant\js\Chart.min.js" />
+    <Content Include="Restaurant\js\dashboard.js" />
+    <Content Include="Restaurant\js\data-table.js" />
+    <Content Include="Restaurant\js\dataTables.bootstrap4.js" />
+    <Content Include="Restaurant\js\documentation.js" />
+    <Content Include="Restaurant\js\file-upload.js" />
+    <Content Include="Restaurant\js\hoverable-collapse.js" />
+    <Content Include="Restaurant\js\jquery.dataTables.js" />
+    <Content Include="Restaurant\js\off-canvas.js" />
+    <Content Include="Restaurant\js\tabs.js" />
+    <Content Include="Restaurant\js\template.js" />
+    <Content Include="Restaurant\Login.aspx" />
+    <Content Include="Restaurant\Logout.aspx" />
+    <Content Include="Restaurant\vendors\base\vendor.bundle.base.css" />
+    <Content Include="Restaurant\vendors\base\vendor.bundle.base.js" />
+    <Content Include="Restaurant\vendors\chart.js\Chart.min.js" />
+    <Content Include="Restaurant\vendors\datatables.net-bs4\dataTables.bootstrap4.css" />
+    <Content Include="Restaurant\vendors\datatables.net-bs4\dataTables.bootstrap4.js" />
+    <Content Include="Restaurant\vendors\datatables.net\jquery.dataTables.js" />
+    <Content Include="Restaurant\vendors\mdi\css\materialdesignicons.min.css" />
+    <Content Include="Restaurant\vendors\mdi\fonts\materialdesignicons-webfont.svg" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -1833,7 +1892,7 @@
     <Compile Include="BLL\AccountsBLL.cs" />
     <Compile Include="BLL\ProfilesBLL.cs" />
     <Compile Include="DAL\AccountsDAL.cs" />
-    <Compile Include="DAL\StaffDAL.cs" />
+    <Compile Include="DAL\StaffsDAL.cs" />
     <Compile Include="DAL\DBConn.cs" />
     <Compile Include="DAL\ProfilesDAL.cs" />
     <Compile Include="Default.aspx.cs">
@@ -1868,38 +1927,43 @@
     <Compile Include="Register.aspx.designer.cs">
       <DependentUpon>Register.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Restaurant\Dashboard.aspx.cs">
+      <DependentUpon>Dashboard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Restaurant\Dashboard.aspx.designer.cs">
+      <DependentUpon>Dashboard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Restaurant\Logout.aspx.cs">
+      <DependentUpon>Logout.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Restaurant\Logout.aspx.designer.cs">
+      <DependentUpon>Logout.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Restaurant\MasterPage_Restaurant.Master.cs">
+      <DependentUpon>MasterPage_Restaurant.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Restaurant\MasterPage_Restaurant.Master.designer.cs">
+      <DependentUpon>MasterPage_Restaurant.Master</DependentUpon>
+    </Compile>
     <Compile Include="Scripts\Libraries\Encryption.cs" />
     <Compile Include="Scripts\Libraries\Extensions.cs" />
     <Compile Include="Scripts\Libraries\RNGCrypto.cs" />
     <Compile Include="Scripts\Libraries\MySQL_Utils.cs" />
+    <Compile Include="Restaurant\Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Restaurant\Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="connections.config" />
     <Content Include="MasterPage_Login.Master" />
     <Content Include="Admin\MasterPage_Admin.Master" />
-    <Content Include="Admin\scss\navs\_global.scss" />
-    <Content Include="Admin\scss\navs\_sidebar.scss" />
-    <Content Include="Admin\scss\navs\_topbar.scss" />
-    <Content Include="Admin\scss\utilities\_animation.scss" />
-    <Content Include="Admin\scss\utilities\_background.scss" />
-    <Content Include="Admin\scss\utilities\_border.scss" />
-    <Content Include="Admin\scss\utilities\_display.scss" />
-    <Content Include="Admin\scss\utilities\_progress.scss" />
-    <Content Include="Admin\scss\utilities\_rotate.scss" />
-    <Content Include="Admin\scss\utilities\_text.scss" />
-    <Content Include="Admin\scss\sb-admin-2.scss" />
-    <Content Include="Admin\scss\_buttons.scss" />
-    <Content Include="Admin\scss\_cards.scss" />
-    <Content Include="Admin\scss\_charts.scss" />
-    <Content Include="Admin\scss\_dropdowns.scss" />
-    <Content Include="Admin\scss\_error.scss" />
-    <Content Include="Admin\scss\_footer.scss" />
-    <Content Include="Admin\scss\_global.scss" />
-    <Content Include="Admin\scss\_login.scss" />
-    <Content Include="Admin\scss\_mixins.scss" />
-    <Content Include="Admin\scss\_navs.scss" />
-    <Content Include="Admin\scss\_utilities.scss" />
-    <Content Include="Admin\scss\_variables.scss" />
     <Content Include="Admin\vendor\bootstrap\js\bootstrap.bundle.js.map" />
     <Content Include="Admin\vendor\bootstrap\js\bootstrap.bundle.min.js.map" />
     <Content Include="Admin\vendor\bootstrap\js\bootstrap.js.map" />
@@ -2050,6 +2114,33 @@
     <Content Include="Admin\vendor\jquery\jquery.min.map" />
     <Content Include="Admin\vendor\jquery\jquery.slim.min.map" />
     <None Include="packages.config" />
+    <Content Include="Restaurant\css\maps\style.css.map" />
+    <Content Include="Restaurant\fonts\Roboto\.DS_Store" />
+    <Content Include="Restaurant\fonts\Roboto\Roboto-Black.eot" />
+    <Content Include="Restaurant\fonts\Roboto\Roboto-Black.ttf" />
+    <Content Include="Restaurant\fonts\Roboto\Roboto-Black.woff" />
+    <Content Include="Restaurant\fonts\Roboto\Roboto-Black.woff2" />
+    <Content Include="Restaurant\fonts\Roboto\Roboto-Bold.eot" />
+    <Content Include="Restaurant\fonts\Roboto\Roboto-Bold.ttf" />
+    <Content Include="Restaurant\fonts\Roboto\Roboto-Bold.woff" />
+    <Content Include="Restaurant\fonts\Roboto\Roboto-Bold.woff2" />
+    <Content Include="Restaurant\fonts\Roboto\Roboto-Light.eot" />
+    <Content Include="Restaurant\fonts\Roboto\Roboto-Light.ttf" />
+    <Content Include="Restaurant\fonts\Roboto\Roboto-Light.woff" />
+    <Content Include="Restaurant\fonts\Roboto\Roboto-Light.woff2" />
+    <Content Include="Restaurant\fonts\Roboto\Roboto-Medium.eot" />
+    <Content Include="Restaurant\fonts\Roboto\Roboto-Medium.ttf" />
+    <Content Include="Restaurant\fonts\Roboto\Roboto-Medium.woff" />
+    <Content Include="Restaurant\fonts\Roboto\Roboto-Medium.woff2" />
+    <Content Include="Restaurant\fonts\Roboto\Roboto-Regular.eot" />
+    <Content Include="Restaurant\fonts\Roboto\Roboto-Regular.ttf" />
+    <Content Include="Restaurant\fonts\Roboto\Roboto-Regular.woff" />
+    <Content Include="Restaurant\fonts\Roboto\Roboto-Regular.woff2" />
+    <Content Include="Restaurant\vendors\mdi\fonts\materialdesignicons-webfont.eot" />
+    <Content Include="Restaurant\vendors\mdi\fonts\materialdesignicons-webfont.ttf" />
+    <Content Include="Restaurant\vendors\mdi\fonts\materialdesignicons-webfont.woff" />
+    <Content Include="Restaurant\vendors\mdi\fonts\materialdesignicons-webfont.woff2" />
+    <Content Include="Restaurant\MasterPage_Restaurant.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
