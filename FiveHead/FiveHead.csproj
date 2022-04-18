@@ -1833,6 +1833,7 @@
     <Content Include="Restaurant\images\faces\face8.jpg" />
     <Content Include="Restaurant\images\faces\face9.jpg" />
     <Content Include="Restaurant\images\favicon.png" />
+    <Content Include="Restaurant\images\logo-black.svg" />
     <Content Include="Restaurant\images\logo-mini.svg" />
     <Content Include="Restaurant\images\logo.svg" />
     <Content Include="Restaurant\images\undraw_profile.svg" />

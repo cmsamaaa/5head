@@ -21409,6 +21409,7 @@ dl li {
   height: 34px;
   margin: auto;
   vertical-align: middle;
+  fill: black;
 }
 
 .navbar .navbar-brand-wrapper .navbar-brand-inner-wrapper .navbar-toggler {
