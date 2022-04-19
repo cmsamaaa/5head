@@ -1,13 +1,8 @@
-﻿$(document).ready(function () {
-    RandomLoginImage();
-});
-
-function RandomLoginImage() {
-    const bg = [
-        "url(img/galaxy-brain-1.png)",
-        "url(img/galaxy-brain-2.png)",
-        "url(img/galaxy-brain-3.png)"
-    ];
-    const i = Math.floor(Math.random() * 3);
-    $(".bg-login-image").css("background-image", bg[i])
+﻿function getParameterByName(name, url = window.location.href) {
+    name = name.replace(/[\[\]]/g, '\\$&');
+    var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, ' '));
 }
