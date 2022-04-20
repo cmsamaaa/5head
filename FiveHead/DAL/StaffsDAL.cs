@@ -23,7 +23,7 @@ namespace FiveHead.DAL
             result = 0;
 
             sql = new StringBuilder();
-            sql.AppendLine("INSERT INTO Staffs (staffID, staffName, accountID)");
+            sql.AppendLine("INSERT INTO Staffs (staffID, firstName, lastName, accountID)");
             sql.AppendLine(" ");
             sql.AppendLine("VALUES (@staffID, @staffName, @accountID)");
             MySqlConnection conn = dbConn.GetConnection();
@@ -31,7 +31,8 @@ namespace FiveHead.DAL
             {
                 sqlCmd = mySQL.cmd_set_connection(sql.ToString(), conn);
                 sqlCmd.Parameters.AddWithValue("@staffID", staff.StaffID);
-                sqlCmd.Parameters.AddWithValue("@staffName", staff.StaffName);
+                sqlCmd.Parameters.AddWithValue("@firstName", staff.FirstName);
+                sqlCmd.Parameters.AddWithValue("@lastName", staff.LastName);
                 sqlCmd.Parameters.AddWithValue("@accountID", staff.AccountID);
                 conn.Open();
                 result = sqlCmd.ExecuteNonQuery();
@@ -119,7 +120,7 @@ namespace FiveHead.DAL
                 return null;
         }
 
-        public int UpdateStaffName(int staffID, string staffName)
+        public int UpdateStaffSalary(int staffID, double salary)
         {
             StringBuilder sql;
             MySqlCommand sqlCmd;
@@ -130,7 +131,7 @@ namespace FiveHead.DAL
             sql = new StringBuilder();
             sql.AppendLine("UPDATE Staffs");
             sql.AppendLine(" ");
-            sql.AppendLine("SET staffName=@staffName");
+            sql.AppendLine("SET salary=@salary");
             sql.AppendLine(" ");
             sql.AppendLine("WHERE staffID=@staffID");
             MySqlConnection conn = dbConn.GetConnection();
@@ -138,7 +139,7 @@ namespace FiveHead.DAL
             {
                 sqlCmd = mySQL.cmd_set_connection(sql.ToString(), conn);
                 sqlCmd.Parameters.AddWithValue("@staffID", staffID);
-                sqlCmd.Parameters.AddWithValue("@staffName", staffName);
+                sqlCmd.Parameters.AddWithValue("@salary", salary);
                 conn.Open();
                 result = sqlCmd.ExecuteNonQuery();
             }

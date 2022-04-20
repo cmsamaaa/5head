@@ -5,7 +5,9 @@ namespace FiveHead.Entity
     public class Staff
     {
         private int staffID;
-        private string staffName;
+        private string firstName;
+        private string lastName;
+        private double salary;
         private int accountID;
 
         public Staff()
@@ -18,24 +20,33 @@ namespace FiveHead.Entity
             this.StaffID = staffID;
         }
 
-        public Staff(int staffID, string staffName) : this(staffID)
+        public Staff(int staffID, string firstName, string lastName) : this(staffID)
         {
-            this.StaffName = staffName;
+            this.FirstName = firstName;
+            this.LastName = lastName;
         }
 
-        public Staff(int staffID, string staffName, int accountID) : this(staffID, staffName)
+        public Staff(int staffID, string firstName, string lastName, int accountID) : this(staffID, firstName, lastName)
         {
             this.AccountID = accountID;
         }
 
-        public Staff(Staff staff) : this(staff.StaffID, staff.StaffName, staff.AccountID)
+        public Staff(int staffID, string firstName, string lastName, double salary, int accountID) : this(staffID, firstName, lastName, accountID)
+        {
+            this.AccountID = accountID;
+            this.Salary = salary;
+        }
+
+        public Staff(Staff staff) : this(staff.StaffID, staff.firstName, staff.LastName, staff.Salary, staff.AccountID)
         {
             if (staff == null)
                 throw new ArgumentNullException();
         }
 
         public int StaffID { get => staffID; set => staffID = value; }
-        public string StaffName { get => staffName; set => staffName = value; }
+        public string FirstName { get => firstName; set => firstName = value; }
+        public string LastName { get => lastName; set => lastName = value; }
+        public double Salary { get => salary; set => salary = value; }
         public int AccountID { get => accountID; set => accountID = value; }
     }
 }
