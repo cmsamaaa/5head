@@ -7,7 +7,7 @@
 
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">New User Profile</h1>
+            <h1 class="h3 mb-0 text-gray-800">Create User Profile</h1>
         </div>
 
         <div class="row">
@@ -17,7 +17,7 @@
                 <!-- Basic Card Example -->
                 <div class="card shadow mb-4 border-bottom-primary">
                     <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">Create Profile</h6>
+                        <h6 class="m-0 font-weight-bold text-primary">User Profile Details</h6>
                     </div>
                     <div class="card-body p-0">
                         <!-- Success Alert -->

@@ -1,10 +1,5 @@
 ﻿using FiveHead.BLL;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace FiveHead.Admin
 {
@@ -32,14 +27,6 @@ namespace FiveHead.Admin
                 Response.Redirect("CreateProfile.aspx?create=true");
             else
                 Response.Redirect("CreateProfile.aspx?create=false");
-        }
-
-        private void ShowMessage(string Message)
-        {
-            if (!ClientScript.IsClientScriptBlockRegistered("MyMessage"))
-            {
-                ClientScript.RegisterClientScriptBlock(this.GetType(), "MyMessage", "alert('" + Message + "');", true);
-            }
         }
     }
 }
