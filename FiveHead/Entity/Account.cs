@@ -26,12 +26,13 @@ namespace FiveHead.Entity
             this.Password = password;
         }
 
-        public Account(string username, string password, string encryptKey) : this(username, password)
+        public Account(string username, string password, string encryptKey, int profileID) : this(username, password)
         {
             this.EncryptKey = encryptKey;
+            this.ProfileID = profileID;
         }
 
-        public Account(int accountID, string username, string password, string encryptKey, int profileID, bool deactivated) : this (username, password, encryptKey)
+        public Account(int accountID, string username, string password, string encryptKey, int profileID, bool deactivated) : this (username, password, encryptKey, profileID)
         {
             this.AccountID = accountID;
             this.profileID = profileID;

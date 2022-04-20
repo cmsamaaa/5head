@@ -22,5 +22,19 @@ namespace FiveHead.BLL
         {
             return dataLayer.GetProfileByID(profile);
         }
+
+        public List<Profile> GetAllProfiles()
+        {
+            return dataLayer.GetAllProfiles();
+        }
+
+        public List<string> GetAllProfileNames()
+        {
+            List<Profile> profileList = GetAllProfiles();
+            List<string> list = new List<String>();
+            foreach (Profile profile in profileList)
+                list.Add(profile.ProfileName);
+            return list;
+        }
     }
 }

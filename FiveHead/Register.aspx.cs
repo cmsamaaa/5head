@@ -24,7 +24,7 @@ namespace FiveHead
                 {
                     AccountsBLL account = new AccountsBLL();
 
-                    int result = account.CreateAccount(username, password);
+                    int result = account.CreateAccount(username, password, 5);
 
                     if (result == 1)
                         Response.Redirect("~/Login.aspx?register=true", true);

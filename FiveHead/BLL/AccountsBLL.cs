@@ -13,13 +13,13 @@ namespace FiveHead.BLL
         ProfilesBLL profilesBLL = new ProfilesBLL();
         Encryption crypt = new Encryption();
 
-        public int CreateAccount(string username, string password)
+        public int CreateAccount(string username, string password, int profileID)
         {
             string encryptKey, encryptPassword;
 
             encryptKey = RNGCrypto.GenerateIdentifier(12);
             encryptPassword = crypt.Encrypt(encryptKey, password);
-            account = new Account(username, encryptPassword, encryptKey);
+            account = new Account(username, encryptPassword, encryptKey, profileID);
 
             return dataLayer.CreateAccount(account);
         }
@@ -32,6 +32,15 @@ namespace FiveHead.BLL
         public Account GetAccountByUsername(string username)
         {
             return dataLayer.GetAccountByUsername(username);
+        }
+
+        public int GetAccountIDByUsername(string username)
+        {
+            account = GetAccountByUsername(username);
+            if (account != null)
+                return account.AccountID;
+            else
+                return 0;
         }
 
         public Account GetAccount(string username, string password)

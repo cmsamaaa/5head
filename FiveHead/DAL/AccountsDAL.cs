@@ -23,9 +23,9 @@ namespace FiveHead.DAL
             result = 0;
 
             sql = new StringBuilder();
-            sql.AppendLine("INSERT INTO Accounts (username, password, encryptKey)");
+            sql.AppendLine("INSERT INTO Accounts (username, password, encryptKey, profileID)");
             sql.AppendLine(" ");
-            sql.AppendLine("VALUES (@username, @password, @encryptKey)");
+            sql.AppendLine("VALUES (@username, @password, @encryptKey, @profileID)");
             MySqlConnection conn = dbConn.GetConnection();
             try
             {
@@ -33,6 +33,7 @@ namespace FiveHead.DAL
                 sqlCmd.Parameters.AddWithValue("@username", account.Username);
                 sqlCmd.Parameters.AddWithValue("@password", account.Password);
                 sqlCmd.Parameters.AddWithValue("@encryptKey", account.EncryptKey);
+                sqlCmd.Parameters.AddWithValue("@profileID", account.ProfileID);
                 conn.Open();
                 result = sqlCmd.ExecuteNonQuery();
             }

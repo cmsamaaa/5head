@@ -7,8 +7,14 @@ namespace FiveHead.BLL
     {
         Account account;
         Profile profile;
+        StaffsDAL dataLayer = new StaffsDAL();
         AccountsBLL accountsBLL = new AccountsBLL();
         ProfilesBLL profilesBLL = new ProfilesBLL();
+
+        public int CreateStaff(string firstName, string lastName, int accountID)
+        {
+            return dataLayer.CreateStaff(firstName, lastName, accountID);
+        }
 
         public bool Authenticate(string username, string password)
         {

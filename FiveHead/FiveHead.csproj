@@ -105,6 +105,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Admin\CreateAccount.aspx" />
     <Content Include="Admin\CreateProfile.aspx" />
     <Content Include="Admin\css\custom.css" />
     <Content Include="Admin\css\sb-admin-2.css" />
@@ -1863,6 +1864,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Admin\CreateAccount.aspx.cs">
+      <DependentUpon>CreateAccount.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\CreateAccount.aspx.designer.cs">
+      <DependentUpon>CreateAccount.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Admin\CreateProfile.aspx.cs">
       <DependentUpon>CreateProfile.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

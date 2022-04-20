@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Apr 20, 2022 at 10:50 AM
+-- Generation Time: Apr 20, 2022 at 01:28 PM
 -- Server version: 8.0.21
 -- PHP Version: 7.3.21
 
@@ -33,11 +33,11 @@ CREATE TABLE IF NOT EXISTS `accounts` (
   `username` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `password` text NOT NULL,
   `encryptKey` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `profileID` int NOT NULL DEFAULT '5',
+  `profileID` int NOT NULL,
   `deactivated` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`accountID`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `accounts`
@@ -90,7 +90,7 @@ CREATE TABLE IF NOT EXISTS `staffs` (
   `accountID` int NOT NULL,
   PRIMARY KEY (`staffID`),
   UNIQUE KEY `accountID` (`accountID`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `staffs`

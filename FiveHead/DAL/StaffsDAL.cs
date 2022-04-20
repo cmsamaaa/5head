@@ -14,7 +14,7 @@ namespace FiveHead.DAL
         DBConn dbConn = new DBConn();
         private string errMsg;
 
-        public int CreateStaff(Staff staff)
+        public int CreateStaff(string firstName, string lastName, int accountID)
         {
             StringBuilder sql;
             MySqlCommand sqlCmd;
@@ -23,17 +23,16 @@ namespace FiveHead.DAL
             result = 0;
 
             sql = new StringBuilder();
-            sql.AppendLine("INSERT INTO Staffs (staffID, firstName, lastName, accountID)");
+            sql.AppendLine("INSERT INTO Staffs (firstName, lastName, accountID)");
             sql.AppendLine(" ");
-            sql.AppendLine("VALUES (@staffID, @staffName, @accountID)");
+            sql.AppendLine("VALUES (@firstName, @lastName, @accountID)");
             MySqlConnection conn = dbConn.GetConnection();
             try
             {
                 sqlCmd = mySQL.cmd_set_connection(sql.ToString(), conn);
-                sqlCmd.Parameters.AddWithValue("@staffID", staff.StaffID);
-                sqlCmd.Parameters.AddWithValue("@firstName", staff.FirstName);
-                sqlCmd.Parameters.AddWithValue("@lastName", staff.LastName);
-                sqlCmd.Parameters.AddWithValue("@accountID", staff.AccountID);
+                sqlCmd.Parameters.AddWithValue("@firstName", firstName);
+                sqlCmd.Parameters.AddWithValue("@lastName", lastName);
+                sqlCmd.Parameters.AddWithValue("@accountID", accountID);
                 conn.Open();
                 result = sqlCmd.ExecuteNonQuery();
             }
