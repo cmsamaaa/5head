@@ -5,6 +5,8 @@ namespace FiveHead
 {
     public partial class Register : System.Web.UI.Page
     {
+        ProfilesBLL profilesBLL = new ProfilesBLL();
+
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -24,7 +26,7 @@ namespace FiveHead
                 {
                     AccountsBLL account = new AccountsBLL();
 
-                    int result = account.CreateAccount(username, password, 5);
+                    int result = account.CreateAccount(username, password, profilesBLL.GetProfileIDByName("Customer"));
 
                     if (result == 1)
                         Response.Redirect("~/Login.aspx?register=true", true);
