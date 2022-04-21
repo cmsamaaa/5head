@@ -21,49 +21,88 @@ namespace FiveHead.Admin
         private void SetUserProfiles()
         {
             profilesBLL = new ProfilesBLL();
-            profilesBLL.GetAllProfiles().ForEach(profile => ddl_UserProfile.Items.Add(new ListItem(profile.ProfileName, profile.ProfileID.ToString())));
+            profilesBLL.GetAllProfiles().ForEach(profile =>
+            {
+                if (!profile.ProfileName.Equals("Administrator"))
+                    ddl_UserProfile.Items.Add(new ListItem(profile.ProfileName, profile.ProfileID.ToString()));
+            });
         }
 
         protected void btn_Create_Click(object sender, EventArgs e)
         {
             HideAllPlaceHolders();
 
-            if (ddl_AccountType.Value.Equals("staff"))
+            switch (ddl_AccountType.Value)
             {
-                accountBLL = new AccountsBLL();
-                staffsBLL = new StaffsBLL();
+                case "customer":
+                    PlaceHolder_TempMsg.Visible = true;
+                    break;
+                case "staff":
+                    CreateStaffAccount();
+                    break;
+                case "administrator":
+                    CreateAdminAccount();
+                    break;
+                default:
+                    PlaceHolder_TempMsg.Visible = true;
+                    break;
+            }
+                
+        }
 
-                string firstName = tb_FirstName.Value;
-                string lastName = tb_LastName.Value;
-                string username = tb_Username.Value;
-                string password = tb_Password.Value;
-                string repeatPassword = tb_RepeatPassword.Value;
-                string strProfileID = ddl_UserProfile.Value;
+        private void CreateStaffAccount()
+        {
+            accountBLL = new AccountsBLL();
+            staffsBLL = new StaffsBLL();
 
-                bool isEmptyField = String.IsNullOrEmpty(firstName) || String.IsNullOrEmpty(lastName) || String.IsNullOrEmpty(username) ||
-                    String.IsNullOrEmpty(password) || String.IsNullOrEmpty(repeatPassword) || String.IsNullOrEmpty(strProfileID);
+            string firstName = tb_FirstName.Value;
+            string lastName = tb_LastName.Value;
+            string username = tb_Username.Value;
+            string password = tb_Password.Value;
+            string repeatPassword = tb_RepeatPassword.Value;
+            string strProfileID = ddl_UserProfile.Value;
 
-                if (!isEmptyField)
+            bool isEmptyField = String.IsNullOrEmpty(firstName) || String.IsNullOrEmpty(lastName) || String.IsNullOrEmpty(username) ||
+                String.IsNullOrEmpty(password) || String.IsNullOrEmpty(repeatPassword) || String.IsNullOrEmpty(strProfileID);
+
+            if (!isEmptyField)
+            {
+                int result = accountBLL.CreateAccount(username, password, Convert.ToInt32(strProfileID));
+                if (result == 1)
                 {
-                    int result = accountBLL.CreateAccount(username, password, Convert.ToInt32(strProfileID));
-                    if (result == 1)
-                    {
-                        result = 0;
-                        result = staffsBLL.CreateStaff(firstName, lastName, accountBLL.GetAccountIDByUsername(username));
+                    result = 0;
+                    result = staffsBLL.CreateStaff(firstName, lastName, accountBLL.GetAccountIDByUsername(username));
 
-                        if (result == 1)
-                            Response.Redirect("CreateAccount.aspx?create=true", true);
-                        else
-                            PlaceHolder_Error_Staff.Visible = true;
-                    }
+                    if (result == 1)
+                        Response.Redirect("CreateAccount.aspx?create=true", true);
                     else
-                        PlaceHolder_Error_Account.Visible = true;
+                        PlaceHolder_Error_Staff.Visible = true;
                 }
                 else
-                    PlaceHolder_EmptyFields.Visible = true;
+                    PlaceHolder_Error_Account.Visible = true;
             }
             else
-                PlaceHolder_TempMsg.Visible = true;
+                PlaceHolder_EmptyFields.Visible = true;
+        }
+
+        private void CreateAdminAccount()
+        {
+            accountBLL = new AccountsBLL();
+
+            string username = tb_Username.Value;
+            string password = tb_Password.Value;
+            string repeatPassword = tb_RepeatPassword.Value;
+
+            bool isEmptyField = String.IsNullOrEmpty(username) || String.IsNullOrEmpty(password) || String.IsNullOrEmpty(repeatPassword);
+
+            if (!isEmptyField)
+            {
+                int result = accountBLL.CreateAdminAccount(Session["adminSession"].ToString(), username, password);
+                if (result == 1)
+                    Response.Redirect("CreateAccount.aspx?create=true", true);
+                else
+                    PlaceHolder_Error_Account.Visible = true;
+            }
         }
 
         private void HideAllPlaceHolders()

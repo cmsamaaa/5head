@@ -1,6 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin/MasterPage_Admin.Master" AutoEventWireup="true" CodeBehind="CreateAccount.aspx.cs" Inherits="FiveHead.Admin.CreateAccount" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js'></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder_PageContent" runat="server">
     <div class="container-fluid">
@@ -27,7 +28,7 @@
                             <div class="row justify-content-center">
                                 <div class="alert alert-danger alert-dismissible fade show col-7 mt-4" role="alert">
                                     <i class="fas fa-exclamation-triangle"></i>
-                                    Only Staff creation works for now! Still work in progress... TT
+                                    Customer account creation is still work in progress... TT
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -102,25 +103,6 @@
                                 <div class="p-5">
                                     <div class="form-group row">
                                         <div class="col-sm-6 mb-3 mb-sm-0">
-                                            <input runat="server" type="text" class="form-control form-control-user" id="tb_FirstName" placeholder="First Name">
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <input runat="server" type="text" class="form-control form-control-user" id="tb_LastName" placeholder="Last Name">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <input runat="server" type="email" class="form-control form-control-user" id="tb_Username" placeholder="Username" required>
-                                    </div>
-                                    <div class="form-group row">
-                                        <div class="col-sm-6 mb-3 mb-sm-0">
-                                            <input runat="server" type="password" class="form-control form-control-user" id="tb_Password" placeholder="Password" required>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <input runat="server" type="password" class="form-control form-control-user" id="tb_RepeatPassword" placeholder="Repeat Password" required>
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <div class="col-sm-6 mb-3 mb-sm-0">
                                             <select runat="server" id="ddl_AccountType" class="custom-select" required>
                                                 <option selected disabled>Account Type</option>
                                                 <option value="customer">Customer</option>
@@ -129,9 +111,28 @@
                                             </select>
                                         </div>
                                         <div class="col-sm-6">
-                                            <select runat="server" id="ddl_UserProfile" class="custom-select" required>
+                                            <select runat="server" id="ddl_UserProfile" class="custom-select">
                                                 <option selected disabled>User Profile</option>
                                             </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row row-name">
+                                        <div class="col-sm-6 mb-3 mb-sm-0">
+                                            <input runat="server" type="text" class="form-control form-control-user" id="tb_FirstName" placeholder="First Name">
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <input runat="server" type="text" class="form-control form-control-user" id="tb_LastName" placeholder="Last Name">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <input runat="server" type="text" class="form-control form-control-user" id="tb_Username" placeholder="Username" required>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-6 mb-3 mb-sm-0">
+                                            <input runat="server" type="password" class="form-control form-control-user" id="tb_Password" placeholder="Password" required>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <input runat="server" type="password" class="form-control form-control-user" id="tb_RepeatPassword" placeholder="Repeat Password" required>
                                         </div>
                                     </div>
                                     <button runat="server" id="btn_Create" class="btn btn-primary btn-user btn-block" onserverclick="btn_Create_Click" type="button">Create</button>
@@ -155,6 +156,17 @@
                 $('.success-alert-box').show();
             if (queryStr == "false")
                 $('.danger-alert-box').show();
+
+            $('#ContentPlaceHolder_PageContent_ddl_AccountType').on('change', function () {
+                if (this.value === "administrator") {
+                    $('.row-name').fadeOut();
+                    $('#ContentPlaceHolder_PageContent_ddl_UserProfile').fadeOut();
+                }
+                else {
+                    $('.row-name').fadeIn();
+                    $('#ContentPlaceHolder_PageContent_ddl_UserProfile').fadeIn();
+                }
+            });
         });
     </script>
 </asp:Content>

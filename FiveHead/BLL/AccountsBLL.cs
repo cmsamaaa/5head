@@ -15,13 +15,29 @@ namespace FiveHead.BLL
 
         public int CreateAccount(string username, string password, int profileID)
         {
-            string encryptKey, encryptPassword;
+            if (!CheckUsernameExist(username))
+            {
+                string encryptKey, encryptPassword;
 
-            encryptKey = RNGCrypto.GenerateIdentifier(12);
-            encryptPassword = crypt.Encrypt(encryptKey, password);
-            account = new Account(username, encryptPassword, encryptKey, profileID);
+                encryptKey = RNGCrypto.GenerateIdentifier(12);
+                encryptPassword = crypt.Encrypt(encryptKey, password);
+                account = new Account(username, encryptPassword, encryptKey, profileID);
 
-            return dataLayer.CreateAccount(account);
+                return dataLayer.CreateAccount(account);
+            }
+            else
+                return 0;
+        }
+
+        public int CreateAdminAccount(string sessionUser, string username, string password)
+        {
+            account = GetAccountByUsername(sessionUser);
+            string profileName = profilesBLL.GetProfileNameByID(account.ProfileID);
+
+            if (profileName.Equals("Administrator"))
+                return CreateAccount(username, password, profilesBLL.GetProfileIDByName("Administrator"));
+            else
+                return 0;
         }
 
         public List<Account> GetAllAccounts()
@@ -32,6 +48,12 @@ namespace FiveHead.BLL
         public Account GetAccountByUsername(string username)
         {
             return dataLayer.GetAccountByUsername(username);
+        }
+
+        public bool CheckUsernameExist(string username)
+        {
+            account = GetAccountByUsername(username);
+            return account != null;
         }
 
         public int GetAccountIDByUsername(string username)

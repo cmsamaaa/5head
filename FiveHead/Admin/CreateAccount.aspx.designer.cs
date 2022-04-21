@@ -51,6 +51,24 @@ namespace FiveHead.Admin
         protected global::System.Web.UI.WebControls.PlaceHolder PlaceHolder_Error_Staff;
 
         /// <summary>
+        /// ddl_AccountType control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlSelect ddl_AccountType;
+
+        /// <summary>
+        /// ddl_UserProfile control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlSelect ddl_UserProfile;
+
+        /// <summary>
         /// tb_FirstName control.
         /// </summary>
         /// <remarks>
@@ -75,7 +93,7 @@ namespace FiveHead.Admin
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl tb_Username;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText tb_Username;
 
         /// <summary>
         /// tb_Password control.
@@ -94,24 +112,6 @@ namespace FiveHead.Admin
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputPassword tb_RepeatPassword;
-
-        /// <summary>
-        /// ddl_AccountType control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlSelect ddl_AccountType;
-
-        /// <summary>
-        /// ddl_UserProfile control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlSelect ddl_UserProfile;
 
         /// <summary>
         /// btn_Create control.

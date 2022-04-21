@@ -18,9 +18,21 @@ namespace FiveHead.BLL
             return dataLayer.CreateProfile(profile);
         }
 
-        public Profile GetProfileByID(int profile)
+        public Profile GetProfileByID(int profileID)
         {
-            return dataLayer.GetProfileByID(profile);
+            return dataLayer.GetProfileByID(profileID);
+        }
+
+        public string GetProfileNameByID(int profileID)
+        {
+            profile = dataLayer.GetProfileByID(profileID);
+            return profile.ProfileName;
+        }
+
+        public int GetProfileIDByName(string profileName)
+        {
+            profile = dataLayer.GetProfileByName(profileName);
+            return profile.ProfileID;
         }
 
         public List<Profile> GetAllProfiles()
