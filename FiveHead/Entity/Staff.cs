@@ -12,7 +12,6 @@ namespace FiveHead.Entity
         private int staffID;
         private string firstName;
         private string lastName;
-        private double salary;
         private int accountID;
 
         public Staff()
@@ -39,10 +38,9 @@ namespace FiveHead.Entity
         public Staff(int staffID, string firstName, string lastName, double salary, int accountID) : this(staffID, firstName, lastName, accountID)
         {
             this.AccountID = accountID;
-            this.Salary = salary;
         }
 
-        public Staff(Staff staff) : this(staff.StaffID, staff.firstName, staff.LastName, staff.Salary, staff.AccountID)
+        public Staff(Staff staff) : this(staff.StaffID, staff.firstName, staff.LastName, staff.AccountID)
         {
             if (staff == null)
                 throw new ArgumentNullException();
@@ -51,7 +49,6 @@ namespace FiveHead.Entity
         public int StaffID { get => staffID; set => staffID = value; }
         public string FirstName { get => firstName; set => firstName = value; }
         public string LastName { get => lastName; set => lastName = value; }
-        public double Salary { get => salary; set => salary = value; }
         public int AccountID { get => accountID; set => accountID = value; }
 
         MySQL_Utils mySQL = new MySQL_Utils();
@@ -161,41 +158,6 @@ namespace FiveHead.Entity
                 return new Staff(ds.Tables[0].ToList<Staff>()[0]);
             else
                 return null;
-        }
-
-        public int UpdateStaffSalary(int staffID, double salary)
-        {
-            StringBuilder sql;
-            MySqlCommand sqlCmd;
-            int result;
-
-            result = 0;
-
-            sql = new StringBuilder();
-            sql.AppendLine("UPDATE Staffs");
-            sql.AppendLine(" ");
-            sql.AppendLine("SET salary=@salary");
-            sql.AppendLine(" ");
-            sql.AppendLine("WHERE staffID=@staffID");
-            MySqlConnection conn = dbConn.GetConnection();
-            try
-            {
-                sqlCmd = mySQL.cmd_set_connection(sql.ToString(), conn);
-                sqlCmd.Parameters.AddWithValue("@staffID", staffID);
-                sqlCmd.Parameters.AddWithValue("@salary", salary);
-                conn.Open();
-                result = sqlCmd.ExecuteNonQuery();
-            }
-            catch (Exception ex)
-            {
-                errMsg = ex.Message;
-            }
-            finally
-            {
-                dbConn.CloseConnection(conn);
-            }
-
-            return result;
         }
 
         public int DeleteStaff(int staffID)

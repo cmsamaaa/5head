@@ -13,25 +13,23 @@ namespace FiveHead.Entity
     {
         private int profileID;
         private string profileName;
-        private int permissionLevel;
 
         public Profile()
         {
 
         }
 
-        public Profile(string profileName, int permissionLevel)
+        public Profile(string profileName)
         {
             this.ProfileName = profileName;
-            this.PermissionLevel = permissionLevel;
         }
 
-        public Profile(int profileID, string profileName, int permissionLevel) : this(profileName, permissionLevel)
+        public Profile(int profileID, string profileName) : this(profileName)
         {
             this.ProfileID = profileID;
         }
 
-        public Profile (Profile profile) : this(profile.ProfileID, profile.ProfileName, profile.PermissionLevel)
+        public Profile (Profile profile) : this(profile.ProfileID, profile.ProfileName)
         {
             if (profile == null)
                 throw new ArgumentNullException();
@@ -39,7 +37,6 @@ namespace FiveHead.Entity
 
         public int ProfileID { get => profileID; set => profileID = value; }
         public string ProfileName { get => profileName; set => profileName = value; }
-        public int PermissionLevel { get => permissionLevel; set => permissionLevel = value; }
 
 
         // Data Access
@@ -56,15 +53,14 @@ namespace FiveHead.Entity
             result = 0;
 
             sql = new StringBuilder();
-            sql.AppendLine("INSERT INTO Profiles (profileName, permissionLevel)");
+            sql.AppendLine("INSERT INTO Profiles (profileName)");
             sql.AppendLine(" ");
-            sql.AppendLine("VALUES (@profileName, @permissionLevel)");
+            sql.AppendLine("VALUES (@profileName)");
             MySqlConnection conn = dbConn.GetConnection();
             try
             {
                 sqlCmd = mySQL.cmd_set_connection(sql.ToString(), conn);
                 sqlCmd.Parameters.AddWithValue("@profileName", profile.ProfileName);
-                sqlCmd.Parameters.AddWithValue("@permissionLevel", profile.PermissionLevel);
                 conn.Open();
                 result = sqlCmd.ExecuteNonQuery();
             }

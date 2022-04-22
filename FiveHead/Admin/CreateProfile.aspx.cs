@@ -18,10 +18,9 @@ namespace FiveHead.Admin
         protected void btn_Create_Click(object sender, EventArgs e)
         {
             string profileName = tb_ProfileName.Value;
-            int permissionLevel = Convert.ToInt32(tb_PermissionLevel.Value);
 
             profilesController = new ProfilesController();
-            int result = profilesController.CreateProfile(profileName, permissionLevel);
+            int result = profilesController.CreateProfile(profileName);
 
             if (result == 1)
                 Response.Redirect("CreateProfile.aspx?create=true");

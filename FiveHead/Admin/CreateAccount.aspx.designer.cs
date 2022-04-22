@@ -15,13 +15,13 @@ namespace FiveHead.Admin
     {
 
         /// <summary>
-        /// PlaceHolder_TempMsg control.
+        /// PlaceHolder_Selection_Msg control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.PlaceHolder PlaceHolder_TempMsg;
+        protected global::System.Web.UI.WebControls.PlaceHolder PlaceHolder_Selection_Msg;
 
         /// <summary>
         /// PlaceHolder_EmptyFields control.

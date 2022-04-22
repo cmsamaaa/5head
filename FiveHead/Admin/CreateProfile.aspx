@@ -46,11 +46,6 @@
                                             <input runat="server" type="text" class="form-control form-control-user" id="tb_ProfileName" placeholder="Profile Name" required>
                                         </div>
                                     </div>
-                                    <div class="form-group row">
-                                        <div class="col-sm-12">
-                                            <input runat="server" type="number" min="0" max="10" class="form-control form-control-user" id="tb_PermissionLevel" placeholder="Permission Level" required>
-                                        </div>
-                                    </div>
                                     <button runat="server" id="btn_Create" class="btn btn-primary btn-user btn-block" onserverclick="btn_Create_Click">Create</button>
                                 </div>
                             </div>

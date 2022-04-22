@@ -23,12 +23,12 @@
                     <div class="card-body p-0">
                         <!-- Start of Alert Boxes -->
                         <!-- PlaceHolder - Temp Message -->
-                        <asp:PlaceHolder ID="PlaceHolder_TempMsg" runat="server" Visible="False">
+                        <asp:PlaceHolder ID="PlaceHolder_Selection_Msg" runat="server" Visible="False">
                             <!-- Success Alert -->
                             <div class="row justify-content-center">
                                 <div class="alert alert-danger alert-dismissible fade show col-7 mt-4" role="alert">
                                     <i class="fas fa-exclamation-triangle"></i>
-                                    Customer account creation is still work in progress... TT
+                                    Please select an user account type.
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -105,7 +105,6 @@
                                         <div class="col-sm-6 mb-3 mb-sm-0">
                                             <select runat="server" id="ddl_AccountType" class="custom-select" required>
                                                 <option selected disabled>Account Type</option>
-                                                <option value="customer">Customer</option>
                                                 <option value="staff">Staff</option>
                                                 <option value="administrator">Administrator</option>
                                             </select>

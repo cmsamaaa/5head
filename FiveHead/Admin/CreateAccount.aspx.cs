@@ -34,9 +34,6 @@ namespace FiveHead.Admin
 
             switch (ddl_AccountType.Value)
             {
-                case "customer":
-                    PlaceHolder_TempMsg.Visible = true;
-                    break;
                 case "staff":
                     CreateStaffAccount();
                     break;
@@ -44,7 +41,7 @@ namespace FiveHead.Admin
                     CreateAdminAccount();
                     break;
                 default:
-                    PlaceHolder_TempMsg.Visible = true;
+                    PlaceHolder_Selection_Msg.Visible = true;
                     break;
             }
                 
@@ -107,7 +104,7 @@ namespace FiveHead.Admin
 
         private void HideAllPlaceHolders()
         {
-            PlaceHolder_TempMsg.Visible = false;
+            PlaceHolder_Selection_Msg.Visible = false;
             PlaceHolder_EmptyFields.Visible = false;
             PlaceHolder_Error_Account.Visible = false;
             PlaceHolder_Error_Staff.Visible = false;

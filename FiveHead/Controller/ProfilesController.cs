@@ -8,9 +8,9 @@ namespace FiveHead.Controller
     {
         Profile profile = new Profile();
 
-        public int CreateProfile(string profileName, int permissionLevel)
+        public int CreateProfile(string profileName)
         {
-            profile = new Profile(profileName, permissionLevel);
+            profile = new Profile(profileName);
             return profile.CreateProfile(profile);
         }
 

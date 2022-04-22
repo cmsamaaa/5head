@@ -24,15 +24,6 @@ namespace FiveHead.Admin
         protected global::System.Web.UI.HtmlControls.HtmlInputText tb_ProfileName;
 
         /// <summary>
-        /// tb_PermissionLevel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl tb_PermissionLevel;
-
-        /// <summary>
         /// btn_Create control.
         /// </summary>
         /// <remarks>
