@@ -1,11 +1,11 @@
-﻿using FiveHead.BLL;
+﻿using FiveHead.Controller;
 using System;
 
 namespace FiveHead.Admin
 {
     public partial class CreateProfile : System.Web.UI.Page
     {
-        ProfilesBLL profilesBLL;
+        ProfilesController profilesController;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -20,8 +20,8 @@ namespace FiveHead.Admin
             string profileName = tb_ProfileName.Value;
             int permissionLevel = Convert.ToInt32(tb_PermissionLevel.Value);
 
-            profilesBLL = new ProfilesBLL();
-            int result = profilesBLL.CreateProfile(profileName, permissionLevel);
+            profilesController = new ProfilesController();
+            int result = profilesController.CreateProfile(profileName, permissionLevel);
 
             if (result == 1)
                 Response.Redirect("CreateProfile.aspx?create=true");

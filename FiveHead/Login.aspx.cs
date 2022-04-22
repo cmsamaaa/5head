@@ -1,4 +1,4 @@
-﻿using FiveHead.BLL;
+﻿using FiveHead.Controller;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -54,7 +54,7 @@ namespace FiveHead
             username = tb_Username.Text.Trim();
             password = tb_Password.Text.Trim();
 
-            AccountsBLL account = new AccountsBLL();
+            AccountsController account = new AccountsController();
             result = account.Authenticate(username, password);
 
             if (result == true)

@@ -1,13 +1,9 @@
-﻿using FiveHead.Scripts.Libraries;
-using MySql.Data.MySqlClient;
+﻿using MySql.Data.MySqlClient;
 using System;
 using System.Configuration;
 
-namespace FiveHead.DAL
+namespace FiveHead.Scripts.Libraries
 {
-    /// <summary>
-    /// MySQL database connector
-    /// </summary>
     public class DBConn
     {
         MySQL_Utils mySQL = new MySQL_Utils();

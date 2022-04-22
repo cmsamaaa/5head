@@ -1,4 +1,4 @@
-﻿using FiveHead.BLL;
+﻿using FiveHead.Controller;
 using System;
 using System.Web.UI.WebControls;
 
@@ -6,9 +6,9 @@ namespace FiveHead.Admin
 {
     public partial class CreateAccount : System.Web.UI.Page
     {
-        AccountsBLL accountBLL;
-        ProfilesBLL profilesBLL;
-        StaffsBLL staffsBLL;
+        AccountsController accountController;
+        ProfilesController profilesController;
+        StaffsController staffsController;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -20,8 +20,8 @@ namespace FiveHead.Admin
 
         private void SetUserProfiles()
         {
-            profilesBLL = new ProfilesBLL();
-            profilesBLL.GetAllProfiles().ForEach(profile =>
+            profilesController = new ProfilesController();
+            profilesController.GetAllProfiles().ForEach(profile =>
             {
                 if (!profile.ProfileName.Equals("Administrator"))
                     ddl_UserProfile.Items.Add(new ListItem(profile.ProfileName, profile.ProfileID.ToString()));
@@ -52,8 +52,8 @@ namespace FiveHead.Admin
 
         private void CreateStaffAccount()
         {
-            accountBLL = new AccountsBLL();
-            staffsBLL = new StaffsBLL();
+            accountController = new AccountsController();
+            staffsController = new StaffsController();
 
             string firstName = tb_FirstName.Value;
             string lastName = tb_LastName.Value;
@@ -67,11 +67,11 @@ namespace FiveHead.Admin
 
             if (!isEmptyField)
             {
-                int result = accountBLL.CreateAccount(username, password, Convert.ToInt32(strProfileID));
+                int result = accountController.CreateAccount(username, password, Convert.ToInt32(strProfileID));
                 if (result == 1)
                 {
                     result = 0;
-                    result = staffsBLL.CreateStaff(firstName, lastName, accountBLL.GetAccountIDByUsername(username));
+                    result = staffsController.CreateStaff(firstName, lastName, accountController.GetAccountIDByUsername(username));
 
                     if (result == 1)
                         Response.Redirect("CreateAccount.aspx?create=true", true);
@@ -87,7 +87,7 @@ namespace FiveHead.Admin
 
         private void CreateAdminAccount()
         {
-            accountBLL = new AccountsBLL();
+            accountController = new AccountsController();
 
             string username = tb_Username.Value;
             string password = tb_Password.Value;
@@ -97,7 +97,7 @@ namespace FiveHead.Admin
 
             if (!isEmptyField)
             {
-                int result = accountBLL.CreateAdminAccount(Session["adminSession"].ToString(), username, password);
+                int result = accountController.CreateAdminAccount(Session["adminSession"].ToString(), username, password);
                 if (result == 1)
                     Response.Redirect("CreateAccount.aspx?create=true", true);
                 else

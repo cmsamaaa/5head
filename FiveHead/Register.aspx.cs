@@ -1,11 +1,11 @@
-﻿using FiveHead.BLL;
+﻿using FiveHead.Controller;
 using System;
 
 namespace FiveHead
 {
     public partial class Register : System.Web.UI.Page
     {
-        ProfilesBLL profilesBLL = new ProfilesBLL();
+        ProfilesController profilesController = new ProfilesController();
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -24,9 +24,9 @@ namespace FiveHead
 
                 if (password.Equals(confirmPassword))
                 {
-                    AccountsBLL account = new AccountsBLL();
+                    AccountsController account = new AccountsController();
 
-                    int result = account.CreateAccount(username, password, profilesBLL.GetProfileIDByName("Customer"));
+                    int result = account.CreateAccount(username, password, profilesController.GetProfileIDByName("Customer"));
 
                     if (result == 1)
                         Response.Redirect("~/Login.aspx?register=true", true);

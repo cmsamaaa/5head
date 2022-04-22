@@ -1,17 +1,17 @@
-﻿using FiveHead.DAL;
-using FiveHead.Entity;
+﻿using FiveHead.Entity;
 using FiveHead.Scripts.Libraries;
 using System.Collections.Generic;
 
-namespace FiveHead.BLL
+namespace FiveHead.Controller
 {
-    public class AccountsBLL
+    public class AccountsController
     {
-        Account account;
-        Profile profile;
-        AccountsDAL dataLayer = new AccountsDAL();
-        ProfilesBLL profilesBLL = new ProfilesBLL();
         Encryption crypt = new Encryption();
+
+        Account account = new Account();
+        Profile profile = new Profile();
+
+        ProfilesController profilesBLL = new ProfilesController();
 
         public int CreateAccount(string username, string password, int profileID)
         {
@@ -23,7 +23,7 @@ namespace FiveHead.BLL
                 encryptPassword = crypt.Encrypt(encryptKey, password);
                 account = new Account(username, encryptPassword, encryptKey, profileID);
 
-                return dataLayer.CreateAccount(account);
+                return account.CreateAccount(account);
             }
             else
                 return 0;
@@ -42,12 +42,12 @@ namespace FiveHead.BLL
 
         public List<Account> GetAllAccounts()
         {
-            return dataLayer.GetAllAccounts();
+            return account.GetAllAccounts();
         }
 
         public Account GetAccountByUsername(string username)
         {
-            return dataLayer.GetAccountByUsername(username);
+            return account.GetAccountByUsername(username);
         }
 
         public bool CheckUsernameExist(string username)
@@ -75,7 +75,7 @@ namespace FiveHead.BLL
             string encryptKey = account.EncryptKey;
             string encryptPassword = crypt.Encrypt(encryptKey, password);
 
-            return dataLayer.GetAccount(username, encryptPassword);
+            return account.GetAccount(username, encryptPassword);
         }
 
         public bool Authenticate(string username, string password)
@@ -98,17 +98,17 @@ namespace FiveHead.BLL
         {
             string encryptPassword = crypt.Encrypt(encryptKey, password);
 
-            return dataLayer.UpdatePassword(username, encryptPassword);
+            return account.UpdatePassword(username, encryptPassword);
         }
 
         public int SuspendAccount(string username)
         {
-            return dataLayer.SuspendAccount(username);
+            return account.SuspendAccount(username);
         }
 
         public int DeleteAccount(string username)
         {
-            return dataLayer.DeleteAccount(username);
+            return account.DeleteAccount(username);
         }
     }
 }

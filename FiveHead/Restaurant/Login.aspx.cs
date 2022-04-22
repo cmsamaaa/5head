@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using FiveHead.BLL;
+using FiveHead.Controller;
 
 namespace FiveHead.Restaurant
 {
@@ -40,7 +40,7 @@ namespace FiveHead.Restaurant
             username = tb_Username.Value.Trim();
             password = tb_Password.Value.Trim();
 
-            StaffsBLL staff = new StaffsBLL();
+            StaffsController staff = new StaffsController();
             result = staff.Authenticate(username, password);
 
             if (result == true)

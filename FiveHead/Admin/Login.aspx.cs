@@ -1,4 +1,4 @@
-﻿using FiveHead.BLL;
+﻿using FiveHead.Controller;
 using System;
 
 namespace FiveHead.Admin
@@ -34,7 +34,7 @@ namespace FiveHead.Admin
             username = tb_Username.Value.Trim();
             password = tb_Password.Value.Trim();
 
-            AccountsBLL account = new AccountsBLL();
+            AccountsController account = new AccountsController();
             result = account.Admin_Authentication(username, password);
 
             if (result == true)

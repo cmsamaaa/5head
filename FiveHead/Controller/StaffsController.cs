@@ -1,25 +1,24 @@
-﻿using FiveHead.DAL;
-using FiveHead.Entity;
+﻿using FiveHead.Entity;
 
-namespace FiveHead.BLL
+namespace FiveHead.Controller
 {
-    public class StaffsBLL
+    public class StaffsController
     {
         Account account;
         Profile profile;
-        StaffsDAL dataLayer = new StaffsDAL();
-        AccountsBLL accountsBLL = new AccountsBLL();
-        ProfilesBLL profilesBLL = new ProfilesBLL();
+        Staff staff = new Staff();
+        AccountsController accountsController = new AccountsController();
+        ProfilesController profilesController = new ProfilesController();
 
         public int CreateStaff(string firstName, string lastName, int accountID)
         {
-            return dataLayer.CreateStaff(firstName, lastName, accountID);
+            return staff.CreateStaff(firstName, lastName, accountID);
         }
 
         public bool Authenticate(string username, string password)
         {
-            account = accountsBLL.GetAccount(username, password);
-            profile = profilesBLL.GetProfileByID(account.ProfileID);
+            account = accountsController.GetAccount(username, password);
+            profile = profilesController.GetProfileByID(account.ProfileID);
 
             if (profile.ProfileName.Equals("Restaurant Staff") || 
                 profile.ProfileName.Equals("Restaurant Manager") ||

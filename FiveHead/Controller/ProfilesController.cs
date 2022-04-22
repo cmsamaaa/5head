@@ -1,43 +1,39 @@
-﻿using FiveHead.DAL;
-using FiveHead.Entity;
+﻿using FiveHead.Entity;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
-namespace FiveHead.BLL
+namespace FiveHead.Controller
 {
-    public class ProfilesBLL
+    public class ProfilesController
     {
-        Profile profile;
-        ProfilesDAL dataLayer = new ProfilesDAL();
+        Profile profile = new Profile();
 
         public int CreateProfile(string profileName, int permissionLevel)
         {
             profile = new Profile(profileName, permissionLevel);
-            return dataLayer.CreateProfile(profile);
+            return profile.CreateProfile(profile);
         }
 
         public Profile GetProfileByID(int profileID)
         {
-            return dataLayer.GetProfileByID(profileID);
+            return profile.GetProfileByID(profileID);
         }
 
         public string GetProfileNameByID(int profileID)
         {
-            profile = dataLayer.GetProfileByID(profileID);
+            profile = profile.GetProfileByID(profileID);
             return profile.ProfileName;
         }
 
         public int GetProfileIDByName(string profileName)
         {
-            profile = dataLayer.GetProfileByName(profileName);
+            profile = profile.GetProfileByName(profileName);
             return profile.ProfileID;
         }
 
         public List<Profile> GetAllProfiles()
         {
-            return dataLayer.GetAllProfiles();
+            return profile.GetAllProfiles();
         }
 
         public List<string> GetAllProfileNames()

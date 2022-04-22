@@ -1906,13 +1906,10 @@
     <Compile Include="Admin\MasterPage_Admin.Master.designer.cs">
       <DependentUpon>MasterPage_Admin.Master</DependentUpon>
     </Compile>
-    <Compile Include="BLL\AccountsBLL.cs" />
-    <Compile Include="BLL\StaffsBLL.cs" />
-    <Compile Include="BLL\ProfilesBLL.cs" />
-    <Compile Include="DAL\AccountsDAL.cs" />
-    <Compile Include="DAL\StaffsDAL.cs" />
-    <Compile Include="DAL\DBConn.cs" />
-    <Compile Include="DAL\ProfilesDAL.cs" />
+    <Compile Include="Controller\AccountsController.cs" />
+    <Compile Include="Controller\StaffsController.cs" />
+    <Compile Include="Controller\ProfilesController.cs" />
+    <Compile Include="Scripts\Libraries\DBConn.cs" />
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
