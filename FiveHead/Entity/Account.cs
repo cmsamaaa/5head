@@ -32,9 +32,13 @@ namespace FiveHead.Entity
             this.Password = password;
         }
 
-        public Account(string username, string password, string encryptKey, int profileID) : this(username, password)
+        public Account(string username, string password, string encryptKey) : this(username, password)
         {
             this.EncryptKey = encryptKey;
+        }
+
+        public Account(string username, string password, string encryptKey, int profileID) : this(username, password, encryptKey)
+        {
             this.ProfileID = profileID;
         }
 
@@ -98,7 +102,7 @@ namespace FiveHead.Entity
             return result;
         }
 
-        public List<Account> GetAllAccounts()
+        public DataSet GetAllAccounts()
         {
             StringBuilder sql;
             MySqlDataAdapter da;
@@ -126,10 +130,42 @@ namespace FiveHead.Entity
                 dbConn.CloseConnection(conn);
             }
 
-            if (ds.Tables[0].Rows.Count > 0)
-                return ds.Tables[0].ToList<Account>();
-            else
-                return null;
+            return ds;
+        }
+
+        public DataSet Admin_GetAllAccounts()
+        {
+            StringBuilder sql;
+            MySqlDataAdapter da;
+            DataSet ds;
+
+            MySqlConnection conn = dbConn.GetConnection();
+            ds = new DataSet();
+            sql = new StringBuilder();
+            sql.AppendLine("SELECT *");
+            sql.AppendLine(" ");
+            sql.AppendLine("FROM Accounts a");
+            sql.AppendLine(" ");
+            sql.AppendLine("INNER JOIN Profiles p");
+            sql.AppendLine(" ");
+            sql.AppendLine("ON a.profileID = p.profileID");
+            conn.Open();
+
+            try
+            {
+                da = mySQL.adapter_set_query(sql.ToString(), conn);
+                da.Fill(ds);
+            }
+            catch (Exception ex)
+            {
+                errMsg = ex.Message;
+            }
+            finally
+            {
+                dbConn.CloseConnection(conn);
+            }
+
+            return ds;
         }
 
         public Account GetAccountByUsername(string username)
@@ -152,6 +188,43 @@ namespace FiveHead.Entity
             {
                 da = mySQL.adapter_set_query(sql.ToString(), conn);
                 da.SelectCommand.Parameters.AddWithValue("username", username);
+                da.Fill(ds);
+            }
+            catch (Exception ex)
+            {
+                errMsg = ex.Message;
+            }
+            finally
+            {
+                dbConn.CloseConnection(conn);
+            }
+
+            if (ds.Tables[0].Rows.Count > 0)
+                return new Account(ds.Tables[0].ToList<Account>()[0]);
+            else
+                return null;
+        }
+
+        public Account GetAccount(int accountID)
+        {
+            StringBuilder sql;
+            MySqlDataAdapter da;
+            DataSet ds;
+
+            MySqlConnection conn = dbConn.GetConnection();
+            ds = new DataSet();
+            sql = new StringBuilder();
+            sql.AppendLine("SELECT *");
+            sql.AppendLine(" ");
+            sql.AppendLine("FROM Accounts");
+            sql.AppendLine(" ");
+            sql.AppendLine("WHERE accountID = @accountID");
+            conn.Open();
+
+            try
+            {
+                da = mySQL.adapter_set_query(sql.ToString(), conn);
+                da.SelectCommand.Parameters.AddWithValue("accountID", accountID);
                 da.Fill(ds);
             }
             catch (Exception ex)
@@ -207,7 +280,7 @@ namespace FiveHead.Entity
                 return null;
         }
 
-        public int UpdatePassword(string username, string password)
+        public int UpdateUsername(int accountID, string username)
         {
             StringBuilder sql;
             MySqlCommand sqlCmd;
@@ -218,15 +291,15 @@ namespace FiveHead.Entity
             sql = new StringBuilder();
             sql.AppendLine("UPDATE Accounts");
             sql.AppendLine(" ");
-            sql.AppendLine("SET password=@password");
+            sql.AppendLine("SET username=@username");
             sql.AppendLine(" ");
-            sql.AppendLine("WHERE username=@username");
+            sql.AppendLine("WHERE accountID=@accountID");
             MySqlConnection conn = dbConn.GetConnection();
             try
             {
                 sqlCmd = mySQL.cmd_set_connection(sql.ToString(), conn);
+                sqlCmd.Parameters.AddWithValue("@accountID", accountID);
                 sqlCmd.Parameters.AddWithValue("@username", username);
-                sqlCmd.Parameters.AddWithValue("@password", password);
                 conn.Open();
                 result = sqlCmd.ExecuteNonQuery();
             }
@@ -242,7 +315,43 @@ namespace FiveHead.Entity
             return result;
         }
 
-        public int SuspendAccount(string username)
+        public int UpdatePassword(string username, string password, string encryptKey)
+        {
+            StringBuilder sql;
+            MySqlCommand sqlCmd;
+            int result;
+
+            result = 0;
+
+            sql = new StringBuilder();
+            sql.AppendLine("UPDATE Accounts");
+            sql.AppendLine(" ");
+            sql.AppendLine("SET password=@password, encryptKey=@encryptKey");
+            sql.AppendLine(" ");
+            sql.AppendLine("WHERE username=@username");
+            MySqlConnection conn = dbConn.GetConnection();
+            try
+            {
+                sqlCmd = mySQL.cmd_set_connection(sql.ToString(), conn);
+                sqlCmd.Parameters.AddWithValue("@username", username);
+                sqlCmd.Parameters.AddWithValue("@password", password);
+                sqlCmd.Parameters.AddWithValue("@encryptKey", encryptKey);
+                conn.Open();
+                result = sqlCmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                errMsg = ex.Message;
+            }
+            finally
+            {
+                dbConn.CloseConnection(conn);
+            }
+
+            return result;
+        }
+
+        public int UpdateAccountStatus(int accountID, bool deactivated)
         {
             StringBuilder sql;
             MySqlCommand sqlCmd;
@@ -255,13 +364,13 @@ namespace FiveHead.Entity
             sql.AppendLine(" ");
             sql.AppendLine("SET deactivated=@deactivated");
             sql.AppendLine(" ");
-            sql.AppendLine("WHERE username=@username");
+            sql.AppendLine("WHERE accountID=@accountID");
             MySqlConnection conn = dbConn.GetConnection();
             try
             {
                 sqlCmd = mySQL.cmd_set_connection(sql.ToString(), conn);
-                sqlCmd.Parameters.AddWithValue("@username", username);
-                sqlCmd.Parameters.AddWithValue("@deactivated", true);
+                sqlCmd.Parameters.AddWithValue("@accountID", accountID);
+                sqlCmd.Parameters.AddWithValue("@deactivated", deactivated);
                 conn.Open();
                 result = sqlCmd.ExecuteNonQuery();
             }

@@ -1,6 +1,7 @@
 ﻿using FiveHead.Entity;
 using FiveHead.Scripts.Libraries;
 using System.Collections.Generic;
+using System.Data;
 
 namespace FiveHead.Controller
 {
@@ -40,9 +41,24 @@ namespace FiveHead.Controller
                 return 0;
         }
 
-        public List<Account> GetAllAccounts()
+        public DataSet GetAllAccountsDataSet()
         {
             return account.GetAllAccounts();
+        }
+
+        public DataSet Admin_GetAllAccounts()
+        {
+            return account.Admin_GetAllAccounts();
+        }
+
+        public List<Account> GetAllAccounts()
+        {
+            DataSet ds = GetAllAccountsDataSet();
+
+            if (ds.Tables[0].Rows.Count > 0)
+                return ds.Tables[0].ToList<Account>();
+            else
+                return null;
         }
 
         public Account GetAccountByUsername(string username)
@@ -65,6 +81,11 @@ namespace FiveHead.Controller
                 return 0;
         }
 
+        public Account GetAccount(int accountID)
+        {
+            return account.GetAccount(accountID);
+        }
+
         public Account GetAccount(string username, string password)
         {
             account = GetAccountByUsername(username);
@@ -80,7 +101,11 @@ namespace FiveHead.Controller
 
         public bool Authenticate(string username, string password)
         {
-            return GetAccount(username, password) == null ? false : true;
+            account = GetAccount(username, password);
+            if (account.Deactivated)
+                return false;
+            else
+                return true;
         }
 
         public bool Admin_Authentication(string username, string password)
@@ -88,22 +113,44 @@ namespace FiveHead.Controller
             account = GetAccount(username, password);
             profile = profilesBLL.GetProfileByID(account.ProfileID);
 
+            if (account.Deactivated)
+                return false;
+
             if (profile.ProfileName.Equals("Administrator"))
                 return true;
 
             return false;
         }
 
-        public int UpdatePassword(string username, string password, string encryptKey)
+        public int UpdateUsername(int accountID, string username)
         {
-            string encryptPassword = crypt.Encrypt(encryptKey, password);
-
-            return account.UpdatePassword(username, encryptPassword);
+            if (!CheckUsernameExist(username))
+            {
+                account = new Account();
+                return account.UpdateUsername(accountID, username);
+            }
+            else
+                return 0;
         }
 
-        public int SuspendAccount(string username)
+        public int UpdatePassword(string username, string password)
         {
-            return account.SuspendAccount(username);
+            string encryptKey, encryptPassword;
+            encryptKey = RNGCrypto.GenerateIdentifier(12);
+            encryptPassword = crypt.Encrypt(encryptKey, password);
+            account = new Account(username, encryptPassword, encryptKey);
+
+            return account.UpdatePassword(username, encryptPassword, encryptKey);
+        }
+
+        public int ReactivateAccount(int accountID)
+        {
+            return account.UpdateAccountStatus(accountID, false);
+        }
+
+        public int SuspendAccount(int accountID)
+        {
+            return account.UpdateAccountStatus(accountID, true);
         }
 
         public int DeleteAccount(string username)

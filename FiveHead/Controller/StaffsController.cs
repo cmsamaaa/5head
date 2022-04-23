@@ -15,10 +15,18 @@ namespace FiveHead.Controller
             return staff.CreateStaff(firstName, lastName, accountID);
         }
 
+        public Staff GetStaffByAccountID(int accountID)
+        {
+            return staff.GetStaffByAccountID(accountID);
+        }
+
         public bool Authenticate(string username, string password)
         {
             account = accountsController.GetAccount(username, password);
             profile = profilesController.GetProfileByID(account.ProfileID);
+
+            if (account.Deactivated)
+                return false;
 
             if (profile.ProfileName.Equals("Restaurant Staff") || 
                 profile.ProfileName.Equals("Restaurant Manager") ||
@@ -26,6 +34,11 @@ namespace FiveHead.Controller
                 return true;
 
             return false;
+        }
+
+        public int UpdateName(int staffID, string firstName, string lastName)
+        {
+            return staff.UpdateName(staffID, firstName, lastName);
         }
     }
 }

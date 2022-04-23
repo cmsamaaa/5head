@@ -6,3 +6,22 @@
 .danger-alert-box {
     display: none;
 }
+
+.GridPager {
+    display: table-row;
+    font-size: 14px;
+    color: black;
+    font-weight: 800;
+}
+
+    .GridPager a {
+        font-size: 14px;
+        font-weight: 500;
+        color: black;
+    }
+
+        .GridPager a:hover {
+            color: #4e73df;
+            text-shadow: 0px 0px 2px #4e73df;
+            text-decoration: none;
+        }

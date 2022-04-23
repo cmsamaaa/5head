@@ -123,7 +123,7 @@ namespace FiveHead.Entity
                 return null;
         }
 
-        public Staff GetStaffByID(int staffID)
+        public Staff GetStaffByStaffID(int staffID)
         {
             StringBuilder sql;
             MySqlDataAdapter da;
@@ -158,6 +158,79 @@ namespace FiveHead.Entity
                 return new Staff(ds.Tables[0].ToList<Staff>()[0]);
             else
                 return null;
+        }
+
+        public Staff GetStaffByAccountID(int accountID)
+        {
+            StringBuilder sql;
+            MySqlDataAdapter da;
+            DataSet ds;
+
+            MySqlConnection conn = dbConn.GetConnection();
+            ds = new DataSet();
+            sql = new StringBuilder();
+            sql.AppendLine("SELECT *");
+            sql.AppendLine(" ");
+            sql.AppendLine("FROM Staffs");
+            sql.AppendLine(" ");
+            sql.AppendLine("WHERE accountID = @accountID");
+            conn.Open();
+
+            try
+            {
+                da = mySQL.adapter_set_query(sql.ToString(), conn);
+                da.SelectCommand.Parameters.AddWithValue("accountID", accountID);
+                da.Fill(ds);
+            }
+            catch (Exception ex)
+            {
+                errMsg = ex.Message;
+            }
+            finally
+            {
+                dbConn.CloseConnection(conn);
+            }
+
+            if (ds.Tables[0].Rows.Count > 0)
+                return new Staff(ds.Tables[0].ToList<Staff>()[0]);
+            else
+                return null;
+        }
+
+        public int UpdateName(int staffID, string firstName, string lastName)
+        {
+            StringBuilder sql;
+            MySqlCommand sqlCmd;
+            int result;
+
+            result = 0;
+
+            sql = new StringBuilder();
+            sql.AppendLine("UPDATE Staffs");
+            sql.AppendLine(" ");
+            sql.AppendLine("SET firstName=@firstName, lastName=@lastName");
+            sql.AppendLine(" ");
+            sql.AppendLine("WHERE staffID=@staffID");
+            MySqlConnection conn = dbConn.GetConnection();
+            try
+            {
+                sqlCmd = mySQL.cmd_set_connection(sql.ToString(), conn);
+                sqlCmd.Parameters.AddWithValue("@staffID", staffID);
+                sqlCmd.Parameters.AddWithValue("@firstName", firstName);
+                sqlCmd.Parameters.AddWithValue("@lastName", lastName);
+                conn.Open();
+                result = sqlCmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                errMsg = ex.Message;
+            }
+            finally
+            {
+                dbConn.CloseConnection(conn);
+            }
+
+            return result;
         }
 
         public int DeleteStaff(int staffID)

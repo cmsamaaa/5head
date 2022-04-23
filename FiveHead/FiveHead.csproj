@@ -111,6 +111,7 @@
     <Content Include="Admin\css\sb-admin-2.css" />
     <Content Include="Admin\css\sb-admin-2.min.css" />
     <Content Include="Admin\Dashboard.aspx" />
+    <Content Include="Admin\EditAccount.aspx" />
     <Content Include="Admin\img\favicon.png" />
     <Content Include="Admin\img\galaxy-brain-1.png" />
     <Content Include="Admin\img\galaxy-brain-2.png" />
@@ -125,7 +126,6 @@
     <Content Include="Admin\js\demo\chart-area-demo.js" />
     <Content Include="Admin\js\demo\chart-bar-demo.js" />
     <Content Include="Admin\js\demo\chart-pie-demo.js" />
-    <Content Include="Admin\js\demo\datatables-demo.js" />
     <Content Include="Admin\js\sb-admin-2.js" />
     <Content Include="Admin\js\sb-admin-2.min.js" />
     <Content Include="Admin\Login.aspx" />
@@ -138,12 +138,6 @@
     <Content Include="Admin\vendor\chart.js\Chart.bundle.min.js" />
     <Content Include="Admin\vendor\chart.js\Chart.js" />
     <Content Include="Admin\vendor\chart.js\Chart.min.js" />
-    <Content Include="Admin\vendor\datatables\dataTables.bootstrap4.css" />
-    <Content Include="Admin\vendor\datatables\dataTables.bootstrap4.js" />
-    <Content Include="Admin\vendor\datatables\dataTables.bootstrap4.min.css" />
-    <Content Include="Admin\vendor\datatables\dataTables.bootstrap4.min.js" />
-    <Content Include="Admin\vendor\datatables\jquery.dataTables.js" />
-    <Content Include="Admin\vendor\datatables\jquery.dataTables.min.js" />
     <Content Include="Admin\vendor\fontawesome-free\attribution.js" />
     <Content Include="Admin\vendor\fontawesome-free\css\all.css" />
     <Content Include="Admin\vendor\fontawesome-free\css\all.min.css" />
@@ -1799,6 +1793,7 @@
     <Content Include="Admin\vendor\jquery\jquery.min.js" />
     <Content Include="Admin\vendor\jquery\jquery.slim.js" />
     <Content Include="Admin\vendor\jquery\jquery.slim.min.js" />
+    <Content Include="Admin\ViewAllAccounts.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="Register.aspx" />
@@ -1885,6 +1880,13 @@
     <Compile Include="Admin\Dashboard.aspx.designer.cs">
       <DependentUpon>Dashboard.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Admin\EditAccount.aspx.cs">
+      <DependentUpon>EditAccount.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\EditAccount.aspx.designer.cs">
+      <DependentUpon>EditAccount.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Admin\Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1905,6 +1907,13 @@
     </Compile>
     <Compile Include="Admin\MasterPage_Admin.Master.designer.cs">
       <DependentUpon>MasterPage_Admin.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\ViewAllAccounts.aspx.cs">
+      <DependentUpon>ViewAllAccounts.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\ViewAllAccounts.aspx.designer.cs">
+      <DependentUpon>ViewAllAccounts.aspx</DependentUpon>
     </Compile>
     <Compile Include="Controller\AccountsController.cs" />
     <Compile Include="Controller\StaffsController.cs" />
