@@ -1,6 +1,8 @@
 ﻿using FiveHead.Entity;
+using FiveHead.Scripts.Libraries;
 using System;
 using System.Collections.Generic;
+using System.Data;
 
 namespace FiveHead.Controller
 {
@@ -31,9 +33,19 @@ namespace FiveHead.Controller
             return profile.ProfileID;
         }
 
-        public List<Profile> GetAllProfiles()
+        public DataSet GetAllProfilesDataSet()
         {
             return profile.GetAllProfiles();
+        }
+
+        public List<Profile> GetAllProfiles()
+        {
+            DataSet ds = GetAllProfilesDataSet();
+
+            if (ds.Tables[0].Rows.Count > 0)
+                return ds.Tables[0].ToList<Profile>();
+            else
+                return null;
         }
 
         public List<string> GetAllProfileNames()

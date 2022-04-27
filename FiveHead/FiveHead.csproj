@@ -1794,6 +1794,7 @@
     <Content Include="Admin\vendor\jquery\jquery.slim.js" />
     <Content Include="Admin\vendor\jquery\jquery.slim.min.js" />
     <Content Include="Admin\ViewAllAccounts.aspx" />
+    <Content Include="Admin\ViewAllProfiles.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="Register.aspx" />
@@ -1914,6 +1915,13 @@
     </Compile>
     <Compile Include="Admin\ViewAllAccounts.aspx.designer.cs">
       <DependentUpon>ViewAllAccounts.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\ViewAllProfiles.aspx.cs">
+      <DependentUpon>ViewAllProfiles.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\ViewAllProfiles.aspx.designer.cs">
+      <DependentUpon>ViewAllProfiles.aspx</DependentUpon>
     </Compile>
     <Compile Include="Controller\AccountsController.cs" />
     <Compile Include="Controller\StaffsController.cs" />

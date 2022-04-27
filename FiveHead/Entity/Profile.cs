@@ -76,7 +76,7 @@ namespace FiveHead.Entity
             return result;
         }
 
-        public List<Profile> GetAllProfiles()
+        public DataSet GetAllProfiles()
         {
             StringBuilder sql;
             MySqlDataAdapter da;
@@ -104,10 +104,7 @@ namespace FiveHead.Entity
                 dbConn.CloseConnection(conn);
             }
 
-            if (ds.Tables[0].Rows.Count > 0)
-                return ds.Tables[0].ToList<Profile>();
-            else
-                return null;
+            return ds;
         }
 
         public Profile GetProfileByID(int profileID)
