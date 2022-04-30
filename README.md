@@ -27,17 +27,17 @@
 
 -   #### Scripts/Libraries
     -   Consists of "quality-of-life" methods we use often in the web application
--   #### Entity
+-   #### Entity (combined with Data Access Layer)
     -   Consists of the object classes (Let C# enjoy polymorphism)
--   #### DAL (Data Access Layer)
+-   #### Data Access Layer
     -   Consists of the code that communicates with the database
     -   Has very minimal validation and is error-prone
-    -   Extensive validation should occur within the BLL
+    -   Extensive validation should occur within the Controller
     -   Focus only on data access instead of data storage
--   #### BLL (Business Logic Layer)
+-   #### Controller (Business Logic Layer)
     -   Consists of almost all validations and logic code
     -   Main code that controls/runs all application logic
-    -   Describes how objects interact with each other, where the front-end and DAL can indirectly communicate with each other
+    -   Describes how objects interact with each other, where the Boundary and Entity can indirectly communicate with each other
 
 ### Login Information
 
