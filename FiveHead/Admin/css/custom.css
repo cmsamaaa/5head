@@ -1,4 +1,8 @@
-﻿.custom-control-label {
+﻿.note {
+    font-size: 14px;
+}
+
+.custom-control-label {
     line-height: 1.5rem;
 }
 

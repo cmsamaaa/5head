@@ -9,6 +9,6 @@
 
 function getTime() {
     let serverTime = new Date();
-    serverTime = new Date(serverTime.getTime() + 1000);
-    return serverTime.toGMTString();
+    serverTime = new Date(serverTime.getTime() + (8*60*60*1000));
+    return serverTime.toUTCString() + "+8";
 }

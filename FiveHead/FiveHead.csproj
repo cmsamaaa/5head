@@ -119,6 +119,7 @@
     <Content Include="Admin\img\galaxy-brain-2.png" />
     <Content Include="Admin\img\galaxy-brain-3.png" />
     <Content Include="Admin\img\undraw_add_user.svg" />
+    <Content Include="Admin\img\undraw_profile.svg" />
     <Content Include="Admin\js\custom.js" />
     <Content Include="Admin\js\sb-admin-2.js" />
     <Content Include="Admin\js\sb-admin-2.min.js" />

@@ -3,6 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style type="text/css">
         #lbl_Today {
+            color: #4e73df;
             font-weight: 800;
         }
 
@@ -24,7 +25,7 @@
             <div class="col-lg-12">
 
                 <!-- Basic Card Example -->
-                <div class="card shadow mb-4">
+                <div class="card shadow mb-4 border-bottom-primary">
                     <div class="card-header py-3">
                         <h6 class="m-0 font-weight-bold text-primary">Hello again,
                             <asp:Label ID="lbl_Username" runat="server" Text="Username"></asp:Label>!</h6>

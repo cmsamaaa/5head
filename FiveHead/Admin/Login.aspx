@@ -54,12 +54,7 @@
                                         </div>
                                         <button id="btn_Login" runat="server" class="btn btn-primary btn-user btn-block" onserverclick="btn_Login_Click" type="submit">Login</button>
                                         <hr />
-                                        <div class="text-center">
-                                            <a class="small" href="forgot-password.html">Forgot Password?</a>
-                                        </div>
-                                        <div class="text-center">
-                                            <a class="small" href="register.html">Create an Account!</a>
-                                        </div>
+                                        <span class="note">Please contact an Administrator if you require access.</span>
                                     </div>
                                 </div>
                             </div>
