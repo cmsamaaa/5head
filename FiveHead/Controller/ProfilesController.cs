@@ -65,7 +65,10 @@ namespace FiveHead.Controller
         {
             int result = GetProfileIDByName(profileName);
             if (result == -1)
+            {
+                profile = new Profile();
                 return profile.UpdateProfileName(profileID, profileName);
+            }
             return 0;
         }
 
