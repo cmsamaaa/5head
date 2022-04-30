@@ -13,32 +13,23 @@ namespace FiveHead.Scripts.Libraries
     {
         public MySqlConnection conn_open(string connStr)
         {
-            MySqlConnection conn = null;
+            if(!string.IsNullOrEmpty(connStr))
+                return new MySqlConnection(connStr);
 
-            if(connStr != "")
-            {
-                conn = new MySqlConnection(connStr);
-            }
-
-            return conn;
+            return null;
         }
 
         public MySqlCommand cmd_set_connection(string cmd, MySqlConnection conn)
         {
-            MySqlCommand mySqlCmd = null;
+            if (!conn.Equals(null))
+                return new MySqlCommand(cmd, conn);
 
-            if (conn != null)
-            {
-                mySqlCmd = new MySqlCommand(cmd, conn);
-            }
-
-            return mySqlCmd;
+            return null;
         }
 
         public MySqlDataAdapter adapter_set_query(string cmd, MySqlConnection conn)
         {
-            MySqlDataAdapter da = new MySqlDataAdapter(cmd, conn);
-            return da;
+            return new MySqlDataAdapter(cmd, conn);
         }
 
         public void conn_close(MySqlConnection conn)
