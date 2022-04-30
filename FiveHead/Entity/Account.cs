@@ -385,37 +385,5 @@ namespace FiveHead.Entity
 
             return result;
         }
-
-        public int DeleteAccount(string username)
-        {
-            StringBuilder sql;
-            MySqlCommand sqlCmd;
-            int result;
-
-            result = 0;
-
-            sql = new StringBuilder();
-            sql.AppendLine("DELETE FROM Accounts");
-            sql.AppendLine(" ");
-            sql.AppendLine("WHERE username=@username");
-            MySqlConnection conn = dbConn.GetConnection();
-            try
-            {
-                sqlCmd = mySQL.cmd_set_connection(sql.ToString(), conn);
-                sqlCmd.Parameters.AddWithValue("@username", username);
-                conn.Open();
-                result = sqlCmd.ExecuteNonQuery();
-            }
-            catch (Exception ex)
-            {
-                errMsg = ex.Message;
-            }
-            finally
-            {
-                dbConn.CloseConnection(conn);
-            }
-
-            return result;
-        }
     }
 }

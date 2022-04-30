@@ -180,5 +180,75 @@ namespace FiveHead.Entity
             else
                 return null;
         }
+
+        public int UpdateProfileName(int profileID, string profileName)
+        {
+            StringBuilder sql;
+            MySqlCommand sqlCmd;
+            int result;
+
+            result = 0;
+
+            sql = new StringBuilder();
+            sql.AppendLine("UPDATE Profiles");
+            sql.AppendLine(" ");
+            sql.AppendLine("SET profileName=@profileName");
+            sql.AppendLine(" ");
+            sql.AppendLine("WHERE profileID=@profileID");
+            MySqlConnection conn = dbConn.GetConnection();
+            try
+            {
+                sqlCmd = mySQL.cmd_set_connection(sql.ToString(), conn);
+                sqlCmd.Parameters.AddWithValue("@profileID", profileID);
+                sqlCmd.Parameters.AddWithValue("@profileName", profileName);
+                conn.Open();
+                result = sqlCmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                errMsg = ex.Message;
+            }
+            finally
+            {
+                dbConn.CloseConnection(conn);
+            }
+
+            return result;
+        }
+
+        public int UpdateProfileStatus(int profileID, bool deactivated)
+        {
+            StringBuilder sql;
+            MySqlCommand sqlCmd;
+            int result;
+
+            result = 0;
+
+            sql = new StringBuilder();
+            sql.AppendLine("UPDATE Profiles");
+            sql.AppendLine(" ");
+            sql.AppendLine("SET deactivated=@deactivated");
+            sql.AppendLine(" ");
+            sql.AppendLine("WHERE profileID=@profileID");
+            MySqlConnection conn = dbConn.GetConnection();
+            try
+            {
+                sqlCmd = mySQL.cmd_set_connection(sql.ToString(), conn);
+                sqlCmd.Parameters.AddWithValue("@profileID", profileID);
+                sqlCmd.Parameters.AddWithValue("@deactivated", deactivated);
+                conn.Open();
+                result = sqlCmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                errMsg = ex.Message;
+            }
+            finally
+            {
+                dbConn.CloseConnection(conn);
+            }
+
+            return result;
+        }
     }
 }

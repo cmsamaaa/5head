@@ -24,12 +24,16 @@ namespace FiveHead.Controller
         public string GetProfileNameByID(int profileID)
         {
             profile = profile.GetProfileByID(profileID);
+            if (profile == null)
+                return null;
             return profile.ProfileName;
         }
 
         public int GetProfileIDByName(string profileName)
         {
             profile = profile.GetProfileByName(profileName);
+            if (profile == null)
+                return -1;
             return profile.ProfileID;
         }
 
@@ -55,6 +59,24 @@ namespace FiveHead.Controller
             foreach (Profile profile in profileList)
                 list.Add(profile.ProfileName);
             return list;
+        }
+
+        public int UpdateProfileName(int profileID, string profileName)
+        {
+            int result = GetProfileIDByName(profileName);
+            if (result == -1)
+                return profile.UpdateProfileName(profileID, profileName);
+            return 0;
+        }
+
+        public int ReactivateProfile(int profileID)
+        {
+            return profile.UpdateProfileStatus(profileID, false);
+        }
+
+        public int SuspendProfile(int profileID)
+        {
+            return profile.UpdateProfileStatus(profileID, true);
         }
     }
 }

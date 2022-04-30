@@ -45,7 +45,7 @@
                 </div>
 
                 <div class="table-responsive">
-                    <asp:GridView ID="gv_Profiles" runat="server" AutoGenerateColumns="False" CssClass="table table-bordered" AllowPaging="True" OnPageIndexChanging="gv_Accounts_PageIndexChanging" PageSize="10">
+                    <asp:GridView ID="gv_Profiles" runat="server" AutoGenerateColumns="False" CssClass="table table-bordered" OnRowCommand="gv_Profiles_RowCommand" AllowPaging="True" OnPageIndexChanging="gv_Profiles_PageIndexChanging" PageSize="10">
                         <Columns>
                             <asp:TemplateField HeaderText="ID" ItemStyle-CssClass="col-1">
                                 <ItemTemplate>
@@ -55,6 +55,12 @@
                             <asp:TemplateField HeaderText="Profile Name" ItemStyle-CssClass="col-4">
                                 <ItemTemplate>
                                     <asp:Label ID="lbl_ProfileName" runat="server" Text='<%# Bind("profileName") %>'></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField ItemStyle-CssClass="col-2">
+                                <ItemTemplate>
+                                    <asp:Button ID="btn_Edit" runat="server" Text="Edit" CssClass="btn btn-primary mr-4" CommandName="Edit" CommandArgument='<%#((GridViewRow)Container).RowIndex%>' Visible='<%# Bind("editVisible") %>' />
+                                    <asp:Button ID="btn_Suspend" runat="server" Text='<%# Bind("suspend") %>' CssClass='<%# Bind("css") %>' CommandName='<%# Bind("suspend") %>' CommandArgument='<%#((GridViewRow)Container).RowIndex%>' OnClientClick='<%# Bind("message") %>' />
                                 </ItemTemplate>
                             </asp:TemplateField>
                         </Columns>

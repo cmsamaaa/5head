@@ -6,3 +6,9 @@
     if (!results[2]) return '';
     return decodeURIComponent(results[2].replace(/\+/g, ' '));
 }
+
+function getTime() {
+    let serverTime = new Date();
+    serverTime = new Date(serverTime.getTime() + 1000);
+    return serverTime.toGMTString();
+}

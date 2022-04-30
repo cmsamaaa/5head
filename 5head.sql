@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Apr 22, 2022 at 03:02 PM
+-- Generation Time: Apr 30, 2022 at 05:49 AM
 -- Server version: 8.0.21
 -- PHP Version: 7.3.21
 
@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `accounts` (
   `deactivated` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`accountID`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=MyISAM AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `accounts`
@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS `accounts` (
 
 INSERT INTO `accounts` (`accountID`, `username`, `password`, `encryptKey`, `profileID`, `deactivated`) VALUES
 (0, 'admin', 'Dm9c0iFRidUmWE2KEb7e4Q==', 't4J8TQqHvILd', 1, 0),
-(5, 'staff1', 'xtA5ul3ByOEv11lk2lzdsA==', 'tyfw42kkyeoS', 4, 0),
+(5, 'staff1', 'G08NAWlMqAKi1AyBsC3imQ==', 'tva9Bjw8EWYA', 4, 0),
 (6, 'staff2', 'Da7DhRJ0HUtVx+sE2eBkCA==', '5eIK8-6iPPJp', 4, 0);
 
 -- --------------------------------------------------------
@@ -58,6 +58,7 @@ DROP TABLE IF EXISTS `profiles`;
 CREATE TABLE IF NOT EXISTS `profiles` (
   `profileID` int NOT NULL AUTO_INCREMENT,
   `profileName` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `deactivated` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`profileID`),
   UNIQUE KEY `profileName` (`profileName`)
 ) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -66,13 +67,13 @@ CREATE TABLE IF NOT EXISTS `profiles` (
 -- Dumping data for table `profiles`
 --
 
-INSERT INTO `profiles` (`profileID`, `profileName`) VALUES
-(1, 'Administrator'),
-(2, 'Restaurant Owner'),
-(3, 'Restaurant Manager'),
-(4, 'Restaurant Staff'),
-(5, 'Customer'),
-(8, 'Test');
+INSERT INTO `profiles` (`profileID`, `profileName`, `deactivated`) VALUES
+(1, 'Administrator', 0),
+(2, 'Restaurant Owner', 0),
+(3, 'Restaurant Manager', 0),
+(4, 'Restaurant Staff', 0),
+(5, 'Customer', 0),
+(8, 'Test', 0);
 
 -- --------------------------------------------------------
 
@@ -88,7 +89,7 @@ CREATE TABLE IF NOT EXISTS `staffs` (
   `accountID` int NOT NULL,
   PRIMARY KEY (`staffID`),
   UNIQUE KEY `accountID` (`accountID`)
-) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `staffs`

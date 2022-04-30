@@ -152,10 +152,5 @@ namespace FiveHead.Controller
         {
             return account.UpdateAccountStatus(accountID, true);
         }
-
-        public int DeleteAccount(string username)
-        {
-            return account.DeleteAccount(username);
-        }
     }
 }
