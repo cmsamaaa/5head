@@ -23,11 +23,10 @@ namespace FiveHead.Controller
         public bool Authenticate(string username, string password)
         {
             account = accountsController.GetAccount(username, password);
-            profile = profilesController.GetProfileByID(account.ProfileID);
-
-            if (account.Deactivated)
+            if (account == null || account.Deactivated)
                 return false;
 
+            profile = profilesController.GetProfileByID(account.ProfileID);
             if (profile.ProfileName.Equals("Restaurant Staff") || 
                 profile.ProfileName.Equals("Restaurant Manager") ||
                 profile.ProfileName.Equals("Restaurant Owner"))

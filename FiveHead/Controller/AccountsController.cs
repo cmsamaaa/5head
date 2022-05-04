@@ -111,11 +111,10 @@ namespace FiveHead.Controller
         public bool Admin_Authentication(string username, string password)
         {
             account = GetAccount(username, password);
-            profile = profilesBLL.GetProfileByID(account.ProfileID);
-
-            if (account.Deactivated)
+            if (account == null || account.Deactivated)
                 return false;
 
+            profile = profilesBLL.GetProfileByID(account.ProfileID);
             if (profile.ProfileName.Equals("Administrator"))
                 return true;
 
