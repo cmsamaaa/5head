@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Apr 30, 2022 at 05:49 AM
+-- Generation Time: May 06, 2022 at 02:32 PM
 -- Server version: 8.0.21
 -- PHP Version: 7.3.21
 
@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `accounts` (
   `deactivated` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`accountID`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=MyISAM AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `accounts`
@@ -46,7 +46,57 @@ CREATE TABLE IF NOT EXISTS `accounts` (
 INSERT INTO `accounts` (`accountID`, `username`, `password`, `encryptKey`, `profileID`, `deactivated`) VALUES
 (0, 'admin', 'Dm9c0iFRidUmWE2KEb7e4Q==', 't4J8TQqHvILd', 1, 0),
 (5, 'staff1', 'G08NAWlMqAKi1AyBsC3imQ==', 'tva9Bjw8EWYA', 4, 0),
-(6, 'staff2', 'Da7DhRJ0HUtVx+sE2eBkCA==', '5eIK8-6iPPJp', 4, 0);
+(6, 'staff2', 'Da7DhRJ0HUtVx+sE2eBkCA==', '5eIK8-6iPPJp', 4, 0),
+(7, 'manager', 'Z8e9BfR+eRdiCJ6gPOM/Zg==', 'wXzlGDsXTzdS', 3, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `categories`
+--
+
+DROP TABLE IF EXISTS `categories`;
+CREATE TABLE IF NOT EXISTS `categories` (
+  `categoryID` int NOT NULL AUTO_INCREMENT,
+  `categoryName` varchar(200) NOT NULL,
+  `deactivated` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`categoryID`),
+  UNIQUE KEY `categoryName` (`categoryName`)
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `categories`
+--
+
+INSERT INTO `categories` (`categoryID`, `categoryName`, `deactivated`) VALUES
+(1, 'Drinks', 0),
+(2, 'Pasta', 0),
+(3, 'Soup', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `products`
+--
+
+DROP TABLE IF EXISTS `products`;
+CREATE TABLE IF NOT EXISTS `products` (
+  `productID` int NOT NULL AUTO_INCREMENT,
+  `productName` text NOT NULL,
+  `price` double NOT NULL,
+  `deactivated` tinyint(1) NOT NULL DEFAULT '0',
+  `categoryID` int NOT NULL,
+  PRIMARY KEY (`productID`)
+) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `products`
+--
+
+INSERT INTO `products` (`productID`, `productName`, `price`, `deactivated`, `categoryID`) VALUES
+(1, 'Carbonara', 12.9, 0, 2),
+(2, 'Mushroom Soup', 5.6, 0, 3),
+(3, 'Coke', 2.5, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -89,7 +139,7 @@ CREATE TABLE IF NOT EXISTS `staffs` (
   `accountID` int NOT NULL,
   PRIMARY KEY (`staffID`),
   UNIQUE KEY `accountID` (`accountID`)
-) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `staffs`
@@ -97,7 +147,8 @@ CREATE TABLE IF NOT EXISTS `staffs` (
 
 INSERT INTO `staffs` (`staffID`, `firstName`, `lastName`, `accountID`) VALUES
 (1, 'Jackson', 'Lim', 5),
-(2, 'Jane', 'Ho', 6);
+(2, 'Jane', 'Ho', 6),
+(11, 'John', 'Chan', 7);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

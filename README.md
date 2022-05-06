@@ -45,6 +45,10 @@
     Username: admin
     Password: 123
 
+    Manager Account
+    Username: manager
+    Password: 123
+
     Staff Account #1
     Username: staff1
     Password: 123
