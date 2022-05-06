@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace FiveHead.Restaurant
 {
@@ -20,13 +15,31 @@ namespace FiveHead.Restaurant
                 {
                     sessionQuery = Session["staffSession"].ToString();
 
-                    if (!String.IsNullOrEmpty(sessionQuery))
+                    if (!string.IsNullOrEmpty(sessionQuery))
                         lbl_Username.Text = sessionQuery;
+
+                    InitComponents(Session["staffProfile"].ToString());
                 }
                 catch (Exception ex)
                 {
                     Response.Redirect("Login.aspx?sessionExpired=true", true);
                 }
+            }
+        }
+
+        private void InitComponents(string profileName)
+        {
+            switch(profileName)
+            {
+                case "Restaurant Staff":
+                    break;
+                case "Restaurant Manager":
+                    PlaceHolder_Nav_Manager.Visible = true;
+                    break;
+                case "Restaurant Owner":
+                    break;
+                default:
+                    break;
             }
         }
     }

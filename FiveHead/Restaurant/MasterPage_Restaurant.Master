@@ -6,11 +6,12 @@
 <head runat="server">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <title>Majestic Admin</title>
+    <title>5Head Staff</title>
     <link rel="stylesheet" href="vendors/mdi/css/materialdesignicons.min.css" />
     <link rel="stylesheet" href="vendors/base/vendor.bundle.base.css" />
     <link rel="stylesheet" href="vendors/datatables.net-bs4/dataTables.bootstrap4.css" />
     <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/custom.css" />
     <link rel="shortcut icon" href="images/favicon.png" />
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
@@ -33,99 +34,6 @@
                 </div>
                 <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
                     <ul class="navbar-nav navbar-nav-right">
-                        <li class="nav-item dropdown mr-1">
-                            <a class="nav-link count-indicator dropdown-toggle d-flex justify-content-center align-items-center" id="messageDropdown" href="#" data-toggle="dropdown">
-                                <i class="mdi mdi-message-text mx-0"></i>
-                                <span class="count"></span>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="messageDropdown">
-                                <p class="mb-0 font-weight-normal float-left dropdown-header">Messages</p>
-                                <a class="dropdown-item">
-                                    <div class="item-thumbnail">
-                                        <img src="images/faces/face4.jpg" alt="image" class="profile-pic">
-                                    </div>
-                                    <div class="item-content flex-grow">
-                                        <h6 class="ellipsis font-weight-normal">David Grey
-                                        </h6>
-                                        <p class="font-weight-light small-text text-muted mb-0">
-                                            The meeting is cancelled
-                                        </p>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item">
-                                    <div class="item-thumbnail">
-                                        <img src="images/faces/face2.jpg" alt="image" class="profile-pic">
-                                    </div>
-                                    <div class="item-content flex-grow">
-                                        <h6 class="ellipsis font-weight-normal">Tim Cook
-                                        </h6>
-                                        <p class="font-weight-light small-text text-muted mb-0">
-                                            New product launch
-                                        </p>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item">
-                                    <div class="item-thumbnail">
-                                        <img src="images/faces/face3.jpg" alt="image" class="profile-pic">
-                                    </div>
-                                    <div class="item-content flex-grow">
-                                        <h6 class="ellipsis font-weight-normal">Johnson
-                                        </h6>
-                                        <p class="font-weight-light small-text text-muted mb-0">
-                                            Upcoming board meeting
-                                        </p>
-                                    </div>
-                                </a>
-                            </div>
-                        </li>
-                        <li class="nav-item dropdown mr-4">
-                            <a class="nav-link count-indicator dropdown-toggle d-flex align-items-center justify-content-center notification-dropdown" id="notificationDropdown" href="#" data-toggle="dropdown">
-                                <i class="mdi mdi-bell mx-0"></i>
-                                <span class="count"></span>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="notificationDropdown">
-                                <p class="mb-0 font-weight-normal float-left dropdown-header">Notifications</p>
-                                <a class="dropdown-item">
-                                    <div class="item-thumbnail">
-                                        <div class="item-icon bg-success">
-                                            <i class="mdi mdi-information mx-0"></i>
-                                        </div>
-                                    </div>
-                                    <div class="item-content">
-                                        <h6 class="font-weight-normal">Application Error</h6>
-                                        <p class="font-weight-light small-text mb-0 text-muted">
-                                            Just now
-                                        </p>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item">
-                                    <div class="item-thumbnail">
-                                        <div class="item-icon bg-warning">
-                                            <i class="mdi mdi-settings mx-0"></i>
-                                        </div>
-                                    </div>
-                                    <div class="item-content">
-                                        <h6 class="font-weight-normal">Settings</h6>
-                                        <p class="font-weight-light small-text mb-0 text-muted">
-                                            Private message
-                                        </p>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item">
-                                    <div class="item-thumbnail">
-                                        <div class="item-icon bg-info">
-                                            <i class="mdi mdi-account-box mx-0"></i>
-                                        </div>
-                                    </div>
-                                    <div class="item-content">
-                                        <h6 class="font-weight-normal">New user registration</h6>
-                                        <p class="font-weight-light small-text mb-0 text-muted">
-                                            2 days ago
-                                        </p>
-                                    </div>
-                                </a>
-                            </div>
-                        </li>
                         <li class="nav-item nav-profile dropdown">
                             <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
                                 <img src="images/undraw_profile.svg" alt="profile" />
@@ -154,70 +62,39 @@
                 <nav class="sidebar sidebar-offcanvas" id="sidebar">
                     <ul class="nav">
                         <li class="nav-item">
-                            <a class="nav-link" href="index.html">
+                            <a class="nav-link" href="Dashboard.aspx">
                                 <i class="mdi mdi-home menu-icon"></i>
                                 <span class="menu-title">Dashboard</span>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
-                                <i class="mdi mdi-circle-outline menu-icon"></i>
-                                <span class="menu-title">UI Elements</span>
-                                <i class="menu-arrow"></i>
-                            </a>
-                            <div class="collapse" id="ui-basic">
-                                <ul class="nav flex-column sub-menu">
-                                    <li class="nav-item"><a class="nav-link" href="pages/ui-features/buttons.html">Buttons</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="pages/ui-features/typography.html">Typography</a></li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="pages/forms/basic_elements.html">
-                                <i class="mdi mdi-view-headline menu-icon"></i>
-                                <span class="menu-title">Form elements</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="pages/charts/chartjs.html">
-                                <i class="mdi mdi-chart-pie menu-icon"></i>
-                                <span class="menu-title">Charts</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="pages/tables/basic-table.html">
-                                <i class="mdi mdi-grid-large menu-icon"></i>
-                                <span class="menu-title">Tables</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="pages/icons/mdi.html">
-                                <i class="mdi mdi-emoticon menu-icon"></i>
-                                <span class="menu-title">Icons</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
-                                <i class="mdi mdi-account menu-icon"></i>
-                                <span class="menu-title">User Pages</span>
-                                <i class="menu-arrow"></i>
-                            </a>
-                            <div class="collapse" id="auth">
-                                <ul class="nav flex-column sub-menu">
-                                    <li class="nav-item"><a class="nav-link" href="pages/samples/login.html">Login </a></li>
-                                    <li class="nav-item"><a class="nav-link" href="pages/samples/login-2.html">Login 2 </a></li>
-                                    <li class="nav-item"><a class="nav-link" href="pages/samples/register.html">Register </a></li>
-                                    <li class="nav-item"><a class="nav-link" href="pages/samples/register-2.html">Register 2 </a></li>
-                                    <li class="nav-item"><a class="nav-link" href="pages/samples/lock-screen.html">Lockscreen </a></li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="documentation/documentation.html">
-                                <i class="mdi mdi-file-document-box-outline menu-icon"></i>
-                                <span class="menu-title">Documentation</span>
-                            </a>
-                        </li>
+                        <asp:PlaceHolder ID="PlaceHolder_Nav_Manager" runat="server" Visible="False">
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="collapse" href="#ui-category" aria-expanded="false" aria-controls="ui-category">
+                                    <i class="mdi mdi-grid-large menu-icon"></i>
+                                    <span class="menu-title">Menu Category</span>
+                                    <i class="menu-arrow"></i>
+                                </a>
+                                <div class="collapse" id="ui-category">
+                                    <ul class="nav flex-column sub-menu">
+                                        <li class="nav-item"><a class="nav-link" href="CreateCategory.aspx">Create</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="#">Browse</a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="collapse" href="#ui-item" aria-expanded="false" aria-controls="ui-item">
+                                    <i class="mdi mdi-food menu-icon"></i>
+                                    <span class="menu-title">Menu Item</span>
+                                    <i class="menu-arrow"></i>
+                                </a>
+                                <div class="collapse" id="ui-item">
+                                    <ul class="nav flex-column sub-menu">
+                                        <li class="nav-item"><a class="nav-link" href="CreateProduct.aspx">Create</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="#">Browse</a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </asp:PlaceHolder>
                     </ul>
                 </nav>
                 <!-- partial -->
@@ -229,7 +106,7 @@
                     <!-- partial:partials/_footer.html -->
                     <footer class="footer">
                         <div class="d-sm-flex justify-content-center justify-content-sm-between">
-                            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 5Head <script>document.write(new Date().getFullYear())</script>.</span>
+                            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright &copy; 5Head <script>document.write(new Date().getFullYear())</script>.</span>
                         </div>
                     </footer>
                     <!-- partial -->
@@ -259,6 +136,7 @@
         <script src="js/jquery.dataTables.js"></script>
         <script src="js/dataTables.bootstrap4.js"></script>
         <!-- End custom js for this page-->
+        <script src="js/custom.js"></script>
         <asp:ContentPlaceHolder ID="ContentPlaceHolder_Scripts" runat="server">
         </asp:ContentPlaceHolder>
     </form>

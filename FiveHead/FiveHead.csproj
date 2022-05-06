@@ -1789,10 +1789,12 @@
     <Content Include="Default.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="Register.aspx" />
+    <Content Include="Restaurant\CreateCategory.aspx" />
+    <Content Include="Restaurant\CreateProduct.aspx" />
+    <Content Include="Restaurant\css\custom.css" />
     <Content Include="Restaurant\css\style.css" />
     <Content Include="Restaurant\Dashboard.aspx" />
     <Content Include="Restaurant\images\auth\lockscreen-bg.jpg" />
-    <Content Include="Restaurant\images\auth\login-bg.jpg" />
     <Content Include="Restaurant\images\auth\register-bg.jpg" />
     <Content Include="Restaurant\images\faces\face1.jpg" />
     <Content Include="Restaurant\images\faces\face10.jpg" />
@@ -1822,12 +1824,16 @@
     <Content Include="Restaurant\images\faces\face8.jpg" />
     <Content Include="Restaurant\images\faces\face9.jpg" />
     <Content Include="Restaurant\images\favicon.png" />
+    <Content Include="Restaurant\images\login\galaxy-brain-2.png" />
+    <Content Include="Restaurant\images\login\galaxy-brain-1.png" />
+    <Content Include="Restaurant\images\login\galaxy-brain-3.png" />
     <Content Include="Restaurant\images\logo-black.svg" />
     <Content Include="Restaurant\images\logo-mini.svg" />
     <Content Include="Restaurant\images\logo.svg" />
     <Content Include="Restaurant\images\undraw_profile.svg" />
     <Content Include="Restaurant\js\chart.js" />
     <Content Include="Restaurant\js\Chart.min.js" />
+    <Content Include="Restaurant\js\custom.js" />
     <Content Include="Restaurant\js\dashboard.js" />
     <Content Include="Restaurant\js\data-table.js" />
     <Content Include="Restaurant\js\dataTables.bootstrap4.js" />
@@ -1929,8 +1935,26 @@
       <DependentUpon>ViewAllProfiles.aspx</DependentUpon>
     </Compile>
     <Compile Include="Controller\AccountsController.cs" />
+    <Compile Include="Controller\CategoriesController.cs" />
+    <Compile Include="Controller\ProductsController.cs" />
     <Compile Include="Controller\StaffsController.cs" />
     <Compile Include="Controller\ProfilesController.cs" />
+    <Compile Include="Entity\Category.cs" />
+    <Compile Include="Entity\Product.cs" />
+    <Compile Include="Restaurant\CreateCategory.aspx.cs">
+      <DependentUpon>CreateCategory.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Restaurant\CreateCategory.aspx.designer.cs">
+      <DependentUpon>CreateCategory.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Restaurant\CreateProduct.aspx.cs">
+      <DependentUpon>CreateProduct.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Restaurant\CreateProduct.aspx.designer.cs">
+      <DependentUpon>CreateProduct.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Scripts\Libraries\DBConn.cs" />
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>

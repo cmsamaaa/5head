@@ -35,6 +35,12 @@ namespace FiveHead.Controller
             return false;
         }
 
+        public string GetStaffProfile(string username)
+        {
+            account = accountsController.GetAccountByUsername(username);
+            return profilesController.GetProfileByID(account.ProfileID).ProfileName;
+        }
+
         public int UpdateName(int staffID, string firstName, string lastName)
         {
             return staff.UpdateName(staffID, firstName, lastName);

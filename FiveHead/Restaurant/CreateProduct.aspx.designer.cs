@@ -11,43 +11,43 @@ namespace FiveHead.Restaurant
 {
 
 
-    public partial class Login
+    public partial class CreateProduct
     {
 
         /// <summary>
-        /// form1 control.
+        /// tb_ProductName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText tb_ProductName;
 
         /// <summary>
-        /// tb_Username control.
+        /// tb_Price control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText tb_Username;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText tb_Price;
 
         /// <summary>
-        /// tb_Password control.
+        /// ddl_Category control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputPassword tb_Password;
+        protected global::System.Web.UI.HtmlControls.HtmlSelect ddl_Category;
 
         /// <summary>
-        /// btn_Login control.
+        /// btn_Create control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlButton btn_Login;
+        protected global::System.Web.UI.HtmlControls.HtmlButton btn_Create;
     }
 }

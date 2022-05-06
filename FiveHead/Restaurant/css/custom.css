@@ -1,0 +1,14 @@
+﻿.success-alert-box,
+.danger-alert-box,
+.empty-alert-box {
+    font-size: 0.875rem;
+    display: none;
+}
+
+.login-field {
+    background: transparent;
+}
+
+.close {
+    font-size: 1.2rem;
+}

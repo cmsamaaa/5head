@@ -45,13 +45,14 @@ namespace FiveHead.Restaurant
 
             if (result == true)
             {
+                staff = new StaffsController();
+
                 Session["staffSession"] = username;
+                Session["staffProfile"] = staff.GetStaffProfile(username);
                 Response.Redirect("Dashboard.aspx", true);
             }
             else
-            {
                 ShowMessage("Fail to login!");
-            }
         }
 
         private void ShowMessage(string Message)

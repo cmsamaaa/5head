@@ -1,10 +1,8 @@
 ﻿using FiveHead.Scripts.Libraries;
-using FiveHead.Entity;
 using System;
 using System.Data;
 using System.Text;
 using MySql.Data.MySqlClient;
-using System.Collections.Generic;
 
 namespace FiveHead.Entity
 {

@@ -15,7 +15,7 @@ namespace FiveHead.Admin
                 {
                     sessionQuery = Session["adminSession"].ToString();
 
-                    if (!String.IsNullOrEmpty(sessionQuery))
+                    if (!string.IsNullOrEmpty(sessionQuery))
                         lbl_Username.Text = sessionQuery;
                 }
                 catch (Exception ex)

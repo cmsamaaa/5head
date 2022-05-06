@@ -11,16 +11,25 @@ namespace FiveHead.Restaurant
 {
 
 
-    public partial class Dashboard
+    public partial class CreateCategory
     {
 
         /// <summary>
-        /// lbl_Profile control.
+        /// tb_CategoryName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_Profile;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText tb_CategoryName;
+
+        /// <summary>
+        /// btn_Create control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlButton btn_Create;
     }
 }

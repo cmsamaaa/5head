@@ -32,14 +32,14 @@ namespace FiveHead.Admin
                 if (!deactivated)
                 {
                     dr["suspend"] = "Suspend";
-                    dr["message"] = "return confirm('Are you sure you want to suspend the account?')";
+                    dr["message"] = "return confirm('Are you sure you want to suspend the profile?')";
                     dr["css"] = "btn btn-danger";
                     dr["editVisible"] = true;
                 }
                 else
                 {
                     dr["suspend"] = "Re-activate";
-                    dr["message"] = "return confirm('Are you sure you want to re-activate the account?')";
+                    dr["message"] = "return confirm('Are you sure you want to re-activate the profile?')";
                     dr["css"] = "btn btn-success";
                     dr["editVisible"] = false;
                 }
