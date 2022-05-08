@@ -28,5 +28,15 @@ namespace FiveHead.Controller
             else
                 return null;
         }
+
+        public int ReactivateCategory(int categoryID)
+        {
+            return category.UpdateCategoryStatus(categoryID, false);
+        }
+
+        public int SuspendCategory(int categoryID)
+        {
+            return category.UpdateCategoryStatus(categoryID, true);
+        }
     }
 }

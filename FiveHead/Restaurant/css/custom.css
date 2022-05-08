@@ -12,3 +12,22 @@
 .close {
     font-size: 1.2rem;
 }
+
+.GridPager {
+    display: table-row;
+    font-size: 14px;
+    color: black;
+    font-weight: 800;
+}
+
+    .GridPager a {
+        font-size: 14px;
+        font-weight: 500;
+        color: black;
+    }
+
+        .GridPager a:hover {
+            color: #4d83ff;
+            text-shadow: 0px 0px 2px #4d83ff;
+            text-decoration: none;
+        }

@@ -1854,6 +1854,7 @@
     <Content Include="Restaurant\vendors\datatables.net\jquery.dataTables.js" />
     <Content Include="Restaurant\vendors\mdi\css\materialdesignicons.min.css" />
     <Content Include="Restaurant\vendors\mdi\fonts\materialdesignicons-webfont.svg" />
+    <Content Include="Restaurant\ViewAllCategories.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -1954,6 +1955,13 @@
     </Compile>
     <Compile Include="Restaurant\CreateProduct.aspx.designer.cs">
       <DependentUpon>CreateProduct.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Restaurant\ViewAllCategories.aspx.cs">
+      <DependentUpon>ViewAllCategories.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Restaurant\ViewAllCategories.aspx.designer.cs">
+      <DependentUpon>ViewAllCategories.aspx</DependentUpon>
     </Compile>
     <Compile Include="Scripts\Libraries\DBConn.cs" />
     <Compile Include="Default.aspx.cs">
