@@ -23,7 +23,7 @@ namespace FiveHead.Controller
 
         public string GetProfileNameByID(int profileID)
         {
-            profile = profile.GetProfileByID(profileID);
+            profile = GetProfileByID(profileID);
             if (profile == null)
                 return null;
             return profile.ProfileName;

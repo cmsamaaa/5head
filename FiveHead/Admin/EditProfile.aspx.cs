@@ -24,7 +24,7 @@ namespace FiveHead.Admin
 
         private void GetInfo()
         {
-            int profileID = Convert.ToInt32(Session["edit_ProfileID"]);
+            int profileID = Convert.ToInt32(Session["edit_ProfileID"].ToString());
             tb_ProfileName.Value = profilesController.GetProfileNameByID(profileID);
         }
 
