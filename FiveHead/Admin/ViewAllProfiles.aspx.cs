@@ -72,9 +72,6 @@ namespace FiveHead.Admin
             Label profileIDLabel = (Label)gv_Profiles.Rows[index].FindControl("lbl_ProfileID");
             int profileID = Convert.ToInt32(profileIDLabel.Text);
 
-            Label profileNameLabel = (Label)gv_Profiles.Rows[index].FindControl("lbl_ProfileName");
-            string profileName = profileNameLabel.Text;
-
             int result = 0;
             switch (e.CommandName)
             {
