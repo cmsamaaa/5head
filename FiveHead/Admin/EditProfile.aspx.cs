@@ -11,7 +11,14 @@ namespace FiveHead.Admin
         {
             if (!IsPostBack)
             {
-                GetInfo();
+                try
+                {
+                    GetInfo();
+                }
+                catch (Exception ex)
+                {
+                    Response.Redirect("ViewAllProfiles.aspx", true);
+                }
             }
         }
 
