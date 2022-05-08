@@ -1846,6 +1846,7 @@
     <Content Include="Restaurant\js\template.js" />
     <Content Include="Restaurant\Login.aspx" />
     <Content Include="Restaurant\Logout.aspx" />
+    <Content Include="Restaurant\EditCategory.aspx" />
     <Content Include="Restaurant\vendors\base\vendor.bundle.base.css" />
     <Content Include="Restaurant\vendors\base\vendor.bundle.base.js" />
     <Content Include="Restaurant\vendors\chart.js\Chart.min.js" />
@@ -1955,6 +1956,13 @@
     </Compile>
     <Compile Include="Restaurant\CreateProduct.aspx.designer.cs">
       <DependentUpon>CreateProduct.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Restaurant\EditCategory.aspx.cs">
+      <DependentUpon>EditCategory.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Restaurant\EditCategory.aspx.designer.cs">
+      <DependentUpon>EditCategory.aspx</DependentUpon>
     </Compile>
     <Compile Include="Restaurant\ViewAllCategories.aspx.cs">
       <DependentUpon>ViewAllCategories.aspx</DependentUpon>

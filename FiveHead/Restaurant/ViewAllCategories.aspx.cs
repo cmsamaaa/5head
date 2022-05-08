@@ -77,9 +77,8 @@ namespace FiveHead.Restaurant
             switch (e.CommandName)
             {
                 case "Edit":
-                    //Session["edit_CategoryID"] = profileID;
-                    //Response.Redirect("EditCategory.aspx", true);
-                    Response.Redirect("ViewAllCategories.aspx?work-in-progress", true);
+                    Session["edit_CategoryID"] = categoryID;
+                    Response.Redirect("EditCategory.aspx", true);
                     break;
                 case "Suspend":
                     result = categoriesController.SuspendCategory(categoryID);

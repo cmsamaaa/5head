@@ -29,6 +29,38 @@ namespace FiveHead.Controller
                 return null;
         }
 
+        public Category GetCategoryByID(int categoryID)
+        {
+            return category.GetCategoryByID(categoryID);
+        }
+
+        public string GetCategoryNameByID(int categoryID)
+        {
+            category = GetCategoryByID(categoryID);
+            if (category == null)
+                return null;
+            return category.CategoryName;
+        }
+
+        public int GetCategoryIDByName(string categoryName)
+        {
+            category = category.GetCategoryByName(categoryName);
+            if (category == null)
+                return -1;
+            return category.CategoryID;
+        }
+
+        public int UpdateCategoryName(int categoryID, string categoryName)
+        {
+            int result = GetCategoryIDByName(categoryName);
+            if (result == -1)
+            {
+                category = new Category();
+                return category.UpdateCategoryName(categoryID, categoryName);
+            }
+            return 0;
+        }
+
         public int ReactivateCategory(int categoryID)
         {
             return category.UpdateCategoryStatus(categoryID, false);

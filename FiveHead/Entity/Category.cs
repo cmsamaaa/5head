@@ -22,14 +22,14 @@ namespace FiveHead.Entity
             this.CategoryName = categoryName;
         }
 
-        public Category(string categoryName, bool deactivated) : this(categoryName)
-        {
-            this.Deactivated = deactivated;
-        }
-
-        public Category(int categoryID, string categoryName, bool deactivated) : this(categoryName, deactivated)
+        public Category(int categoryID, string categoryName): this(categoryName)
         {
             this.CategoryID = categoryID;
+        }
+
+        public Category(int categoryID, string categoryName, bool deactivated) : this(categoryID, categoryName)
+        {
+            this.Deactivated = deactivated;
         }
 
         public Category(Category category) : this(category.CategoryID, category.CategoryName, category.Deactivated)
@@ -130,6 +130,43 @@ namespace FiveHead.Entity
             {
                 da = mySQL.adapter_set_query(sql.ToString(), conn);
                 da.SelectCommand.Parameters.AddWithValue("categoryID", categoryID);
+                da.Fill(ds);
+            }
+            catch (Exception ex)
+            {
+                errMsg = ex.Message;
+            }
+            finally
+            {
+                dbConn.CloseConnection(conn);
+            }
+
+            if (ds.Tables[0].Rows.Count > 0)
+                return new Category(ds.Tables[0].ToList<Category>()[0]);
+            else
+                return null;
+        }
+
+        public Category GetCategoryByName(string categoryName)
+        {
+            StringBuilder sql;
+            MySqlDataAdapter da;
+            DataSet ds;
+
+            MySqlConnection conn = dbConn.GetConnection();
+            ds = new DataSet();
+            sql = new StringBuilder();
+            sql.AppendLine("SELECT *");
+            sql.AppendLine(" ");
+            sql.AppendLine("FROM Categories");
+            sql.AppendLine(" ");
+            sql.AppendLine("WHERE categoryName = @categoryName");
+            conn.Open();
+
+            try
+            {
+                da = mySQL.adapter_set_query(sql.ToString(), conn);
+                da.SelectCommand.Parameters.AddWithValue("categoryName", categoryName);
                 da.Fill(ds);
             }
             catch (Exception ex)

@@ -10,6 +10,8 @@ namespace FiveHead.Restaurant
 {
     public partial class CreateCategory : System.Web.UI.Page
     {
+        CategoriesController categoriesController;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -23,7 +25,7 @@ namespace FiveHead.Restaurant
             if (string.IsNullOrEmpty(tb_CategoryName.Value))
                 Response.Redirect("CreateCategory.aspx?error=empty");
 
-            CategoriesController categoriesController = new CategoriesController();
+            categoriesController = new CategoriesController();
 
             string categoryName = tb_CategoryName.Value;
             int result = categoriesController.CreateCategory(categoryName);
