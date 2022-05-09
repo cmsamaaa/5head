@@ -29,5 +29,26 @@ namespace FiveHead.Controller
             else
                 return null;
         }
+
+        public Product GetProductByID(int productID)
+        {
+            return product.GetProductByID(productID);
+        }
+
+        public int UpdateProduct(int productID, string productName, double price, int categoryID)
+        {
+            Product product = new Product(productID, productName, price, categoryID);
+            return product.UpdateProduct(product);
+        }
+
+        public int ReactivateProduct(int productID)
+        {
+            return product.UpdateProductStatus(productID, false);
+        }
+
+        public int SuspendProduct(int productID)
+        {
+            return product.UpdateProductStatus(productID, true);
+        }
     }
 }

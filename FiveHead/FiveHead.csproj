@@ -1794,6 +1794,8 @@
     <Content Include="Restaurant\css\custom.css" />
     <Content Include="Restaurant\css\style.css" />
     <Content Include="Restaurant\Dashboard.aspx" />
+    <Content Include="Restaurant\Default.aspx" />
+    <Content Include="Restaurant\EditProduct.aspx" />
     <Content Include="Restaurant\images\auth\lockscreen-bg.jpg" />
     <Content Include="Restaurant\images\auth\register-bg.jpg" />
     <Content Include="Restaurant\images\faces\face1.jpg" />
@@ -1856,6 +1858,7 @@
     <Content Include="Restaurant\vendors\mdi\css\materialdesignicons.min.css" />
     <Content Include="Restaurant\vendors\mdi\fonts\materialdesignicons-webfont.svg" />
     <Content Include="Restaurant\ViewAllCategories.aspx" />
+    <Content Include="Restaurant\ViewAllProducts.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -1957,6 +1960,13 @@
     <Compile Include="Restaurant\CreateProduct.aspx.designer.cs">
       <DependentUpon>CreateProduct.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Restaurant\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Restaurant\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Restaurant\EditCategory.aspx.cs">
       <DependentUpon>EditCategory.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1964,12 +1974,26 @@
     <Compile Include="Restaurant\EditCategory.aspx.designer.cs">
       <DependentUpon>EditCategory.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Restaurant\EditProduct.aspx.cs">
+      <DependentUpon>EditProduct.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Restaurant\EditProduct.aspx.designer.cs">
+      <DependentUpon>EditProduct.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Restaurant\ViewAllCategories.aspx.cs">
       <DependentUpon>ViewAllCategories.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Restaurant\ViewAllCategories.aspx.designer.cs">
       <DependentUpon>ViewAllCategories.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Restaurant\ViewAllProducts.aspx.cs">
+      <DependentUpon>ViewAllProducts.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Restaurant\ViewAllProducts.aspx.designer.cs">
+      <DependentUpon>ViewAllProducts.aspx</DependentUpon>
     </Compile>
     <Compile Include="Scripts\Libraries\DBConn.cs" />
     <Compile Include="Default.aspx.cs">
