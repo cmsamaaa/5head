@@ -1,6 +1,7 @@
 ﻿.success-alert-box,
 .danger-alert-box,
-.empty-alert-box {
+.empty-alert-box,
+.invalid-alert-box {
     font-size: 0.875rem;
     display: none;
 }

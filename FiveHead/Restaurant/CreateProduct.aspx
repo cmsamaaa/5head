@@ -28,9 +28,16 @@
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
-                            <div class="alert alert-danger alert-dismissible fade show col-12 danger-alert-box empty-alert-box" role="alert">
+                            <div class="alert alert-danger alert-dismissible fade show col-12 empty-alert-box" role="alert">
                                 <i class="fas fa-exclamation-triangle"></i>
                                 Please fill up all fields.
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="alert alert-danger alert-dismissible fade show col-12 invalid-alert-box" role="alert">
+                                <i class="fas fa-exclamation-triangle"></i>
+                                Please enter a valid price.
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -79,8 +86,12 @@
                 $('.danger-alert-box').show();
             if (productName != null)
                 $('#ContentPlaceHolder_PageContent_tb_ProductName').val(productName);
-            if (productPrice != null)
+
+            if (productPrice == "invalid")
+                $('.invalid-alert-box').show();
+            else if (productPrice != null)
                 $('#ContentPlaceHolder_PageContent_tb_Price').val(productPrice);
+
             if (productCategory != null) {
                 $('#ContentPlaceHolder_PageContent_ddl_Category').val(productCategory);
                 $('#ContentPlaceHolder_PageContent_ddl_Category').css("color", "black");

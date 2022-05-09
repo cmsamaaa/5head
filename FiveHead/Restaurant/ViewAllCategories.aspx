@@ -23,7 +23,7 @@
                             </div>
                             <div id="error-suspend" class="alert alert-danger alert-dismissible fade show col-12 mt-4 danger-alert-box" role="alert">
                                 <i class="fas fa-exclamation-triangle"></i>
-                                Failed to suspend Menu category.
+                                Failed to suspend menu category.
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -37,7 +37,7 @@
                             </div>
                             <div id="error-activate" class="alert alert-danger alert-dismissible fade show col-12 mt-4 danger-alert-box" role="alert">
                                 <i class="fas fa-exclamation-triangle"></i>
-                                Failed to re-activate Menu category.
+                                Failed to re-activate menu category.
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -51,7 +51,7 @@
                                             <asp:Label ID="lbl_CategoryID" runat="server" Text='<%# Bind("categoryID") %>'></asp:Label>
                                         </ItemTemplate>
                                     </asp:TemplateField>
-                                    <asp:TemplateField HeaderText="Category Name" ItemStyle-CssClass="col-4">
+                                    <asp:TemplateField HeaderText="Category Name">
                                         <ItemTemplate>
                                             <asp:Label ID="lbl_CategoryName" runat="server" Text='<%# Bind("categoryName") %>'></asp:Label>
                                         </ItemTemplate>
