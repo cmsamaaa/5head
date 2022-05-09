@@ -13,6 +13,7 @@ namespace FiveHead.Entity
     {
         private int profileID;
         private string profileName;
+        private bool deactivated;
 
         public Profile()
         {
@@ -24,12 +25,24 @@ namespace FiveHead.Entity
             this.ProfileName = profileName;
         }
 
-        public Profile(int profileID, string profileName) : this(profileName)
+        public Profile(int profileID, string profileName)
         {
             this.ProfileID = profileID;
+            this.ProfileName = profileName;
         }
 
-        public Profile (Profile profile) : this(profile.ProfileID, profile.ProfileName)
+        public Profile(int profileID, bool deactivated)
+        {
+            this.ProfileID = profileID;
+            this.Deactivated = deactivated;
+        }
+
+        public Profile(int profileID, string profileName, bool deactivated) : this(profileID, profileName)
+        {
+            this.Deactivated = deactivated;
+        }
+
+        public Profile (Profile profile) : this(profile.ProfileID, profile.ProfileName, profile.Deactivated)
         {
             if (profile == null)
                 throw new ArgumentNullException();
@@ -37,6 +50,7 @@ namespace FiveHead.Entity
 
         public int ProfileID { get => profileID; set => profileID = value; }
         public string ProfileName { get => profileName; set => profileName = value; }
+        public bool Deactivated { get => deactivated; set => deactivated = value; }
 
 
         // Data Access
@@ -44,7 +58,7 @@ namespace FiveHead.Entity
         DBConn dbConn = new DBConn();
         private string errMsg;
 
-        public int CreateProfile(Profile profile)
+        public int CreateProfile()
         {
             StringBuilder sql;
             MySqlCommand sqlCmd;
@@ -60,7 +74,7 @@ namespace FiveHead.Entity
             try
             {
                 sqlCmd = mySQL.cmd_set_connection(sql.ToString(), conn);
-                sqlCmd.Parameters.AddWithValue("@profileName", profile.ProfileName);
+                sqlCmd.Parameters.AddWithValue("@profileName", this.ProfileName);
                 conn.Open();
                 result = sqlCmd.ExecuteNonQuery();
             }
@@ -181,7 +195,7 @@ namespace FiveHead.Entity
                 return null;
         }
 
-        public int UpdateProfileName(int profileID, string profileName)
+        public int UpdateProfileName()
         {
             StringBuilder sql;
             MySqlCommand sqlCmd;
@@ -199,8 +213,8 @@ namespace FiveHead.Entity
             try
             {
                 sqlCmd = mySQL.cmd_set_connection(sql.ToString(), conn);
-                sqlCmd.Parameters.AddWithValue("@profileID", profileID);
-                sqlCmd.Parameters.AddWithValue("@profileName", profileName);
+                sqlCmd.Parameters.AddWithValue("@profileID", this.ProfileID);
+                sqlCmd.Parameters.AddWithValue("@profileName", this.ProfileName);
                 conn.Open();
                 result = sqlCmd.ExecuteNonQuery();
             }
@@ -216,7 +230,7 @@ namespace FiveHead.Entity
             return result;
         }
 
-        public int UpdateProfileStatus(int profileID, bool deactivated)
+        public int UpdateProfileStatus()
         {
             StringBuilder sql;
             MySqlCommand sqlCmd;
@@ -234,8 +248,8 @@ namespace FiveHead.Entity
             try
             {
                 sqlCmd = mySQL.cmd_set_connection(sql.ToString(), conn);
-                sqlCmd.Parameters.AddWithValue("@profileID", profileID);
-                sqlCmd.Parameters.AddWithValue("@deactivated", deactivated);
+                sqlCmd.Parameters.AddWithValue("@profileID", this.ProfileID);
+                sqlCmd.Parameters.AddWithValue("@deactivated", this.Deactivated);
                 conn.Open();
                 result = sqlCmd.ExecuteNonQuery();
             }

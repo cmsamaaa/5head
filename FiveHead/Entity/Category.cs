@@ -27,6 +27,12 @@ namespace FiveHead.Entity
             this.CategoryID = categoryID;
         }
 
+        public Category(int categoryID, bool deactivated)
+        {
+            this.CategoryID = categoryID;
+            this.Deactivated = deactivated;
+        }
+
         public Category(int categoryID, string categoryName, bool deactivated) : this(categoryID, categoryName)
         {
             this.Deactivated = deactivated;
@@ -47,7 +53,7 @@ namespace FiveHead.Entity
         DBConn dbConn = new DBConn();
         private string errMsg;
 
-        public int CreateCategory(string categoryName)
+        public int CreateCategory()
         {
             StringBuilder sql;
             MySqlCommand sqlCmd;
@@ -63,7 +69,7 @@ namespace FiveHead.Entity
             try
             {
                 sqlCmd = mySQL.cmd_set_connection(sql.ToString(), conn);
-                sqlCmd.Parameters.AddWithValue("@categoryName", categoryName);
+                sqlCmd.Parameters.AddWithValue("@categoryName", this.CategoryName);
                 conn.Open();
                 result = sqlCmd.ExecuteNonQuery();
             }
@@ -184,7 +190,7 @@ namespace FiveHead.Entity
                 return null;
         }
 
-        public int UpdateCategoryName(int categoryID, string categoryName)
+        public int UpdateCategoryName()
         {
             StringBuilder sql;
             MySqlCommand sqlCmd;
@@ -202,8 +208,8 @@ namespace FiveHead.Entity
             try
             {
                 sqlCmd = mySQL.cmd_set_connection(sql.ToString(), conn);
-                sqlCmd.Parameters.AddWithValue("@categoryID", categoryID);
-                sqlCmd.Parameters.AddWithValue("@categoryName", categoryName);
+                sqlCmd.Parameters.AddWithValue("@categoryID", this.CategoryID);
+                sqlCmd.Parameters.AddWithValue("@categoryName", this.CategoryName);
                 conn.Open();
                 result = sqlCmd.ExecuteNonQuery();
             }
@@ -219,7 +225,7 @@ namespace FiveHead.Entity
             return result;
         }
 
-        public int UpdateCategoryStatus(int categoryID, bool deactivated)
+        public int UpdateCategoryStatus()
         {
             StringBuilder sql;
             MySqlCommand sqlCmd;
@@ -237,8 +243,8 @@ namespace FiveHead.Entity
             try
             {
                 sqlCmd = mySQL.cmd_set_connection(sql.ToString(), conn);
-                sqlCmd.Parameters.AddWithValue("@categoryID", categoryID);
-                sqlCmd.Parameters.AddWithValue("@deactivated", deactivated);
+                sqlCmd.Parameters.AddWithValue("@categoryID", this.CategoryID);
+                sqlCmd.Parameters.AddWithValue("@deactivated", this.Deactivated);
                 conn.Open();
                 result = sqlCmd.ExecuteNonQuery();
             }

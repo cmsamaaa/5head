@@ -25,13 +25,20 @@ namespace FiveHead.Entity
             this.Username = username;
         }
 
-        public Account(string username, string password) : this(username)
+        public Account(int accountID, string username) : this(username)
         {
-            this.Password = password;
+            this.AccountID = accountID;
         }
 
-        public Account(string username, string password, string encryptKey) : this(username, password)
+        public Account(int accountID, bool deactivated)
         {
+            this.AccountID = accountID;
+            this.Deactivated = deactivated;
+        }
+
+        public Account(string username, string password, string encryptKey) : this(username)
+        {
+            this.Password = password;
             this.EncryptKey = encryptKey;
         }
 
@@ -65,7 +72,7 @@ namespace FiveHead.Entity
         DBConn dbConn = new DBConn();
         private string errMsg;
 
-        public int CreateAccount(Account account)
+        public int CreateAccount()
         {
             StringBuilder sql;
             MySqlCommand sqlCmd;
@@ -81,10 +88,10 @@ namespace FiveHead.Entity
             try
             {
                 sqlCmd = mySQL.cmd_set_connection(sql.ToString(), conn);
-                sqlCmd.Parameters.AddWithValue("@username", account.Username);
-                sqlCmd.Parameters.AddWithValue("@password", account.Password);
-                sqlCmd.Parameters.AddWithValue("@encryptKey", account.EncryptKey);
-                sqlCmd.Parameters.AddWithValue("@profileID", account.ProfileID);
+                sqlCmd.Parameters.AddWithValue("@username", this.Username);
+                sqlCmd.Parameters.AddWithValue("@password", this.Password);
+                sqlCmd.Parameters.AddWithValue("@encryptKey", this.EncryptKey);
+                sqlCmd.Parameters.AddWithValue("@profileID", this.ProfileID);
                 conn.Open();
                 result = sqlCmd.ExecuteNonQuery();
             }
@@ -278,7 +285,7 @@ namespace FiveHead.Entity
                 return null;
         }
 
-        public int UpdateUsername(int accountID, string username)
+        public int UpdateUsername()
         {
             StringBuilder sql;
             MySqlCommand sqlCmd;
@@ -296,8 +303,8 @@ namespace FiveHead.Entity
             try
             {
                 sqlCmd = mySQL.cmd_set_connection(sql.ToString(), conn);
-                sqlCmd.Parameters.AddWithValue("@accountID", accountID);
-                sqlCmd.Parameters.AddWithValue("@username", username);
+                sqlCmd.Parameters.AddWithValue("@accountID", this.AccountID);
+                sqlCmd.Parameters.AddWithValue("@username", this.Username);
                 conn.Open();
                 result = sqlCmd.ExecuteNonQuery();
             }
@@ -313,7 +320,7 @@ namespace FiveHead.Entity
             return result;
         }
 
-        public int UpdatePassword(string username, string password, string encryptKey)
+        public int UpdatePassword()
         {
             StringBuilder sql;
             MySqlCommand sqlCmd;
@@ -331,9 +338,9 @@ namespace FiveHead.Entity
             try
             {
                 sqlCmd = mySQL.cmd_set_connection(sql.ToString(), conn);
-                sqlCmd.Parameters.AddWithValue("@username", username);
-                sqlCmd.Parameters.AddWithValue("@password", password);
-                sqlCmd.Parameters.AddWithValue("@encryptKey", encryptKey);
+                sqlCmd.Parameters.AddWithValue("@username", this.Username);
+                sqlCmd.Parameters.AddWithValue("@password", this.Password);
+                sqlCmd.Parameters.AddWithValue("@encryptKey", this.EncryptKey);
                 conn.Open();
                 result = sqlCmd.ExecuteNonQuery();
             }
@@ -349,7 +356,7 @@ namespace FiveHead.Entity
             return result;
         }
 
-        public int UpdateAccountStatus(int accountID, bool deactivated)
+        public int UpdateAccountStatus()
         {
             StringBuilder sql;
             MySqlCommand sqlCmd;
@@ -367,8 +374,8 @@ namespace FiveHead.Entity
             try
             {
                 sqlCmd = mySQL.cmd_set_connection(sql.ToString(), conn);
-                sqlCmd.Parameters.AddWithValue("@accountID", accountID);
-                sqlCmd.Parameters.AddWithValue("@deactivated", deactivated);
+                sqlCmd.Parameters.AddWithValue("@accountID", this.AccountID);
+                sqlCmd.Parameters.AddWithValue("@deactivated", this.Deactivated);
                 conn.Open();
                 result = sqlCmd.ExecuteNonQuery();
             }

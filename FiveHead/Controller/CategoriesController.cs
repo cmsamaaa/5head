@@ -11,7 +11,8 @@ namespace FiveHead.Controller
 
         public int CreateCategory(string categoryName)
         {
-            return category.CreateCategory(categoryName);
+            category = new Category(categoryName);
+            return category.CreateCategory();
         }
 
         public DataSet GetAllCategoriesDataSet()
@@ -55,20 +56,22 @@ namespace FiveHead.Controller
             int result = GetCategoryIDByName(categoryName);
             if (result == -1)
             {
-                category = new Category();
-                return category.UpdateCategoryName(categoryID, categoryName);
+                category = new Category(categoryID, categoryName);
+                return category.UpdateCategoryName();
             }
             return 0;
         }
 
         public int ReactivateCategory(int categoryID)
         {
-            return category.UpdateCategoryStatus(categoryID, false);
+            category = new Category(categoryID, false);
+            return category.UpdateCategoryStatus();
         }
 
         public int SuspendCategory(int categoryID)
         {
-            return category.UpdateCategoryStatus(categoryID, true);
+            category = new Category(categoryID, true);
+            return category.UpdateCategoryStatus();
         }
     }
 }

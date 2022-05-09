@@ -12,7 +12,8 @@ namespace FiveHead.Controller
 
         public int CreateStaff(string firstName, string lastName, int accountID)
         {
-            return staff.CreateStaff(firstName, lastName, accountID);
+            staff = new Staff(firstName, lastName, accountID);
+            return staff.CreateStaff();
         }
 
         public Staff GetStaffByAccountID(int accountID)
@@ -43,7 +44,8 @@ namespace FiveHead.Controller
 
         public int UpdateName(int staffID, string firstName, string lastName)
         {
-            return staff.UpdateName(staffID, firstName, lastName);
+            staff = new Staff(staffID, firstName, lastName);
+            return staff.UpdateName();
         }
     }
 }

@@ -24,7 +24,7 @@ namespace FiveHead.Controller
                 encryptPassword = crypt.Encrypt(encryptKey, password);
                 account = new Account(username, encryptPassword, encryptKey, profileID);
 
-                return account.CreateAccount(account);
+                return account.CreateAccount();
             }
             else
                 return 0;
@@ -125,8 +125,8 @@ namespace FiveHead.Controller
         {
             if (!CheckUsernameExist(username))
             {
-                account = new Account();
-                return account.UpdateUsername(accountID, username);
+                account = new Account(accountID, username);
+                return account.UpdateUsername();
             }
             else
                 return 0;
@@ -139,17 +139,19 @@ namespace FiveHead.Controller
             encryptPassword = crypt.Encrypt(encryptKey, password);
             account = new Account(username, encryptPassword, encryptKey);
 
-            return account.UpdatePassword(username, encryptPassword, encryptKey);
+            return account.UpdatePassword();
         }
 
         public int ReactivateAccount(int accountID)
         {
-            return account.UpdateAccountStatus(accountID, false);
+            account = new Account(accountID, false);
+            return account.UpdateAccountStatus();
         }
 
         public int SuspendAccount(int accountID)
         {
-            return account.UpdateAccountStatus(accountID, true);
+            account = new Account(accountID, true);
+            return account.UpdateAccountStatus();
         }
     }
 }

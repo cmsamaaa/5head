@@ -24,6 +24,13 @@ namespace FiveHead.Entity
             this.StaffID = staffID;
         }
 
+        public Staff(string firstName, string lastName, int accountID)
+        {
+            this.FirstName = firstName;
+            this.LastName = lastName;
+            this.AccountID = accountID;
+        }
+
         public Staff(int staffID, string firstName, string lastName) : this(staffID)
         {
             this.FirstName = firstName;
@@ -55,7 +62,7 @@ namespace FiveHead.Entity
         DBConn dbConn = new DBConn();
         private string errMsg;
 
-        public int CreateStaff(string firstName, string lastName, int accountID)
+        public int CreateStaff()
         {
             StringBuilder sql;
             MySqlCommand sqlCmd;
@@ -71,9 +78,9 @@ namespace FiveHead.Entity
             try
             {
                 sqlCmd = mySQL.cmd_set_connection(sql.ToString(), conn);
-                sqlCmd.Parameters.AddWithValue("@firstName", firstName);
-                sqlCmd.Parameters.AddWithValue("@lastName", lastName);
-                sqlCmd.Parameters.AddWithValue("@accountID", accountID);
+                sqlCmd.Parameters.AddWithValue("@firstName", this.FirstName);
+                sqlCmd.Parameters.AddWithValue("@lastName", this.LastName);
+                sqlCmd.Parameters.AddWithValue("@accountID", this.AccountID);
                 conn.Open();
                 result = sqlCmd.ExecuteNonQuery();
             }
@@ -197,7 +204,7 @@ namespace FiveHead.Entity
                 return null;
         }
 
-        public int UpdateName(int staffID, string firstName, string lastName)
+        public int UpdateName()
         {
             StringBuilder sql;
             MySqlCommand sqlCmd;
@@ -215,9 +222,9 @@ namespace FiveHead.Entity
             try
             {
                 sqlCmd = mySQL.cmd_set_connection(sql.ToString(), conn);
-                sqlCmd.Parameters.AddWithValue("@staffID", staffID);
-                sqlCmd.Parameters.AddWithValue("@firstName", firstName);
-                sqlCmd.Parameters.AddWithValue("@lastName", lastName);
+                sqlCmd.Parameters.AddWithValue("@staffID", this.StaffID);
+                sqlCmd.Parameters.AddWithValue("@firstName", this.FirstName);
+                sqlCmd.Parameters.AddWithValue("@lastName", this.LastName);
                 conn.Open();
                 result = sqlCmd.ExecuteNonQuery();
             }

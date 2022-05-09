@@ -24,6 +24,12 @@ namespace FiveHead.Entity
             this.ProductName = productName;
         }
 
+        public Product(int productID, bool deactivated)
+        {
+            this.ProductID = productID;
+            this.Deactivated = deactivated;
+        }
+
         public Product(string productName, double price) : this(productName)
         {
             this.Price = price;
@@ -61,7 +67,7 @@ namespace FiveHead.Entity
         DBConn dbConn = new DBConn();
         private string errMsg;
 
-        public int CreateProduct(Product product)
+        public int CreateProduct()
         {
             StringBuilder sql;
             MySqlCommand sqlCmd;
@@ -77,9 +83,9 @@ namespace FiveHead.Entity
             try
             {
                 sqlCmd = mySQL.cmd_set_connection(sql.ToString(), conn);
-                sqlCmd.Parameters.AddWithValue("@productName", product.ProductName);
-                sqlCmd.Parameters.AddWithValue("@price", product.Price);
-                sqlCmd.Parameters.AddWithValue("@categoryID", product.CategoryID);
+                sqlCmd.Parameters.AddWithValue("@productName", this.ProductName);
+                sqlCmd.Parameters.AddWithValue("@price", this.Price);
+                sqlCmd.Parameters.AddWithValue("@categoryID", this.CategoryID);
                 conn.Open();
                 result = sqlCmd.ExecuteNonQuery();
             }
@@ -163,7 +169,7 @@ namespace FiveHead.Entity
                 return null;
         }
 
-        public int UpdateProduct(Product product)
+        public int UpdateProduct()
         {
             StringBuilder sql;
             MySqlCommand sqlCmd;
@@ -181,10 +187,10 @@ namespace FiveHead.Entity
             try
             {
                 sqlCmd = mySQL.cmd_set_connection(sql.ToString(), conn);
-                sqlCmd.Parameters.AddWithValue("@productID", product.ProductID);
-                sqlCmd.Parameters.AddWithValue("@productName", product.ProductName);
-                sqlCmd.Parameters.AddWithValue("@price", product.price);
-                sqlCmd.Parameters.AddWithValue("@categoryID", product.categoryID);
+                sqlCmd.Parameters.AddWithValue("@productID", this.ProductID);
+                sqlCmd.Parameters.AddWithValue("@productName", this.ProductName);
+                sqlCmd.Parameters.AddWithValue("@price", this.price);
+                sqlCmd.Parameters.AddWithValue("@categoryID", this.categoryID);
                 conn.Open();
                 result = sqlCmd.ExecuteNonQuery();
             }
@@ -200,7 +206,7 @@ namespace FiveHead.Entity
             return result;
         }
 
-        public int UpdateProductStatus(int productID, bool deactivated)
+        public int UpdateProductStatus()
         {
             StringBuilder sql;
             MySqlCommand sqlCmd;
@@ -218,8 +224,8 @@ namespace FiveHead.Entity
             try
             {
                 sqlCmd = mySQL.cmd_set_connection(sql.ToString(), conn);
-                sqlCmd.Parameters.AddWithValue("@productID", productID);
-                sqlCmd.Parameters.AddWithValue("@deactivated", deactivated);
+                sqlCmd.Parameters.AddWithValue("@productID", this.ProductID);
+                sqlCmd.Parameters.AddWithValue("@deactivated", this.Deactivated);
                 conn.Open();
                 result = sqlCmd.ExecuteNonQuery();
             }

@@ -12,7 +12,7 @@ namespace FiveHead.Controller
         public int CreateProduct(string productName, double price, int categoryID)
         {
             product = new Product(productName, price, categoryID);
-            return product.CreateProduct(product);
+            return product.CreateProduct();
         }
 
         public DataSet GetAllProductsDataSet()
@@ -38,17 +38,19 @@ namespace FiveHead.Controller
         public int UpdateProduct(int productID, string productName, double price, int categoryID)
         {
             Product product = new Product(productID, productName, price, categoryID);
-            return product.UpdateProduct(product);
+            return product.UpdateProduct();
         }
 
         public int ReactivateProduct(int productID)
         {
-            return product.UpdateProductStatus(productID, false);
+            product = new Product(productID, false);
+            return product.UpdateProductStatus();
         }
 
         public int SuspendProduct(int productID)
         {
-            return product.UpdateProductStatus(productID, true);
+            product = new Product(productID, true);
+            return product.UpdateProductStatus();
         }
     }
 }

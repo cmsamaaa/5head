@@ -13,7 +13,7 @@ namespace FiveHead.Controller
         public int CreateProfile(string profileName)
         {
             profile = new Profile(profileName);
-            return profile.CreateProfile(profile);
+            return profile.CreateProfile();
         }
 
         public Profile GetProfileByID(int profileID)
@@ -66,20 +66,22 @@ namespace FiveHead.Controller
             int result = GetProfileIDByName(profileName);
             if (result == -1)
             {
-                profile = new Profile();
-                return profile.UpdateProfileName(profileID, profileName);
+                profile = new Profile(profileID, profileName);
+                return profile.UpdateProfileName();
             }
             return 0;
         }
 
         public int ReactivateProfile(int profileID)
         {
-            return profile.UpdateProfileStatus(profileID, false);
+            profile = new Profile(profileID, false);
+            return profile.UpdateProfileStatus();
         }
 
         public int SuspendProfile(int profileID)
         {
-            return profile.UpdateProfileStatus(profileID, true);
+            profile = new Profile(profileID, true);
+            return profile.UpdateProfileStatus();
         }
     }
 }
