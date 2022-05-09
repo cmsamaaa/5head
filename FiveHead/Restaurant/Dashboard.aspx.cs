@@ -25,7 +25,7 @@ namespace FiveHead.Restaurant
                     if (!string.IsNullOrEmpty(staffProfile))
                         lbl_Profile.Text = String.Format("{0}s", staffProfile);
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     Response.Redirect("Login.aspx?sessionExpired=true", true);
                 }

@@ -46,8 +46,9 @@ namespace FiveHead.Scripts.Libraries
                             {
                                 convertedValue = System.Convert.ChangeType(row[property.Name], Nullable.GetUnderlyingType(property.PropertyType));
                             }
-                            catch (Exception ex)
+                            catch (Exception)
                             {
+
                             }
                             property.SetValue(item, convertedValue, null);
                         }

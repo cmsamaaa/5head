@@ -19,7 +19,7 @@ namespace FiveHead.Admin
                 {
                     GetInfo();
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     Response.Redirect("ViewAllAccounts.aspx", true);
                 }

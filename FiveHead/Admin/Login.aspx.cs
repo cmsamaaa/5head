@@ -19,7 +19,7 @@ namespace FiveHead.Admin
                     if (!String.IsNullOrEmpty(sessionQuery))
                         Response.Redirect("Dashboard.aspx", true);
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     
                 }

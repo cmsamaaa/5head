@@ -15,7 +15,7 @@ namespace FiveHead.Admin
                 {
                     GetInfo();
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     Response.Redirect("ViewAllProfiles.aspx", true);
                 }

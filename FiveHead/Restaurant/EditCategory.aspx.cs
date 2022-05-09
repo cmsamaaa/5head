@@ -15,7 +15,7 @@ namespace FiveHead.Restaurant
                 {
                     GetInfo();
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     Response.Redirect("ViewAllCategories.aspx", true);
                 }

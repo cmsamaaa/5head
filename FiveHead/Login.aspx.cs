@@ -24,7 +24,7 @@ namespace FiveHead
                     if (queryStr.Equals("true"))
                         ShowMessage("You have successfully registered!");
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
 
                 }
@@ -39,7 +39,7 @@ namespace FiveHead
                     else if (queryStr.Equals("false"))
                         ShowMessage("Login failed! Please re-enter your credentials.");
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
 
                 }

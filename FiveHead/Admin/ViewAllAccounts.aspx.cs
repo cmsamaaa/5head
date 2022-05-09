@@ -64,7 +64,7 @@ namespace FiveHead.Admin
             {
                 GridViewRow row = gv_Accounts.Rows[index];
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 index = 0;
             }

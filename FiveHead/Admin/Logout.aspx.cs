@@ -21,7 +21,7 @@ namespace FiveHead.Admin
                         Response.Redirect("Login.aspx?logout=true", true);
                     }
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     Response.Redirect("Login.aspx", true);
                 }

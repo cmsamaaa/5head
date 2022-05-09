@@ -18,7 +18,7 @@ namespace FiveHead.Admin
                     if (!string.IsNullOrEmpty(sessionQuery))
                         lbl_Username.Text = sessionQuery;
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     Response.Redirect("Login.aspx?sessionExpired=true", true);
                 }

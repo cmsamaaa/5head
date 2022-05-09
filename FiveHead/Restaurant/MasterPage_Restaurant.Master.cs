@@ -20,7 +20,7 @@ namespace FiveHead.Restaurant
 
                     InitComponents(Session["staffProfile"].ToString());
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     Response.Redirect("Login.aspx?sessionExpired=true", true);
                 }

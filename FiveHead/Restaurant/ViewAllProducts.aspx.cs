@@ -65,7 +65,7 @@ namespace FiveHead.Restaurant
             {
                 GridViewRow row = gv_Products.Rows[index];
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 index = 0;
             }
