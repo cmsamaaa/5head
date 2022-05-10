@@ -7,11 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace FiveHead.Admin
+namespace FiveHead
 {
 
 
-    public partial class WebForm1
+    public partial class Menu
     {
 
         /// <summary>

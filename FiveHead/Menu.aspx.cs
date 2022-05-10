@@ -7,9 +7,9 @@ using System.Web.UI.WebControls;
 using FiveHead.Controller;
 using System.Text;
 
-namespace FiveHead.Admin
+namespace FiveHead
 {
-    public partial class WebForm1 : System.Web.UI.Page
+    public partial class Menu : System.Web.UI.Page
     {
         // Global Variables
         OrdersController ordersController = new OrdersController();         // For handling Orders (Customer)

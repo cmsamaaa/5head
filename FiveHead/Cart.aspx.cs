@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 using FiveHead.Controller;
 using System.Text;
 
-namespace FiveHead.Admin
+namespace FiveHead
 {
     public partial class cart : System.Web.UI.Page
     {

@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace FiveHead.Admin
+namespace FiveHead
 {
 
 

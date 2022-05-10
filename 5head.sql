@@ -85,7 +85,7 @@ CREATE TABLE IF NOT EXISTS `orders` (
   `staffID` int(11) NOT NULL,
   `productID` int(11) NOT NULL,
   `categoryID` int(11) NOT NULL,
-  `productName` text NOT NULL,
+  `productName` varchar(200) NOT NULL,
   `price` float NOT NULL,
   `status` text DEFAULT 'Not Paid',
   PRIMARY KEY (`orderID`)

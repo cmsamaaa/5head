@@ -49,7 +49,7 @@ namespace FiveHead.Controller
 
 					int productID = int.Parse(curr_order[0]);	// Convert String to Integer
 					int categoryID = int.Parse(curr_order[1]);	// Convert String to Integer
-					int productName = int.Parse(curr_order[2]);	// Convert String to Integer
+					string productName = curr_order[2];
 					float price = float.Parse(curr_order[3]);	// Convert String to Float
 					string status = curr_order[4];
 
