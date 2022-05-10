@@ -13,14 +13,15 @@
 
 ## Pre-requisites
 
--   Visual Studio (I'm using Enterprise)
--   MySQL (Workbench / XAMPP / wampserver)
+-   Visual Studio 2022 (I'm using Enterprise)
+-   MySQL 7.0 and above (Community + Workbench / XAMPP / wampserver)
 
 ## Setup Guide
 
 1. Clone this repository to your computer
-2. Import "5head.sql" into MySQL
-3. Visual Studio NuGet Package Manager
+2. Create database named "5head" (if you haven't)
+3. Select 5head, then import "5head.sql" in
+4. Visual Studio NuGet Package Manager
     - Install all necessary dependencies including [MySQL.Data]
 
 ## Documentations
@@ -45,15 +46,15 @@
     Username: admin
     Password: 123
 
-    Manager Account
+    Manager Account (required to see and use manager features)
     Username: manager
     Password: 123
 
-    Staff Account #1
+    Staff Account #1 (required to see and use staff features)
     Username: staff1
     Password: 123
 
-    Staff Account #2
+    Staff Account #2 (required to see and use staff features)
     Username: staff2
     Password: 123
 
