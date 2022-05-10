@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.1.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: May 06, 2022 at 02:32 PM
--- Server version: 8.0.21
--- PHP Version: 7.3.21
+-- Generation Time: May 10, 2022 at 01:07 PM
+-- Server version: 5.1.3
+-- PHP Version: 8.1.5
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -72,6 +72,28 @@ INSERT INTO `categories` (`categoryID`, `categoryName`, `deactivated`) VALUES
 (1, 'Drinks', 0),
 (2, 'Pasta', 0),
 (3, 'Soup', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `orders`
+--
+
+DROP TABLE IF EXISTS `orders`;
+CREATE TABLE IF NOT EXISTS `orders` (
+  `orderID` int(11) NOT NULL,
+  `staffID` int(11) NOT NULL,
+  `productID` int(11) NOT NULL,
+  `categoryID` int(11) NOT NULL,
+  `productName` text NOT NULL,
+  `price` float NOT NULL,
+  `status` text DEFAULT 'Not Paid',
+  PRIMARY KEY (`orderID`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `orders`
+--
 
 -- --------------------------------------------------------
 

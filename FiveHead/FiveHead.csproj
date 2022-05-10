@@ -125,6 +125,7 @@
     <Content Include="Admin\js\sb-admin-2.min.js" />
     <Content Include="Admin\Login.aspx" />
     <Content Include="Admin\Logout.aspx" />
+    <Content Include="Admin\Menu.aspx" />
     <Content Include="Admin\vendor\bootstrap\js\bootstrap.bundle.js" />
     <Content Include="Admin\vendor\bootstrap\js\bootstrap.bundle.min.js" />
     <Content Include="Admin\vendor\bootstrap\js\bootstrap.js" />
@@ -1925,6 +1926,13 @@
     <Compile Include="Admin\MasterPage_Admin.Master.designer.cs">
       <DependentUpon>MasterPage_Admin.Master</DependentUpon>
     </Compile>
+	<Compile Include="Admin\Menu.aspx.cs">
+		<DependentUpon>Menu.aspx</DependentUpon>
+		<SubType>ASPXCodeBehind</SubType>
+	</Compile>
+	<Compile Include="Admin\Menu.aspx.designer.cs">
+		<DependentUpon>Menu.aspx</DependentUpon>
+	</Compile>
     <Compile Include="Admin\ViewAllAccounts.aspx.cs">
       <DependentUpon>ViewAllAccounts.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
