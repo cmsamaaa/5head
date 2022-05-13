@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.3
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: May 10, 2022 at 01:07 PM
--- Server version: 5.1.3
--- PHP Version: 8.1.5
+-- Generation Time: May 13, 2022 at 07:56 AM
+-- Server version: 8.0.21
+-- PHP Version: 7.3.21
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `accounts` (
   `deactivated` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`accountID`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=MyISAM AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `accounts`
@@ -45,9 +45,9 @@ CREATE TABLE IF NOT EXISTS `accounts` (
 
 INSERT INTO `accounts` (`accountID`, `username`, `password`, `encryptKey`, `profileID`, `deactivated`) VALUES
 (0, 'admin', 'Dm9c0iFRidUmWE2KEb7e4Q==', 't4J8TQqHvILd', 1, 0),
-(5, 'staff1', 'G08NAWlMqAKi1AyBsC3imQ==', 'tva9Bjw8EWYA', 4, 0),
-(6, 'staff2', 'Da7DhRJ0HUtVx+sE2eBkCA==', '5eIK8-6iPPJp', 4, 0),
-(7, 'manager', 'Z8e9BfR+eRdiCJ6gPOM/Zg==', 'wXzlGDsXTzdS', 3, 0);
+(3, 'staff', 'CVC736It92Rdvs7PTipJcw==', 'h1-UsyxOikRS', 4, 0),
+(2, 'manager', 'UVflKxqFWw1+zdNeg8gz0w==', 'vF9pLFyyY4mX', 3, 0),
+(1, 'owner', 'T78WaYX9Ri9MPwx9cYp9xg==', 'E-QlGzSEP4kW', 2, 0);
 
 -- --------------------------------------------------------
 
@@ -81,19 +81,15 @@ INSERT INTO `categories` (`categoryID`, `categoryName`, `deactivated`) VALUES
 
 DROP TABLE IF EXISTS `orders`;
 CREATE TABLE IF NOT EXISTS `orders` (
-  `orderID` int(11) NOT NULL,
-  `staffID` int(11) NOT NULL,
-  `productID` int(11) NOT NULL,
-  `categoryID` int(11) NOT NULL,
+  `orderID` int NOT NULL,
+  `staffID` int NOT NULL,
+  `productID` int NOT NULL,
+  `categoryID` int NOT NULL,
   `productName` varchar(200) NOT NULL,
   `price` float NOT NULL,
-  `status` text DEFAULT 'Not Paid',
+  `status` varchar(200) DEFAULT 'Not Paid',
   PRIMARY KEY (`orderID`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `orders`
---
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -161,16 +157,16 @@ CREATE TABLE IF NOT EXISTS `staffs` (
   `accountID` int NOT NULL,
   PRIMARY KEY (`staffID`),
   UNIQUE KEY `accountID` (`accountID`)
-) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `staffs`
 --
 
 INSERT INTO `staffs` (`staffID`, `firstName`, `lastName`, `accountID`) VALUES
-(1, 'Jackson', 'Lim', 5),
-(2, 'Jane', 'Ho', 6),
-(11, 'John', 'Chan', 7);
+(1, 'Jackson', 'Lim', 3),
+(11, 'Jack', 'Horse', 2),
+(12, 'Elonge', 'Moss', 1);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -154,6 +154,8 @@ namespace FiveHead.Entity
             sql.AppendLine("INNER JOIN Profiles p");
             sql.AppendLine(" ");
             sql.AppendLine("ON a.profileID = p.profileID");
+            sql.AppendLine(" ");
+            sql.AppendLine("ORDER BY accountID ASC");
             conn.Open();
 
             try

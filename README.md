@@ -45,18 +45,18 @@
     Administrator Account
     Username: admin
     Password: 123
+	
+	Owner Account (required to see and use owner features)
+    Username: manager
+    Password: 111
 
     Manager Account (required to see and use manager features)
     Username: manager
-    Password: 123
+    Password: 222
 
-    Staff Account #1 (required to see and use staff features)
-    Username: staff1
-    Password: 123
-
-    Staff Account #2 (required to see and use staff features)
-    Username: staff2
-    Password: 123
+    Staff Account (required to see and use staff features)
+    Username: staff
+    Password: 333
 
 ### Requirements
 

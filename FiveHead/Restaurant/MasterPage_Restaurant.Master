@@ -37,7 +37,8 @@
                         <li class="nav-item nav-profile dropdown">
                             <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
                                 <img src="images/undraw_profile.svg" alt="profile" />
-                                <span class="nav-profile-name"><asp:Label ID="lbl_Username" runat="server" Text=""></asp:Label></span>
+                                <span class="nav-profile-name">
+                                    <asp:Label ID="lbl_Username" runat="server" Text=""></asp:Label></span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
                                 <a class="dropdown-item">
@@ -67,6 +68,25 @@
                                 <span class="menu-title">Dashboard</span>
                             </a>
                         </li>
+
+                        <!-- Restaurant Staff Navigation -->
+                        <asp:PlaceHolder ID="PlaceHolder_Nav_Staff" runat="server" Visible="False">
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="collapse" href="#ui-orders" aria-expanded="false" aria-controls="ui-orders">
+                                    <i class="mdi mdi-cart menu-icon"></i>
+                                    <span class="menu-title">Orders</span>
+                                    <i class="menu-arrow"></i>
+                                </a>
+                                <div class="collapse" id="ui-orders">
+                                    <ul class="nav flex-column sub-menu">
+                                        <li class="nav-item"><a class="nav-link" href="#">Check</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="#">Browse</a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </asp:PlaceHolder>
+
+                        <!-- Restaurant Manager Navigation -->
                         <asp:PlaceHolder ID="PlaceHolder_Nav_Manager" runat="server" Visible="False">
                             <li class="nav-item">
                                 <a class="nav-link" data-toggle="collapse" href="#ui-category" aria-expanded="false" aria-controls="ui-category">
@@ -94,6 +114,29 @@
                                     </ul>
                                 </div>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="collapse" href="#ui-coupon" aria-expanded="false" aria-controls="ui-coupon">
+                                    <i class="mdi mdi-ticket-percent menu-icon"></i>
+                                    <span class="menu-title">Coupon</span>
+                                    <i class="menu-arrow"></i>
+                                </a>
+                                <div class="collapse" id="ui-coupon">
+                                    <ul class="nav flex-column sub-menu">
+                                        <li class="nav-item"><a class="nav-link" href="#">Create</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="#">Manage</a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </asp:PlaceHolder>
+
+                        <!-- Restaurant Owner Navigation -->
+                        <asp:PlaceHolder ID="PlaceHolder_Nav_Owner" runat="server" Visible="False">
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    <i class="mdi mdi-file menu-icon"></i>
+                                    <span class="menu-title">Data Report</span>
+                                </a>
+                            </li>
                         </asp:PlaceHolder>
                     </ul>
                 </nav>
@@ -106,7 +149,9 @@
                     <!-- partial:partials/_footer.html -->
                     <footer class="footer">
                         <div class="d-sm-flex justify-content-center justify-content-sm-between">
-                            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright &copy; 5Head <script>document.write(new Date().getFullYear())</script>.</span>
+                            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright &copy; 5Head
+                                <script>document.write(new Date().getFullYear())</script>
+                                .</span>
                         </div>
                     </footer>
                     <!-- partial -->

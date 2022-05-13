@@ -32,11 +32,13 @@ namespace FiveHead.Restaurant
             switch(profileName)
             {
                 case "Restaurant Staff":
+                    PlaceHolder_Nav_Staff.Visible = true;
                     break;
                 case "Restaurant Manager":
                     PlaceHolder_Nav_Manager.Visible = true;
                     break;
                 case "Restaurant Owner":
+                    PlaceHolder_Nav_Owner.Visible = true;
                     break;
                 default:
                     break;

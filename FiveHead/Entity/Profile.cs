@@ -102,6 +102,8 @@ namespace FiveHead.Entity
             sql.AppendLine("SELECT *");
             sql.AppendLine(" ");
             sql.AppendLine("FROM Profiles");
+            sql.AppendLine(" ");
+            sql.AppendLine("ORDER BY profileID ASC");
             conn.Open();
 
             try

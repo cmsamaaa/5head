@@ -42,6 +42,15 @@ namespace FiveHead.Restaurant
         protected global::System.Web.UI.WebControls.Label lbl_Username;
 
         /// <summary>
+        /// PlaceHolder_Nav_Staff control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.PlaceHolder PlaceHolder_Nav_Staff;
+
+        /// <summary>
         /// PlaceHolder_Nav_Manager control.
         /// </summary>
         /// <remarks>
@@ -49,6 +58,15 @@ namespace FiveHead.Restaurant
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.PlaceHolder PlaceHolder_Nav_Manager;
+
+        /// <summary>
+        /// PlaceHolder_Nav_Owner control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.PlaceHolder PlaceHolder_Nav_Owner;
 
         /// <summary>
         /// ContentPlaceHolder_PageContent control.
