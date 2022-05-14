@@ -122,8 +122,8 @@
                                 </a>
                                 <div class="collapse" id="ui-coupon">
                                     <ul class="nav flex-column sub-menu">
-                                        <li class="nav-item"><a class="nav-link" href="#">Create</a></li>
-                                        <li class="nav-item"><a class="nav-link" href="#">Manage</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="CreateCoupon.aspx">Create</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="ViewAllCoupons.aspx">Manage</a></li>
                                     </ul>
                                 </div>
                             </li>
@@ -151,7 +151,7 @@
                         <div class="d-sm-flex justify-content-center justify-content-sm-between">
                             <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright &copy; 5Head
                                 <script>document.write(new Date().getFullYear())</script>
-                                .</span>
+                            </span>
                         </div>
                     </footer>
                     <!-- partial -->

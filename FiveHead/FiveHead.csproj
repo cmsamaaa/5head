@@ -1792,11 +1792,13 @@
     <Content Include="Menu.aspx" />
     <Content Include="Cart.aspx" />
     <Content Include="Restaurant\CreateCategory.aspx" />
+    <Content Include="Restaurant\CreateCoupon.aspx" />
     <Content Include="Restaurant\CreateProduct.aspx" />
     <Content Include="Restaurant\css\custom.css" />
     <Content Include="Restaurant\css\style.css" />
     <Content Include="Restaurant\Dashboard.aspx" />
     <Content Include="Restaurant\Default.aspx" />
+    <Content Include="Restaurant\EditCoupon.aspx" />
     <Content Include="Restaurant\EditProduct.aspx" />
     <Content Include="Restaurant\images\auth\lockscreen-bg.jpg" />
     <Content Include="Restaurant\images\auth\register-bg.jpg" />
@@ -1860,6 +1862,7 @@
     <Content Include="Restaurant\vendors\mdi\css\materialdesignicons.min.css" />
     <Content Include="Restaurant\vendors\mdi\fonts\materialdesignicons-webfont.svg" />
     <Content Include="Restaurant\ViewAllCategories.aspx" />
+    <Content Include="Restaurant\ViewAllCoupons.aspx" />
     <Content Include="Restaurant\ViewAllProducts.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -1943,11 +1946,13 @@
     </Compile>
     <Compile Include="Controller\AccountsController.cs" />
     <Compile Include="Controller\CategoriesController.cs" />
+    <Compile Include="Controller\CouponsController.cs" />
     <Compile Include="Controller\OrdersController.cs" />
     <Compile Include="Controller\ProductsController.cs" />
     <Compile Include="Controller\StaffsController.cs" />
     <Compile Include="Controller\ProfilesController.cs" />
     <Compile Include="Entity\Category.cs" />
+    <Compile Include="Entity\Coupon.cs" />
     <Compile Include="Entity\Order.cs" />
     <Compile Include="Entity\Product.cs" />
     <Compile Include="Restaurant\CreateCategory.aspx.cs">
@@ -1956,6 +1961,13 @@
     </Compile>
     <Compile Include="Restaurant\CreateCategory.aspx.designer.cs">
       <DependentUpon>CreateCategory.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Restaurant\CreateCoupon.aspx.cs">
+      <DependentUpon>CreateCoupon.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Restaurant\CreateCoupon.aspx.designer.cs">
+      <DependentUpon>CreateCoupon.aspx</DependentUpon>
     </Compile>
     <Compile Include="Restaurant\CreateProduct.aspx.cs">
       <DependentUpon>CreateProduct.aspx</DependentUpon>
@@ -1978,6 +1990,13 @@
     <Compile Include="Restaurant\EditCategory.aspx.designer.cs">
       <DependentUpon>EditCategory.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Restaurant\EditCoupon.aspx.cs">
+      <DependentUpon>EditCoupon.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Restaurant\EditCoupon.aspx.designer.cs">
+      <DependentUpon>EditCoupon.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Restaurant\EditProduct.aspx.cs">
       <DependentUpon>EditProduct.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1991,6 +2010,13 @@
     </Compile>
     <Compile Include="Restaurant\ViewAllCategories.aspx.designer.cs">
       <DependentUpon>ViewAllCategories.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Restaurant\ViewAllCoupons.aspx.cs">
+      <DependentUpon>ViewAllCoupons.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Restaurant\ViewAllCoupons.aspx.designer.cs">
+      <DependentUpon>ViewAllCoupons.aspx</DependentUpon>
     </Compile>
     <Compile Include="Restaurant\ViewAllProducts.aspx.cs">
       <DependentUpon>ViewAllProducts.aspx</DependentUpon>

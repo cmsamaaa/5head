@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: May 13, 2022 at 07:56 AM
+-- Generation Time: May 14, 2022 at 07:48 AM
 -- Server version: 8.0.21
 -- PHP Version: 7.3.21
 
@@ -72,6 +72,32 @@ INSERT INTO `categories` (`categoryID`, `categoryName`, `deactivated`) VALUES
 (1, 'Drinks', 0),
 (2, 'Pasta', 0),
 (3, 'Soup', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `coupons`
+--
+
+DROP TABLE IF EXISTS `coupons`;
+CREATE TABLE IF NOT EXISTS `coupons` (
+  `couponID` int NOT NULL AUTO_INCREMENT,
+  `code` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `discount` int NOT NULL,
+  `deactivated` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`couponID`),
+  UNIQUE KEY `code` (`code`)
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `coupons`
+--
+
+INSERT INTO `coupons` (`couponID`, `code`, `discount`, `deactivated`) VALUES
+(1, 'GREEDISGOOD', 15, 0),
+(2, 'THEREISNOSPOON', 5, 1),
+(3, 'CNY2022', 8, 0),
+(4, 'HAPPYHOLS2022', 5, 0);
 
 -- --------------------------------------------------------
 
