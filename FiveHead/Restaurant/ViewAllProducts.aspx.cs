@@ -18,8 +18,16 @@ namespace FiveHead.Restaurant
 
         private void bindGridView()
         {
+            PlaceHolder_NoProduct.Visible = false;
             productsController = new ProductsController();
-            DataSet ds = productsController.GetAllProductsDataSet();
+            DataSet ds;
+
+            string search = Request.QueryString["search"];
+            if (!string.IsNullOrEmpty(search))
+                ds = productsController.SearchAllProducts(search);
+            else
+                ds = productsController.GetAllProductsDataSet();
+
             DataTable dt = ds.Tables[0];
             dt.Columns.Add("suspend", typeof(string));
             dt.Columns.Add("message", typeof(string));
@@ -47,6 +55,9 @@ namespace FiveHead.Restaurant
 
             gv_Products.DataSource = ds;
             gv_Products.DataBind();
+
+            if (ds.Tables[0].Rows.Count == 0)
+                PlaceHolder_NoProduct.Visible = true;
         }
 
         protected void gv_Products_PageIndexChanging(object sender, GridViewPageEventArgs e)
@@ -97,6 +108,11 @@ namespace FiveHead.Restaurant
                 default:
                     break;
             }
+        }
+
+        protected void btn_Search_Click(object sender, EventArgs e)
+        {
+            Response.Redirect(string.Format("ViewAllProducts.aspx?search={0}", tb_Search.Value), true);
         }
     }
 }

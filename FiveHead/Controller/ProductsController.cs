@@ -20,6 +20,11 @@ namespace FiveHead.Controller
             return product.GetAllProducts();
         }
 
+        public DataSet SearchAllProducts(string search)
+        {
+            return product.SearchAllProducts(search);
+        }
+
         public List<Product> GetAllProducts()
         {
             DataSet ds = GetAllProductsDataSet();

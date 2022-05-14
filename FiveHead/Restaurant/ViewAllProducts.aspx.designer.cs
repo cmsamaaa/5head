@@ -15,6 +15,24 @@ namespace FiveHead.Restaurant
     {
 
         /// <summary>
+        /// tb_Search control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText tb_Search;
+
+        /// <summary>
+        /// btn_Search control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlButton btn_Search;
+
+        /// <summary>
         /// gv_Products control.
         /// </summary>
         /// <remarks>
@@ -22,5 +40,14 @@ namespace FiveHead.Restaurant
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView gv_Products;
+
+        /// <summary>
+        /// PlaceHolder_NoProduct control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.PlaceHolder PlaceHolder_NoProduct;
     }
 }

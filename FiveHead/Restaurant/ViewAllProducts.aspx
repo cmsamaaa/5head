@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Restaurant/MasterPage_Restaurant.Master" AutoEventWireup="true" CodeBehind="ViewAllProducts.aspx.cs" Inherits="FiveHead.Restaurant.ViewAllProducts" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder_PageContent" runat="server">
@@ -11,6 +12,19 @@
                         <p class="card-description">
                             List of all menu items
                         </p>
+                        <div class="form-group row">
+                            <div class="input-group col-sm-6">
+                                <div class="input-group-prepend bg-transparent">
+                                    <span class="input-group-text bg-transparent border-right-0">
+                                        <i class="mdi mdi-magnify text-primary"></i>
+                                    </span>
+                                </div>
+                                <input runat="server" type="text" class="form-control form-control-lg border-left-0 login-field" id="tb_Search" placeholder="Search by Product Name" />
+                            </div>
+                            <div class="input-group col-sm-6">
+                                <button runat="server" id="btn_Search" class="btn btn-primary" onserverclick="btn_Search_Click">Search</button>
+                            </div>
+                        </div>
                         <!-- Success Alert -->
                         <div class="row justify-content-center">
                             <div id="success-suspend" class="alert alert-success alert-dismissible fade show col-12 mt-4 success-alert-box" role="alert">
@@ -57,7 +71,8 @@
                                     </asp:TemplateField>
                                     <asp:TemplateField HeaderText="Price" ItemStyle-CssClass="col-2">
                                         <ItemTemplate>
-                                            $ <asp:Label ID="lbl_Price" runat="server" Text='<%# Eval("price", "{0:0.00}") %>'></asp:Label>
+                                            $
+                                            <asp:Label ID="lbl_Price" runat="server" Text='<%# Eval("price", "{0:0.00}") %>'></asp:Label>
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                     <asp:TemplateField ItemStyle-CssClass="col-2">
@@ -70,6 +85,9 @@
                                 <PagerStyle CssClass="GridPager" HorizontalAlign="Right" />
                             </asp:GridView>
                         </div>
+                        <asp:PlaceHolder ID="PlaceHolder_NoProduct" runat="server" Visible="false">
+                            No products found
+                        </asp:PlaceHolder>
                     </div>
                 </div>
             </div>
@@ -90,6 +108,10 @@
                 $('#success-activate').show();
             if (queryStr_Activate == "false")
                 $('#error-activate').show();
+
+            const search = getParameterByName("search");
+            if (search != null)
+                $('#ContentPlaceHolder_PageContent_tb_Search').val(search);
         });
     </script>
 </asp:Content>
