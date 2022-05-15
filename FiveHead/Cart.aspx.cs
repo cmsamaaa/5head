@@ -29,30 +29,250 @@ namespace FiveHead
 			 * 1. Take all orders (found in 'cart' List<List<String>> variable)
 			 * 2. Insert into Table - row by row
 			 */
-			int orderID = 1;
-			int staffID = 1;
-			int ret_Code = ordersController.CheckoutCart(orderID, staffID);
 
-			ViewAllInCart();
+			// Clear Label
+			lbl_Debug_Output.Text = "";
+			lbl_Info.InnerText = "";
+
+			/* 
+			 * Get Coupon Code
+			 * - Cross-Reference with 'coupons' table to verify coupon code's validity
+			 * - if valid : Give discount according to the 'discount value' column
+			 */
+			string coupon_Code = tb_coupon_Code.Value;
+
+			int orderID = (ordersController.GetNumberOfOrders() + 1);
+			List<List<String>> cart = (List<List<String>>)Session["cart"];
+
+			/*
+			 * Filter and get all cart details
+			 */
+			List<String> required_columns = new List<string>() { 
+				"orderID", "tableNumber", "productID", "categoryID", 
+				"productName", "productQty", "price", "start_datetime", 
+				"end_datetime", "status", "finalPrice", "contacts" 
+			};
+			List<List<String>> conf_cart = new List<List<String>>(); // To store the confirmed cart values
+
+			// Get Table Number
+			string tableNum = "";
+			if (Session["tableNum"] == null)
+            {
+				tableNum = tb_table_Number.Value;
+			}
+			else
+			{
+				// Table is already assigned
+				tableNum = Session["tableNum"].ToString();
+
+				// Set table objects to invisible
+				// - so that user cannot change table manually after confirmation
+				lb_table_Number.Visible = false;
+				table_Shopping_Cart.Visible = false;
+			}
 
 			// Get Final Price
-			float final_Price = ordersController.CalculateFinalPrice(ordersController.GetCart());
+			float final_Price = ordersController.CalculateFinalPrice(cart);
 			StringBuilder table_Text = new StringBuilder();
 			table_Text.AppendLine("Final Price: " + final_Price.ToString());
 
-			// Display in Table
-			table_Shopping_Cart.Text = table_Text.ToString();
-		}
+			// Get Start DateTime
+			string start_Datetime = Session["start_datetime"].ToString();
+			string end_Datetime = start_Datetime;
 
-		protected void btn_make_Payment(object sender, EventArgs e)
-        {
+			// Data Verification
+			if (orderID != -1)
+			{
+				// No Orders found, default to 1st row
+				orderID = 0;
+			}
+
+			if(tableNum == "")
+            {
+				// Default
+				Random r = new Random();
+				tableNum = r.Next(0, 100).ToString();
+            }
+
 			/*
-			 * When Button "btn_make_Payment" is clicked
+			 * Check if table number exists AND status is 'Not Paid'
+			 * - This means the table is occupied, get another table number
 			 */
-			int orderID = 1;
-			int staffID = 1;
-			int ret_Code = MakePayment();
+			int table_number_exists = -1;
+			while (table_number_exists > 0)
+			{
+				table_number_exists = ordersController.CheckTableIsFree(int.Parse(tableNum)); // Check if table number is empty
+				if (table_number_exists > 0)
+				{
+					// Table is occupied, get another table
+					Random r = new Random();
+					tableNum = r.Next(0, 100).ToString();
+				}
+			}
+
+            /*
+                * Get other details and
+                * populate final cart
+                */
+            if (cart != null)
+			{
+				/*
+				 * Populate Final Cart
+				 */
+				for (int i = 0; i < cart.Count; i++)
+				{
+					List<String> curr_row = cart[i];
+					List<String> tmp = new List<String>();
+					int curr_prod_total_Quantity = 0; // Total quantity of a certain item
+
+					// Get details from cart
+					string curr_prodID = curr_row[0];
+					string curr_catID = curr_row[1];
+					string curr_prodName = curr_row[2];
+					string curr_prodPrice = curr_row[3];
+					string curr_prodStatus = curr_row[4];
+
+					// Calculate Product Quantity
+					for (int j = 0; j < cart.Count; j++)
+					{
+						// Loop through cart to count occurence of current item
+						List<String> row_to_check = cart[j];
+						string curr_row_prodID = row_to_check[0];
+						// If found, add 1
+						if (curr_prodID == curr_row_prodID)
+						{
+							curr_prod_total_Quantity += 1;
+						}
+					}
+
+					// Check if product exists in final cart
+					int final_cart_curr_size = conf_cart.Count;
+					bool element_exists = false;
+
+					if (final_cart_curr_size > 0)
+					{
+						/*
+						 * Verify that product doesnt exist inside the final cart yet
+						 * - if doesnt exist : Add
+						 */
+						for (int j = 0; j < final_cart_curr_size; j++)
+						{
+							List<String> row_to_check = conf_cart[j];
+							string curr_row_prodID = row_to_check[2];
+
+							// Check if Product ID exists already in the final cart
+							// Filter to have only one of each item in the conf_cart
+							if (row_to_check.Contains(curr_prodName))
+							{
+								element_exists = true;
+							}
+						}
+					}
+
+					if (!element_exists)
+					{
+						/*
+						 * Does not exist
+						 */
+						// If doesnt exist
+						// Populate final cart
+						tmp.Add(orderID.ToString());
+						tmp.Add(tableNum.ToString());
+						tmp.Add(curr_prodID);
+						tmp.Add(curr_catID);
+						tmp.Add(curr_prodName);
+						tmp.Add(curr_prod_total_Quantity.ToString());
+						tmp.Add(curr_prodPrice);
+						tmp.Add(start_Datetime);
+						tmp.Add(end_Datetime); // Default to '[START_DATETIME]', to be updated when payment is made, alongside Status
+						tmp.Add(curr_prodStatus);
+						tmp.Add(final_Price.ToString());
+						tmp.Add("Not Provided"); // Default to 'Not Provided', to be updated when payment is made, alongside Status
+
+						// Write to final cart
+						conf_cart.Add(tmp);
+
+						lbl_Debug_Output.Text += curr_prodName + " Has been added" + "<br/>";
+					}
+					else
+                    {
+						lbl_Debug_Output.Text += curr_prodName + " Has not been added" + "<br/>";
+					}
+				}
+
+				// Get Discount and write to session
+				if (coupon_Code == "")
+				{
+					Session["discount"] = "0.0";
+				}
+				else
+				{
+					Session["discount"] = ordersController.GetDiscount(coupon_Code);
+				}
+
+				// Check if Session["tableNum"] already exists
+				int ret_Code = -1;
+				if (Session["tableNum"] == null)
+				{
+					ret_Code = ordersController.CheckoutCart(coupon_Code, conf_cart);
+
+					// Write Table Number to Session
+					Session["tableNum"] = tableNum;
+
+					// Write Checked-out cart
+					Session["checked_out_cart"] = conf_cart;
+				}
+                else
+                {
+					ret_Code = 1;
+                }
+				//int ret_Code = 0;
+
+				lbl_Debug_Output.Text += "[DEBUG - DATETIME] Start DateTime : " + start_Datetime + "<br/>";
+				lbl_Debug_Output.Text += "[DEBUG - DATETIME] End   DateTime : " + end_Datetime + "<br/>";
+
+				/* #DEBUG
+				for (int i = 0; i < conf_cart.Count; i++)
+				{
+					List<String> tmp_Cart = conf_cart[i];
+
+					for (int j = 0; j < tmp_Cart.Count; j++)
+					{
+						lbl_Debug_Output.Text += "[DEBUG] " + i.ToString() + " : " + tmp_Cart[j] + "<br/>";
+					}
+				}
+				*/
+
+				if (ret_Code == 1)
+                {
+					// Success
+					Response.Redirect("~/PaymentSummary.aspx");
+                }
+                else
+                {
+					lbl_Info.InnerText += "Checking out of cart failed. \n";
+                }
+			}
+
+			ViewAllInCart();
+
+			// Display in Table
+			lbl_Debug_Output.Text += table_Text.ToString() + "<br/>";
+		}
+		protected void btn_remove_from_Cart(object sender, EventArgs e)
+        {
+			string prodID_to_remove = tb_prodID_to_remove.Value;
+
+			// Remove From Cart
+			RemoveFromCart(prodID_to_remove);
         }
+		protected void btn_go_to_Menu(object sender, EventArgs e)
+		{
+			/*
+			 * Go To Menu
+			 */
+			Response.Redirect("~/Menu.aspx");
+		}
 
 		// Helper Functions
 		public void ViewAllInCart()
@@ -60,61 +280,189 @@ namespace FiveHead
 			/*
 			 * Display all items added to cart
 			 */
-			int cart_size = ordersController.GetCart().Count;
+			List<List<String>> cart = (List<List<String>>)Session["cart"];
+			List<List<String>> dataset = new List<List<String>>(); // Create master dataset for getting all rows to populate datagridview table
+			int cart_size = 0;
+
+			// Reset Table
+			table_Shopping_Cart.Rows.Clear();
+
+			// Null Check
+			if (cart == null)
+			{
+				cart = new List<List<String>>();
+			}
+			else
+			{
+				cart_size = cart.Count;
+			}
 			StringBuilder text_to_show = new StringBuilder(); // Use StringBuilder to append and get all strings to display in Shopping Cart ListView
 
+			// Data Validation : Check if current cart has more than 1
 			if (cart_size > 0)
 			{
-				// Append a Line to StringBuilder
-				text_to_show.AppendLine("s/n | Product ID | Category ID | Product Name | Price | Status");
-				text_to_show.AppendLine("\n"); // Write Newline
-
+				/*
+				 * Gather dataset
+				 */
 				for (int i = 0; i < cart_size; i++)
 				{
-					List<String> cart_contents = ordersController.GetCart()[i];
+					// Initialize Variables
+					List<String> curr_row = cart[i]; // Create a new List to store current row					
+					List<String> tmp = new List<String>(); // Create a new List to store data from the current row
 
-					// Get Columns
-					string productID = cart_contents[0];
-					string productName = cart_contents[1];
-					string price = cart_contents[2];
-					string categoryID = cart_contents[3];
+					// Get Variables
+					string productID = curr_row[0];
+					string categoryID = curr_row[1];
+					string productName = curr_row[2];
+					string price = curr_row[3];
+					string status = curr_row[4];
 
 					// Add every index as a new line in the StringBuilder / table entry
-					text_to_show.AppendLine(
-						i + " | " +
-						categoryID + " | " +
-						productID + " | " +
-						productName + " | " +
-						price + " | " +
-						"<button id='" + productID + "'>" +
-							"Add To Cart" +
-						"</button>" + "\n"
-					);
+					tmp.Add((i + 1).ToString());
+					tmp.Add(productID);
+					tmp.Add(categoryID);
+					tmp.Add(productName);
+					tmp.Add(price);
+					tmp.Add(status);
 
-					// Write NewLine
-					text_to_show.AppendLine("\n");
+					// Add temporary dataset to list of rows
+					dataset.Add(tmp);
+				}
+
+				/*
+				 * Headers 
+				 */
+				// Create Table Header
+				List<String> HeaderText = new List<String>() { "s/n", "Product ID", "Category ID", "Product Name", "Price", "Status" };
+
+				// Create new Table Header Row
+				TableHeaderRow header = new TableHeaderRow();
+				for (int i = 0; i < HeaderText.Count; i++)
+				{
+					// Create new cell
+					TableCell curr_header = new TableCell();
+
+					// Populate Cell
+					curr_header.Text = HeaderText[i];
+
+					// Add Cell to Header Row
+					header.Cells.Add(curr_header);
+				}
+
+				// Add Header Row to Table
+				table_Shopping_Cart.Rows.Add(header);
+
+				/*
+				 * Rows 
+				 */
+				// Create Table Rows
+				for (int i = 0; i < dataset.Count; i++)
+				{
+					/* 
+					 * Get Current Row in Table Dataset
+					 */
+					List<String> curr_row = dataset[i];
+					TableRow new_tablerow = new TableRow();
+					for (int j = 0; j < curr_row.Count; j++)
+					{
+						/*
+						 * Get Cells in current row
+						 */
+						TableCell new_cell = new TableCell();
+
+						//table_MenuItems.Text += " | " + curr_row[j].ToString().Replace(Environment.NewLine, "<br/>");
+						new_cell.Text = curr_row[j];
+
+						// Add Cell to row
+						new_tablerow.Cells.Add(new_cell);
+					}
+
+					// Append Rows to table
+					table_Shopping_Cart.Rows.Add(new_tablerow);
 				}
 			}
 			else
 			{
-				text_to_show.AppendLine("No Items in Shopping Cart.");
-				text_to_show.AppendLine("\n"); // Write Newline
+				// No Items Found
+				TableRow curr_row = new TableRow();
+				TableCell new_cell = new TableCell();
+				new_cell.Text = "No Items in Cart. <br/>";
+				curr_row.Cells.Add(new_cell);
+				table_Shopping_Cart.Rows.Add(curr_row);
 			}
-
-			// Write to Widget
-			table_Shopping_Cart.Text = text_to_show.ToString(); // C# ASP.NET table (aka asp:Literal) uses .Text
 		}
-
-		public int MakePayment()
+		public int RemoveFromCart(string prodID)
         {
 			/*
-			 * User to Make Payment
+			 * Remove Product ID from SESSION 'cart'
 			 */
-			int orderID = 1;
-			int staffID = 1;
-			int ret_Code = ordersController.ProcessPayment(orderID, staffID);
+			List<List<String>> cart = (List<List<String>>)Session["cart"];
+			List<List<String>> dataset = new List<List<String>>(); // Create master dataset for getting all rows to populate datagridview table
+			int cart_size = 0;
+			int res_Code = 1;
 
-			return ret_Code;
-        }
+			// Reset Table
+			table_Shopping_Cart.Rows.Clear();
+
+			// Null Check
+			if (cart == null)
+			{
+				cart = new List<List<String>>();
+			}
+			else
+			{
+				cart_size = cart.Count;
+			}
+			StringBuilder text_to_show = new StringBuilder(); // Use StringBuilder to append and get all strings to display in Shopping Cart ListView
+
+			if (cart_size > 0)
+			{
+				// Create Temporary cart for manipulation
+				List<List<String>> cart_tmp = cart;
+
+				// Get Initial Cart Size
+				int old_cart_size = cart_tmp.Count;
+
+				// Check for Index of selected product ID
+				int pos = -1; // Position of selected product ID
+				for(int i=0; i<cart_tmp.Count; i++)
+                {
+					List<String> curr_row = cart_tmp[i];
+
+					string curr_prod_ID = curr_row[0]; // Get current row's Product ID
+					if (curr_prod_ID == prodID)
+					{
+						pos = i;
+						break;
+					}
+				}
+				// Remove ROW from cart
+				if (pos > -1)
+				{
+					// Check if cart is big
+					cart_tmp.RemoveAt(pos);
+				}
+                else
+                {
+					lbl_Info.InnerText = "Product ID provided is not valid.";
+                }
+
+				// Get New Cart Size
+				int new_cart_size = cart_tmp.Count;
+
+				// If cart size is smaller than initial cart size, return true (0)
+				if(new_cart_size == old_cart_size - 1)
+                {
+					res_Code = 0;
+                }
+
+				// Store new cart
+				Session["cart"] = cart_tmp;
+			}
+
+			ViewAllInCart();
+
+			return res_Code;
+		}
 	}
 }

@@ -56,33 +56,56 @@ namespace FiveHead.Entity
         /*
          * Function Definitions
          */
-        public int insert_Orders(int orderID, int staffID, int productID, string productName, int categoryID, float price)
+
+        // Order Functions
+        public int insert_Orders(
+            int orderID, int tableNumber, int productID, int categoryID, 
+            string productName, int productQty, double price, string start_datetime, 
+            string end_datetime, string status,double finalPrice, string contacts
+        )
         {
             /*
              * Insert Orders into Table
              */
 
             // Variables
-            string sql_stmt = "INSERT INTO orders VALUES (" +
-                orderID + "," +
-                staffID + "," +
-                productID + "," +
-                "'" + productName + "'" + "," + 
-                categoryID + "," +
-                price +
+            string sql_stmt = "INSERT INTO orders (" +
+                "tableNumber, " +
+                "productID, " +
+                "categoryID, " +
+                "productName, " +
+                "productQty, " +
+                "price, " +
+                "start_datetime, " +
+                "end_datetime, " +
+                "status, " +
+                "finalPrice, " +
+                "contacts" +
+            ") " + "VALUES (" +
+                tableNumber + ", " +
+                productID + ", " +
+                categoryID + ", " +
+                "'" + productName + "'" + ", " + 
+                productQty + ", " + 
+                price + ", " + 
+                "'" + start_datetime + "'" + ", " + 
+                "'" + end_datetime + "'" + ", " + 
+                "'" + status + "'" + ", " + 
+                finalPrice + ", "  + 
+                "'" + contacts + "'" +
             ");";
-            int result = 0;
-            MySqlCommand sql_cmd;
+            int result = 0; // Return 1 => Success | 0 => Error
             MySqlConnection conn = dbConn.GetConnection();
+            MySqlCommand sql_cmd;
 
             // Execute SQL
             try
             {
-                sql_cmd = mySQL.cmd_set_connection(sql_stmt, conn);
                 conn.Open();
+                sql_cmd = mySQL.cmd_set_connection(sql_stmt, conn);
                 result = sql_cmd.ExecuteNonQuery(); // Returns number of rows affected
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 errMsg = ex.Message.ToString();
             }
@@ -90,31 +113,42 @@ namespace FiveHead.Entity
             {
                 dbConn.CloseConnection(conn);
             }
+            System.Diagnostics.Debug.WriteLine(sql_stmt);
 
             return result;
         }
 
-        public int update_Orders(int orderID, int staffID)
+        public int update_Orders(int table_Num, string contactDetails, string end_datetime)
         {
             /*
              * Update Order Status after payment is made		
              */
 
+            // Default
+            if (contactDetails == "")
+            {
+                contactDetails = "Not Provided";
+            }
+
             // Variables
             int result = 0;
-            string sql_stmt = "UPDATE orders SET status = 'Paid'" + " WHERE " +
-                "orderID = '" + orderID + "'" + " AND " +
-                "staffID = '" + staffID + "';";
+            string sql_stmt = "UPDATE orders SET" + " " + 
+                "status = 'Paid'" + ", " +
+                "end_datetime = " + "'" + end_datetime + "'" + ", " +
+                "contacts = " + "'" + contactDetails + "'" +
+                " WHERE " +
+                "status = 'Not Paid' AND tableNumber = " + table_Num + ";";
             MySqlCommand sql_cmd;   // MySQL Command Object Holder
             MySqlConnection conn = dbConn.GetConnection(); // MySQL Connnction Object
 
             // Execute SQL
             try
             {
-                sql_cmd = mySQL.cmd_set_connection(sql_stmt, conn);
-
                 // Open/Start Database Connection
                 conn.Open();
+
+                // Set SQL Command
+                sql_cmd = mySQL.cmd_set_connection(sql_stmt, conn);
 
                 // Execute and return numbr of tables affected
                 result = sql_cmd.ExecuteNonQuery();
@@ -131,22 +165,21 @@ namespace FiveHead.Entity
             // Return status
             return result;
         }
-        List<String> get_Orders(int orderID, int staffID)
+        public List<List<String>> get_Orders(int table_Num)
         {
             /*
              * Get current orders
              */
 
             // Initialize Variables
-            List<String> order_data = new List<String>(); // A Temporary List container to hold the rows returned from the search query
+            List<List<String>> order_data = new List<List<String>>(); // A Temporary List container to hold the rows returned from the search query
             DataSet ds = new DataSet(); // Container to store Data (generally from a Database)
             MySqlDataAdapter da; // MySQL Data Container used to hold data before connection usage
             MySqlConnection conn = dbConn.GetConnection();
 
             // Retrieve Order data
-            string sql_stmt = "SELECT * FROM orders WHERE status = 'Not Paid'" + " AND " +
-                "orderID = '" + orderID + "'" + " AND " +
-                "staffID = '" + staffID + "';";
+            string sql_stmt = "SELECT * FROM orders WHERE " +
+                "status = 'Not Paid' AND tableNumber = '" + table_Num + "';";
 
             // Execute Statement
             try
@@ -177,11 +210,43 @@ namespace FiveHead.Entity
                 // If Results were found
 
                 // Set result as order data and convert it to type List<String> for return
-                order_data = ds.Tables[0].ToList<List<String>>()[0]; 
+                order_data = ds.Tables[0].ToList<List<List<String>>>()[0]; 
             }
 
             // Output
             return order_data;
+        }
+        public int get_number_of_orders()
+        {
+            /*
+             * Get total number of rows in table 'order'
+             */
+
+            // Variables
+            int number_of_rows = -1; // Default to -1
+            string sql_stmt = "SELECT COUNT(*) As Count FROM orders;"; // Define Connection String
+            MySqlConnection conn = dbConn.GetConnection();
+            MySqlCommand cmd = new MySqlCommand(sql_stmt, conn);
+
+            // Get number of rows
+            try
+            {
+                // Open Database connection
+                conn.Open();
+
+                // Execute Query
+                number_of_rows = (int)cmd.ExecuteScalar();
+            }
+            catch (Exception ex)
+            {
+                errMsg = ex.Message.ToString();
+            }
+            finally
+            {
+                dbConn.CloseConnection(conn);
+            }
+
+            return number_of_rows;
         }
 
         /*
@@ -195,8 +260,66 @@ namespace FiveHead.Entity
 
             // Variables
             List<List<String>> res = new List<List<String>>(); // List Object of type List<List<String>> to store all returned menu items
-            List<String> curr_row = new List<String>(); // List Object to store current row returns
             string sql_stmt = "SELECT * FROM products;"; // Get all values from 'orders'
+
+            // Define Connection String
+            MySqlConnection conn = dbConn.GetConnection();
+            MySqlCommand cmd = new MySqlCommand(sql_stmt, conn);
+  
+            try
+            {
+                // Open Database connection
+                conn.Open();
+
+                // Execute Query
+                cmd.ExecuteNonQuery();
+
+                // Fetch query result
+                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+
+                foreach (DataRow dr in dt.Rows)
+                {
+                    List<String> curr_row = new List<String>(); // List Object of type List<String> to store current row
+
+                    // Read Data
+                    // Get Values from column names
+                    string productID = dr["productID"].ToString();
+                    string productName = dr["productName"].ToString();
+                    string price = dr["price"].ToString();
+                    string categoryID = dr["categoryID"].ToString();
+
+                    // Append values received from current row column values
+                    curr_row.Add(productID);
+                    curr_row.Add(productName);
+                    curr_row.Add(price);
+                    curr_row.Add(categoryID);
+
+                    // Append current row to all MenuItems List
+                    res.Add(curr_row);
+                }
+            }
+            catch (Exception ex)
+            {
+                errMsg = ex.Message.ToString();
+            }
+            finally
+            {
+                dbConn.CloseConnection(conn);
+            }
+
+            return res;
+        }
+        public List<String> GetMenuItemByProductID(string productID)
+        {
+            /*
+             * Get Menu Item, filtered according to ProductID 
+             */
+
+            // Variables
+            List<String> product_details = new List<String>(); // Initialize List<String> object
+            string sql_stmt = "SELECT * FROM products WHERE productID = " + productID + ";"; // Get all values from 'orders'
 
             // Define Connection String
             MySqlConnection conn = dbConn.GetConnection();
@@ -208,22 +331,173 @@ namespace FiveHead.Entity
                 conn.Open();
 
                 // Execute Query
+                cmd.ExecuteNonQuery();
+
                 // Fetch query result
-                MySqlDataReader reader = cmd.ExecuteReader();
+                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
 
-                while (reader.Read())
+                foreach (DataRow dr in dt.Rows)
                 {
+                    List<String> curr_row = new List<String>(); // List Object of type List<String> to store current row
+
                     // Read Data
-
                     // Get Values from column names
-                    curr_row.Add(reader["productID"].ToString());
-                    curr_row.Add(reader["productName"].ToString());
-                    curr_row.Add(reader["price"].ToString());
-                    curr_row.Add(reader["categoryID"].ToString());
+                    string tmp_ProdID = dr["productID"].ToString();
+                    string tmp_ProdName = dr["productName"].ToString();
+                    string tmp_Price = dr["price"].ToString();
+                    string tmp_CatID = dr["categoryID"].ToString();
 
-                    // Append current row to all MenuItems List
-                    res.Add(curr_row);
-                } 
+                    // Append values received from current row column values
+                    product_details.Add(tmp_ProdID);
+                    product_details.Add(tmp_ProdName);
+                    product_details.Add(tmp_Price);
+                    product_details.Add(tmp_CatID);
+                }
+            }
+            catch (Exception ex)
+            {
+                errMsg = ex.Message.ToString();
+            }
+            finally
+            {
+                dbConn.CloseConnection(conn);
+            }
+
+            return product_details;
+        }
+        public List<String> GetMenuItemByName(string productName)
+        {
+            /*
+             * Get Menu Item, filtered according to ProductID 
+             */
+
+            // Variables
+            List<String> product_details = new List<String>(); // Initialize List<String> object
+            string sql_stmt = "SELECT * FROM products WHERE productName = " + "'" + productName + "'" + ";"; // Get all values from 'orders'
+
+            // Define Connection String
+            MySqlConnection conn = dbConn.GetConnection();
+            MySqlCommand cmd = new MySqlCommand(sql_stmt, conn);
+
+            try
+            {
+                // Open Database connection
+                conn.Open();
+
+                // Execute Query
+                cmd.ExecuteNonQuery();
+
+                // Fetch query result
+                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+
+                foreach (DataRow dr in dt.Rows)
+                {
+                    List<String> curr_row = new List<String>(); // List Object of type List<String> to store current row
+
+                    // Read Data
+                    // Get Values from column names
+                    string tmp_ProdID = dr["productID"].ToString();
+                    string tmp_ProdName = dr["productName"].ToString();
+                    string tmp_Price = dr["price"].ToString();
+                    string tmp_CatID = dr["categoryID"].ToString();
+
+                    // Append values received from current row column values
+                    product_details.Add(tmp_ProdID);
+                    product_details.Add(tmp_ProdName);
+                    product_details.Add(tmp_Price);
+                    product_details.Add(tmp_CatID);
+                }
+            }
+            catch (Exception ex)
+            {
+                errMsg = ex.Message.ToString();
+            }
+            finally
+            {
+                dbConn.CloseConnection(conn);
+            }
+
+            return product_details;
+        }
+
+        /*
+         * Orders Related
+         */
+        public int check_table_is_free(int table_Num)
+        {
+            // Variables
+            int is_free = -1; // Default to -1
+            string sql_stmt = "SELECT COUNT(*) As Count FROM orders" +
+                " WHERE " +
+                "tableNumber = " + table_Num + " AND " + "status = 'Not Paid';"; // Define Connection String
+            MySqlConnection conn = dbConn.GetConnection();
+            MySqlCommand cmd = new MySqlCommand(sql_stmt, conn);
+
+            // Get number of rows
+            try
+            {
+                // Open Database connection
+                conn.Open();
+
+                // Execute Query
+                is_free = (int)cmd.ExecuteScalar();
+            }
+            catch (Exception ex)
+            {
+                errMsg = ex.Message.ToString();
+            }
+            finally
+            {
+                dbConn.CloseConnection(conn);
+            }
+
+            return is_free;
+        }
+
+        /*
+         * Payments
+         */
+        public string get_discount(string coupon_code)
+        {
+            /*
+             * Check and verify coupon code exists
+             * and
+             * return the discount amount
+             */
+            /*
+             * Get current orders
+             */
+
+            // Define SQL query statement
+            string sql_stmt = "SELECT discounts FROM coupon WHERE code = '" + coupon_code + "'" + ";";
+
+            // Initialize Variables
+            DataSet ds = new DataSet(); // Container to store Data (generally from a Database)
+            MySqlConnection conn = dbConn.GetConnection();
+            MySqlCommand cmd = new MySqlCommand(sql_stmt, conn);
+            string res = "";
+
+            try
+            {
+                // Open Database connection
+                conn.Open();
+
+                // Execute Query
+                cmd.ExecuteNonQuery();
+
+                // Fetch query result
+                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+
+                foreach (DataRow dr in dt.Rows)
+                {
+                    res = dr["coupon"].ToString();
+                }
             }
             catch (Exception ex)
             {

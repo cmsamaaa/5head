@@ -107,14 +107,18 @@ INSERT INTO `coupons` (`couponID`, `code`, `discount`, `deactivated`) VALUES
 
 DROP TABLE IF EXISTS `orders`;
 CREATE TABLE IF NOT EXISTS `orders` (
-  `orderID` int NOT NULL,
-  `staffID` int NOT NULL,
+  `orderID` INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  `tableNumber` int NOT NULL,
   `productID` int NOT NULL,
   `categoryID` int NOT NULL,
   `productName` varchar(200) NOT NULL,
-  `price` float NOT NULL,
+  `productQty int NOT NULL,
+  `price` double NOT NULL,
+  `start_datetime` DATETIME NOT NULL,
+  `end_datetime` DATETIME NOT NULL,
   `status` varchar(200) DEFAULT 'Not Paid',
-  PRIMARY KEY (`orderID`)
+  `finalPrice` double NOT NULL,
+  `contacts` VARCHAR(200) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------

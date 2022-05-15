@@ -1788,6 +1788,7 @@
     <Content Include="Admin\ViewAllProfiles.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="Login.aspx" />
+    <Content Include="PaymentSummary.aspx" />
     <Content Include="Register.aspx" />
     <Content Include="Menu.aspx" />
     <Content Include="Cart.aspx" />
@@ -1955,6 +1956,13 @@
     <Compile Include="Entity\Coupon.cs" />
     <Compile Include="Entity\Order.cs" />
     <Compile Include="Entity\Product.cs" />
+    <Compile Include="PaymentSummary.aspx.cs">
+      <DependentUpon>PaymentSummary.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PaymentSummary.aspx.designer.cs">
+      <DependentUpon>PaymentSummary.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Restaurant\CreateCategory.aspx.cs">
       <DependentUpon>CreateCategory.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
