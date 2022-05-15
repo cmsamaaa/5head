@@ -51,6 +51,11 @@ namespace FiveHead.Controller
             return account.Admin_GetAllAccounts();
         }
 
+        public DataSet SearchAllAccounts(string search)
+        {
+            return account.SearchAllAccounts(search);
+        }
+
         public List<Account> GetAllAccounts()
         {
             DataSet ds = GetAllAccountsDataSet();

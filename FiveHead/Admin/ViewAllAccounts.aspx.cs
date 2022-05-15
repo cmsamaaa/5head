@@ -19,7 +19,16 @@ namespace FiveHead.Admin
 
         private void bindGridView()
         {
-            DataSet ds = accountsController.Admin_GetAllAccounts();
+            PlaceHolder_Empty.Visible = false;
+            accountsController = new AccountsController();
+            DataSet ds;
+
+            string search = Request.QueryString["search"];
+            if (!string.IsNullOrEmpty(search))
+                ds = accountsController.SearchAllAccounts(search);
+            else
+                ds = accountsController.Admin_GetAllAccounts();
+
             DataTable dt = ds.Tables[0];
             dt.Columns.Add("suspend", typeof(string));
             dt.Columns.Add("message", typeof(string));
@@ -47,6 +56,9 @@ namespace FiveHead.Admin
 
             gv_Accounts.DataSource = ds;
             gv_Accounts.DataBind();
+
+            if (ds.Tables[0].Rows.Count == 0)
+                PlaceHolder_Empty.Visible = true;
         }
 
         protected void gv_Accounts_PageIndexChanging(object sender, GridViewPageEventArgs e)
@@ -100,6 +112,11 @@ namespace FiveHead.Admin
                 default:
                     break;
             }
+        }
+
+        protected void btn_Search_Click(object sender, EventArgs e)
+        {
+            Response.Redirect(string.Format("ViewAllAccounts.aspx?search={0}", tb_Search.Value), true);
         }
     }
 }

@@ -175,6 +175,46 @@ namespace FiveHead.Entity
             return ds;
         }
 
+        public DataSet SearchAllAccounts(string search)
+        {
+            StringBuilder sql;
+            MySqlDataAdapter da;
+            DataSet ds;
+
+            MySqlConnection conn = dbConn.GetConnection();
+            ds = new DataSet();
+            sql = new StringBuilder();
+            sql.AppendLine("SELECT *");
+            sql.AppendLine(" ");
+            sql.AppendLine("FROM Accounts a");
+            sql.AppendLine(" ");
+            sql.AppendLine("INNER JOIN Profiles p");
+            sql.AppendLine(" ");
+            sql.AppendLine("ON a.profileID = p.profileID");
+            sql.AppendLine(" ");
+            sql.AppendLine("WHERE a.username LIKE @search OR p.profileName LIKE @search");
+            sql.AppendLine(" ");
+            sql.AppendLine("ORDER BY accountID ASC");
+            conn.Open();
+
+            try
+            {
+                da = mySQL.adapter_set_query(sql.ToString(), conn);
+                da.SelectCommand.Parameters.AddWithValue("search", "%" + search + "%");
+                da.Fill(ds);
+            }
+            catch (Exception ex)
+            {
+                errMsg = ex.Message;
+            }
+            finally
+            {
+                dbConn.CloseConnection(conn);
+            }
+
+            return ds;
+        }
+
         public Account GetAccountByUsername(string username)
         {
             StringBuilder sql;

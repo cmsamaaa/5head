@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin/MasterPage_Admin.Master" AutoEventWireup="true" CodeBehind="ViewAllProfiles.aspx.cs" Inherits="FiveHead.Admin.ViewAllProfiles" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder_PageContent" runat="server">
@@ -43,7 +44,16 @@
                         </button>
                     </div>
                 </div>
-
+                <asp:Panel ID="Panel_Search" runat="server" DefaultButton="btn_Search">
+                    <div class="form-group row">
+                        <div class="col-sm-6 mb-3 mb-sm-0">
+                            <input runat="server" type="text" class="form-control form-control-user" id="tb_Search" placeholder="Search by Profile Name">
+                        </div>
+                        <div class="col-sm-4">
+                            <asp:Button ID="btn_Search" runat="server" CssClass="btn btn-primary" Text="Search" OnClick="btn_Search_Click" />
+                        </div>
+                    </div>
+                </asp:Panel>
                 <div class="table-responsive">
                     <asp:GridView ID="gv_Profiles" runat="server" AutoGenerateColumns="False" CssClass="table table-bordered" OnRowCommand="gv_Profiles_RowCommand" AllowPaging="True" OnPageIndexChanging="gv_Profiles_PageIndexChanging" PageSize="10">
                         <Columns>
@@ -67,6 +77,9 @@
                         <PagerStyle CssClass="GridPager" HorizontalAlign="Right" />
                     </asp:GridView>
                 </div>
+                <asp:PlaceHolder ID="PlaceHolder_Empty" runat="server" Visible="false">
+                    No profiles found
+                </asp:PlaceHolder>
             </div>
         </div>
 
@@ -86,6 +99,10 @@
                 $('#success-activate').show();
             if (queryStr_Activate == "false")
                 $('#error-activate').show();
+
+            const search = getParameterByName("search");
+            if (search != null)
+                $('#ContentPlaceHolder_PageContent_tb_Search').val(search);
         });
     </script>
 </asp:Content>

@@ -42,6 +42,11 @@ namespace FiveHead.Controller
             return profile.GetAllProfiles();
         }
 
+        public DataSet SearchAllProfiles(string search)
+        {
+            return profile.SearchAllProfiles(search);
+        }
+
         public List<Profile> GetAllProfiles()
         {
             DataSet ds = GetAllProfilesDataSet();

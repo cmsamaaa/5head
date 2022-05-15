@@ -9,6 +9,7 @@ namespace FiveHead.Admin
     public partial class ViewAllProfiles : System.Web.UI.Page
     {
         ProfilesController profilesController = new ProfilesController();
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -19,7 +20,16 @@ namespace FiveHead.Admin
 
         private void bindGridView()
         {
-            DataSet ds = profilesController.GetAllProfilesDataSet();
+            PlaceHolder_Empty.Visible = false;
+            profilesController = new ProfilesController();
+            DataSet ds;
+
+            string search = Request.QueryString["search"];
+            if (!string.IsNullOrEmpty(search))
+                ds = profilesController.SearchAllProfiles(search);
+            else
+                ds = profilesController.GetAllProfilesDataSet();
+
             DataTable dt = ds.Tables[0];
             dt.Columns.Add("suspend", typeof(string));
             dt.Columns.Add("message", typeof(string));
@@ -47,6 +57,9 @@ namespace FiveHead.Admin
 
             gv_Profiles.DataSource = ds;
             gv_Profiles.DataBind();
+
+            if (ds.Tables[0].Rows.Count == 0)
+                PlaceHolder_Empty.Visible = true;
         }
 
         protected void gv_Profiles_PageIndexChanging(object sender, GridViewPageEventArgs e)
@@ -96,6 +109,11 @@ namespace FiveHead.Admin
                 default:
                     break;
             }
+        }
+
+        protected void btn_Search_Click(object sender, EventArgs e)
+        {
+            Response.Redirect(string.Format("ViewAllProfiles.aspx?search={0}", tb_Search.Value), true);
         }
     }
 }
