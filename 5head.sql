@@ -112,7 +112,7 @@ CREATE TABLE IF NOT EXISTS `orders` (
   `productID` int NOT NULL,
   `categoryID` int NOT NULL,
   `productName` varchar(200) NOT NULL,
-  `productQty int NOT NULL,
+  `productQty` int NOT NULL,
   `price` double NOT NULL,
   `start_datetime` DATETIME NOT NULL,
   `end_datetime` DATETIME NOT NULL,
