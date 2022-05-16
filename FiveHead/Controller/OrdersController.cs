@@ -49,8 +49,9 @@ namespace FiveHead.Controller
 						string start_datetime = curr_order[7];
 						string end_datetime = curr_order[8];
 						string status = curr_order[9];
-						double finalPrice = double.Parse(curr_order[10]);
-						string contacts = curr_order[11];
+						string orderStatus = curr_order[10];
+						double finalPrice = double.Parse(curr_order[11]);
+						string contacts = curr_order[12];
 
 						/* #DEBUG : Test out input
 						for(int j=0; j < curr_order.Count; j++)
@@ -61,7 +62,7 @@ namespace FiveHead.Controller
 						ret_Code = order.insert_Orders(
 							orderID, table_Num, productID, categoryID,
 							productName, productQty, price, start_datetime,
-							end_datetime, status, finalPrice, contacts
+							end_datetime, status, orderStatus, finalPrice, contacts
 						);
 
 						// System.Diagnostics.Debug.WriteLine(res);
@@ -117,7 +118,7 @@ namespace FiveHead.Controller
 		 * Payment-related functions
 		 * - i.e. Coupon validation
 		 */
-		public int ProcessPayment(int table_num, string contactDetails, string end_datetime)
+		public int ProcessPayment(int table_num, string orderStatus, string contactDetails, string end_datetime)
 		{
 			/*
 			 * Make Payment
@@ -132,7 +133,7 @@ namespace FiveHead.Controller
 			int ret_Code = 0;
 
 			// Update 'orders' table status with 'Paid'
-			ret_Code = order.update_Orders(table_num, contactDetails, end_datetime);
+			ret_Code = order.update_Orders(table_num, orderStatus, contactDetails, end_datetime);
 
 			return ret_Code;
 		}

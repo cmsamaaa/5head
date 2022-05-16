@@ -50,7 +50,7 @@ namespace FiveHead
 			List<String> required_columns = new List<string>() { 
 				"orderID", "tableNumber", "productID", "categoryID", 
 				"productName", "productQty", "price", "start_datetime", 
-				"end_datetime", "status", "finalPrice", "contacts" 
+				"end_datetime", "paymentStatus",  "orderStatus", "finalPrice", "contacts" 
 			};
 			List<List<String>> conf_cart = new List<List<String>>(); // To store the confirmed cart values
 
@@ -186,6 +186,7 @@ namespace FiveHead
 						tmp.Add(start_Datetime);
 						tmp.Add(end_Datetime); // Default to '[START_DATETIME]', to be updated when payment is made, alongside Status
 						tmp.Add(curr_prodStatus);
+						tmp.Add("Not Active");
 						tmp.Add(final_Price.ToString());
 						tmp.Add("Not Provided"); // Default to 'Not Provided', to be updated when payment is made, alongside Status
 
@@ -333,7 +334,7 @@ namespace FiveHead
 				 * Headers 
 				 */
 				// Create Table Header
-				List<String> HeaderText = new List<String>() { "s/n", "Product ID", "Category ID", "Product Name", "Price", "Status" };
+				List<String> HeaderText = new List<String>() { "s/n", "Product ID", "Category ID", "Product Name", "Price", "Payment Status" };
 
 				// Create new Table Header Row
 				TableHeaderRow header = new TableHeaderRow();

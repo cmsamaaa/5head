@@ -73,7 +73,7 @@ namespace FiveHead
 			string end_datetime = now.ToString("yyyy-MM-dd H:mm:ss");
 			this.Session["end_datetime"] = end_datetime;
 
-			int ret_Code = ordersController.ProcessPayment(tableNum, contactDetails, end_datetime);
+			int ret_Code = ordersController.ProcessPayment(tableNum, "Active", contactDetails, end_datetime);
 
             return ret_Code;
         }
@@ -129,8 +129,9 @@ namespace FiveHead
 					string productQty = curr_order[5];
 					string price = curr_order[6];
 					string status = curr_order[9];
-					string finalPrice = curr_order[10];
-					string contacts = curr_order[11];
+					string orderStatus = curr_order[10];
+					string finalPrice = curr_order[11];
+					string contacts = curr_order[12];
 
 					/*
 					 * Data for table_payment_Summary
@@ -149,10 +150,10 @@ namespace FiveHead
 				}
 
 				// Fill up user info
-				double total_Price = double.Parse(all_orders[0][10]);
+				double total_Price = double.Parse(all_orders[0][11]);
 				double discounts = double.Parse(Session["discount"].ToString());
 				double final_Price = total_Price - discounts;
-				lbl_total_Price_Value.InnerText = "$" + all_orders[0][10].ToString();
+				lbl_total_Price_Value.InnerText = "$" + total_Price.ToString();
 				lbl_discount_Value.InnerText = "$" + discounts.ToString();
 				lbl_final_Price_Value.InnerText = "$" + final_Price.ToString();
 
@@ -160,7 +161,7 @@ namespace FiveHead
 				 * Headers 
 				 */
 				// Create Table Header
-				List<String> HeaderText = new List<String>() { "s/n", "Product ID", "Category ID", "Product Name", "Quantity", "Price", "Status" };
+				List<String> HeaderText = new List<String>() { "s/n", "Product ID", "Category ID", "Product Name", "Quantity", "Price", "Payment Status" };
 
 				// Create new Table Header Row
 				TableHeaderRow header = new TableHeaderRow();

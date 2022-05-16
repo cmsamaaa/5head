@@ -116,7 +116,8 @@ CREATE TABLE IF NOT EXISTS `orders` (
   `price` double NOT NULL,
   `start_datetime` DATETIME NOT NULL,
   `end_datetime` DATETIME NOT NULL,
-  `status` varchar(200) DEFAULT 'Not Paid',
+  `paymentStatus` varchar(200) DEFAULT 'Not Paid',
+  `orderStatus` varchar(200) DEFAULT 'Not Active',
   `finalPrice` double NOT NULL,
   `contacts` VARCHAR(200) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;

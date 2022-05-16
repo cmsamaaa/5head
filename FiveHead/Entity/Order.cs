@@ -61,7 +61,7 @@ namespace FiveHead.Entity
         public int insert_Orders(
             int orderID, int tableNumber, int productID, int categoryID, 
             string productName, int productQty, double price, string start_datetime, 
-            string end_datetime, string status,double finalPrice, string contacts
+            string end_datetime, string paymentStatus, string orderStatus, double finalPrice, string contacts
         )
         {
             /*
@@ -78,7 +78,8 @@ namespace FiveHead.Entity
                 "price, " +
                 "start_datetime, " +
                 "end_datetime, " +
-                "status, " +
+                "paymentStatus, " +
+                "orderStatus, " + 
                 "finalPrice, " +
                 "contacts" +
             ") " + "VALUES (" +
@@ -90,7 +91,8 @@ namespace FiveHead.Entity
                 price + ", " + 
                 "'" + start_datetime + "'" + ", " + 
                 "'" + end_datetime + "'" + ", " + 
-                "'" + status + "'" + ", " + 
+                "'" + paymentStatus + "'" + ", " +
+                "'" + orderStatus + "'" + ", " +
                 finalPrice + ", "  + 
                 "'" + contacts + "'" +
             ");";
@@ -118,7 +120,7 @@ namespace FiveHead.Entity
             return result;
         }
 
-        public int update_Orders(int table_Num, string contactDetails, string end_datetime)
+        public int update_Orders(int table_Num, string orderStatus, string contactDetails, string end_datetime)
         {
             /*
              * Update Order Status after payment is made		
@@ -133,11 +135,12 @@ namespace FiveHead.Entity
             // Variables
             int result = 0;
             string sql_stmt = "UPDATE orders SET" + " " + 
-                "status = 'Paid'" + ", " +
+                "paymentStatus = 'Paid'" + ", " + 
+                "orderStatus = '" + orderStatus + "'" + ", " +
                 "end_datetime = " + "'" + end_datetime + "'" + ", " +
                 "contacts = " + "'" + contactDetails + "'" +
                 " WHERE " +
-                "status = 'Not Paid' AND tableNumber = " + table_Num + ";";
+                "paymentStatus = 'Not Paid' AND tableNumber = " + table_Num + ";";
             MySqlCommand sql_cmd;   // MySQL Command Object Holder
             MySqlConnection conn = dbConn.GetConnection(); // MySQL Connnction Object
 
@@ -168,7 +171,7 @@ namespace FiveHead.Entity
         public List<List<String>> get_Orders(int table_Num)
         {
             /*
-             * Get current orders
+             * Get current orders not paid
              */
 
             // Initialize Variables
@@ -179,7 +182,7 @@ namespace FiveHead.Entity
 
             // Retrieve Order data
             string sql_stmt = "SELECT * FROM orders WHERE " +
-                "status = 'Not Paid' AND tableNumber = '" + table_Num + "';";
+                "paymentStatus = 'Not Paid' AND tableNumber = '" + table_Num + "';";
 
             // Execute Statement
             try
@@ -433,7 +436,7 @@ namespace FiveHead.Entity
             int is_free = -1; // Default to -1
             string sql_stmt = "SELECT COUNT(*) As Count FROM orders" +
                 " WHERE " +
-                "tableNumber = " + table_Num + " AND " + "status = 'Not Paid';"; // Define Connection String
+                "tableNumber = " + table_Num + " AND " + "paymentStatus = 'Not Paid';"; // Define Connection String
             MySqlConnection conn = dbConn.GetConnection();
             MySqlCommand cmd = new MySqlCommand(sql_stmt, conn);
 
