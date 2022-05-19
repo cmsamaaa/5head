@@ -1860,9 +1860,11 @@
     <Content Include="Restaurant\vendors\datatables.net\jquery.dataTables.js" />
     <Content Include="Restaurant\vendors\mdi\css\materialdesignicons.min.css" />
     <Content Include="Restaurant\vendors\mdi\fonts\materialdesignicons-webfont.svg" />
+    <Content Include="Restaurant\ViewActiveOrders.aspx" />
     <Content Include="Restaurant\ViewAllCategories.aspx" />
     <Content Include="Restaurant\ViewAllCoupons.aspx" />
     <Content Include="Restaurant\ViewAllProducts.aspx" />
+    <Content Include="Restaurant\ViewOrder.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -2010,6 +2012,13 @@
     <Compile Include="Restaurant\EditProduct.aspx.designer.cs">
       <DependentUpon>EditProduct.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Restaurant\ViewActiveOrders.aspx.cs">
+      <DependentUpon>ViewActiveOrders.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Restaurant\ViewActiveOrders.aspx.designer.cs">
+      <DependentUpon>ViewActiveOrders.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Restaurant\ViewAllCategories.aspx.cs">
       <DependentUpon>ViewAllCategories.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2030,6 +2039,13 @@
     </Compile>
     <Compile Include="Restaurant\ViewAllProducts.aspx.designer.cs">
       <DependentUpon>ViewAllProducts.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Restaurant\ViewOrder.aspx.cs">
+      <DependentUpon>ViewOrder.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Restaurant\ViewOrder.aspx.designer.cs">
+      <DependentUpon>ViewOrder.aspx</DependentUpon>
     </Compile>
     <Compile Include="Scripts\Libraries\DBConn.cs" />
     <Compile Include="Default.aspx.cs">

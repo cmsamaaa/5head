@@ -9,10 +9,23 @@ namespace FiveHead.Entity
 {
     public class Order
     {
+        private int orderID;
+        private int tableNumber;
+        private int productID;
+        private int categoryID;
+        private string productName;
+        private int productQty;
+        private double price;
+        private DateTime start_datetime;
+        private DateTime end_datetime;
+        private string paymentStatus;
+        private string orderStatus;
+        private double finalPrice;
+        private string contacts;
+
         /*
          * Entity Objects
          */
-        private int orderID;
         public Order()
         {
             /* Constructor */
@@ -23,6 +36,12 @@ namespace FiveHead.Entity
             this.OrderID = orderID;
         }
 
+        public Order(int tableNumber, string orderStatus)
+        {
+            this.TableNumber = tableNumber;
+            this.OrderStatus = orderStatus;
+        }
+
         public Order(Order order) : this(order.OrderID)
         {
             if(order == null)
@@ -31,20 +50,19 @@ namespace FiveHead.Entity
             }
         }
 
-        public int OrderID
-        {
-            /*
-             * Getter/Setter
-             */
-            get
-            {
-                return orderID;
-            }
-            set
-            {
-                orderID = value;
-            }
-        }
+        public int OrderID { get => orderID; set => orderID = value; }
+        public int TableNumber { get => tableNumber; set => tableNumber = value; }
+        public int ProductID { get => productID; set => productID = value; }
+        public int CategoryID { get => categoryID; set => categoryID = value; }
+        public string ProductName { get => productName; set => productName = value; }
+        public int ProductQty { get => productQty; set => productQty = value; }
+        public double Price { get => price; set => price = value; }
+        public DateTime Start_datetime { get => start_datetime; set => start_datetime = value; }
+        public DateTime End_datetime { get => end_datetime; set => end_datetime = value; }
+        public string PaymentStatus { get => paymentStatus; set => paymentStatus = value; }
+        public string OrderStatus { get => orderStatus; set => orderStatus = value; }
+        public double FinalPrice { get => finalPrice; set => finalPrice = value; }
+        public string Contacts { get => contacts; set => contacts = value; }
 
         /*
          * Class Variables
@@ -459,6 +477,115 @@ namespace FiveHead.Entity
             }
 
             return is_free;
+        }
+
+        public DataSet GetAllActiveOrders()
+        {
+            StringBuilder sql;
+            MySqlDataAdapter da;
+            DataSet ds;
+
+            MySqlConnection conn = dbConn.GetConnection();
+            ds = new DataSet();
+            sql = new StringBuilder();
+            sql.AppendLine("SELECT DISTINCT tableNumber, finalPrice, paymentStatus, orderStatus");
+            sql.AppendLine(" ");
+            sql.AppendLine("FROM orders");
+            sql.AppendLine(" ");
+            sql.AppendLine("WHERE orderStatus=@currStatus");
+            sql.AppendLine(" ");
+            sql.AppendLine("GROUP BY tableNumber");
+            sql.AppendLine(" ");
+            sql.AppendLine("ORDER BY tableNumber");
+            conn.Open();
+
+            try
+            {
+                da = mySQL.adapter_set_query(sql.ToString(), conn);
+                da.SelectCommand.Parameters.AddWithValue("currStatus", "Active");
+                da.Fill(ds);
+            }
+            catch (Exception ex)
+            {
+                errMsg = ex.Message;
+            }
+            finally
+            {
+                dbConn.CloseConnection(conn);
+            }
+
+            return ds;
+        }
+
+        public DataSet GetActiveOrderDetails(int tableNo)
+        {
+            StringBuilder sql;
+            MySqlDataAdapter da;
+            DataSet ds;
+
+            MySqlConnection conn = dbConn.GetConnection();
+            ds = new DataSet();
+            sql = new StringBuilder();
+            sql.AppendLine("SELECT *");
+            sql.AppendLine(" ");
+            sql.AppendLine("FROM orders");
+            sql.AppendLine(" ");
+            sql.AppendLine("WHERE tableNumber=@tableNumber AND orderStatus=@currStatus");
+            conn.Open();
+
+            try
+            {
+                da = mySQL.adapter_set_query(sql.ToString(), conn);
+                da.SelectCommand.Parameters.AddWithValue("tableNumber", tableNo);
+                da.SelectCommand.Parameters.AddWithValue("currStatus", "Active");
+                da.Fill(ds);
+            }
+            catch (Exception ex)
+            {
+                errMsg = ex.Message;
+            }
+            finally
+            {
+                dbConn.CloseConnection(conn);
+            }
+
+            return ds;
+        }
+
+        public int UpdateStatus(string currStatus)
+        {
+            StringBuilder sql;
+            MySqlCommand sqlCmd;
+            int result;
+
+            result = 0;
+
+            sql = new StringBuilder();
+            sql.AppendLine("UPDATE Orders");
+            sql.AppendLine(" ");
+            sql.AppendLine("SET orderStatus=@orderStatus");
+            sql.AppendLine(" ");
+            sql.AppendLine("WHERE tableNumber=@tableNumber AND orderStatus=@currStatus");
+            MySqlConnection conn = dbConn.GetConnection();
+            try
+            {
+                sqlCmd = mySQL.cmd_set_connection(sql.ToString(), conn);
+                sqlCmd.Parameters.AddWithValue("@tableNumber", this.TableNumber);
+                sqlCmd.Parameters.AddWithValue("@currStatus", currStatus);
+                sqlCmd.Parameters.AddWithValue("@orderStatus", this.OrderStatus);
+                conn.Open();
+                result = sqlCmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                errMsg = ex.Message;
+            }
+            finally
+            {
+                dbConn.CloseConnection(conn);
+            }
+
+            return result;
         }
 
         /*

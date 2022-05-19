@@ -1,10 +1,7 @@
 ﻿using FiveHead.Entity;
-using FiveHead.Scripts.Libraries;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Web;
 
 namespace FiveHead.Controller
 {
@@ -162,6 +159,28 @@ namespace FiveHead.Controller
         {
 			return order.get_number_of_orders();
         }
+
+		public DataSet GetAllActiveOrders()
+        {
+			return order.GetAllActiveOrders();
+        }
+
+		public DataSet GetActiveOrderDetails(int tableNo)
+		{
+			return order.GetActiveOrderDetails(tableNo);
+		}
+
+		public int CompleteOrder(int tableNumber)
+		{
+			order = new Order(tableNumber, "Completed");
+			return order.UpdateStatus("Active");
+		}
+
+		public int SuspendOrder(int tableNumber)
+		{
+			order = new Order(tableNumber, "Suspended");
+			return order.UpdateStatus("Active");
+		}
 
 		/*
 		 * Payment-related
