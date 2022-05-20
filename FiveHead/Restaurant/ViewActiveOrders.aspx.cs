@@ -31,6 +31,9 @@ namespace FiveHead.Restaurant
 
             gv_Orders.DataSource = ds;
             gv_Orders.DataBind();
+
+            if (ds.Tables[0].Rows.Count == 0)
+                PlaceHolder_NoOrders.Visible = true;
         }
 
         protected void gv_Orders_PageIndexChanging(object sender, GridViewPageEventArgs e)

@@ -16,6 +16,7 @@ namespace FiveHead.Restaurant
                 try
                 {
                     bindGridView();
+                    bindTotalBill();
                 }
                 catch (Exception)
                 {
@@ -39,10 +40,18 @@ namespace FiveHead.Restaurant
             foreach (DataRow dr in dt.Rows)
                 dr["message"] = "return confirm('Are you sure you want to suspend the order item? This action cannot be reverted.')";
 
-            lbl_TotalBill.Text = string.Format("{0:0.00}", dt.Rows[0]["finalPrice"]);
-
             gv_Orders.DataSource = ds;
             gv_Orders.DataBind();
+        }
+
+        private void bindTotalBill()
+        {
+            ordersController = new OrdersController();
+
+            if (!int.TryParse(Session["view_TableNo"].ToString(), out int tableNo))
+                Response.Redirect("ViewActiveOrders.aspx", true);
+            
+            lbl_TotalBill.Text = string.Format("{0:0.00}", ordersController.GetTotalBill(tableNo, "Active"));
         }
 
         protected void gv_Orders_PageIndexChanging(object sender, GridViewPageEventArgs e)

@@ -170,10 +170,22 @@ namespace FiveHead.Controller
 			return order.GetActiveOrderDetails(tableNo);
 		}
 
+		public double GetTotalBill(int tableNo, string orderStatus)
+        {
+			DataSet ds = order.GetTotalBill(tableNo, orderStatus);
+			DataTable dt = ds.Tables[0];
+
+			double totalBill = 0;
+			foreach (DataRow dr in dt.Rows)
+				totalBill = totalBill + Convert.ToDouble(dr["finalPrice"].ToString());
+
+			return totalBill;
+		}
+
 		public int CompleteOrder(int tableNumber)
 		{
-			order = new Order(tableNumber, "Completed");
-			return order.UpdateStatus("Active");
+			order = new Order(tableNumber, "Completed", DateTime.Now);
+			return order.CloseOrder();
 		}
 
 		public int SuspendOrder(int tableNumber)

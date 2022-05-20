@@ -42,6 +42,13 @@ namespace FiveHead.Entity
             this.OrderStatus = orderStatus;
         }
 
+        public Order(int tableNumber, string orderStatus, DateTime end_datetime)
+        {
+            this.TableNumber = tableNumber;
+            this.OrderStatus = orderStatus;
+            this.End_datetime = end_datetime;
+        }
+
         public Order(Order order) : this(order.OrderID)
         {
             if(order == null)
@@ -552,6 +559,41 @@ namespace FiveHead.Entity
             return ds;
         }
 
+        public DataSet GetTotalBill(int tableNo, string orderStatus)
+        {
+            StringBuilder sql;
+            MySqlDataAdapter da;
+            DataSet ds;
+
+            MySqlConnection conn = dbConn.GetConnection();
+            ds = new DataSet();
+            sql = new StringBuilder();
+            sql.AppendLine("SELECT DISTINCT start_datetime, finalPrice");
+            sql.AppendLine(" ");
+            sql.AppendLine("FROM orders");
+            sql.AppendLine(" ");
+            sql.AppendLine("WHERE tableNumber=@tableNumber AND orderStatus=@orderStatus");
+            conn.Open();
+
+            try
+            {
+                da = mySQL.adapter_set_query(sql.ToString(), conn);
+                da.SelectCommand.Parameters.AddWithValue("tableNumber", tableNo);
+                da.SelectCommand.Parameters.AddWithValue("orderStatus", orderStatus);
+                da.Fill(ds);
+            }
+            catch (Exception ex)
+            {
+                errMsg = ex.Message;
+            }
+            finally
+            {
+                dbConn.CloseConnection(conn);
+            }
+
+            return ds;
+        }
+
         public int UpdateStatus(string currStatus)
         {
             StringBuilder sql;
@@ -572,6 +614,43 @@ namespace FiveHead.Entity
                 sqlCmd = mySQL.cmd_set_connection(sql.ToString(), conn);
                 sqlCmd.Parameters.AddWithValue("@tableNumber", this.TableNumber);
                 sqlCmd.Parameters.AddWithValue("@currStatus", currStatus);
+                sqlCmd.Parameters.AddWithValue("@orderStatus", this.OrderStatus);
+                conn.Open();
+                result = sqlCmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                errMsg = ex.Message;
+            }
+            finally
+            {
+                dbConn.CloseConnection(conn);
+            }
+
+            return result;
+        }
+
+        public int CloseOrder()
+        {
+            StringBuilder sql;
+            MySqlCommand sqlCmd;
+            int result;
+
+            result = 0;
+
+            sql = new StringBuilder();
+            sql.AppendLine("UPDATE Orders");
+            sql.AppendLine(" ");
+            sql.AppendLine("SET orderStatus=@orderStatus, end_datetime=@end_datetime");
+            sql.AppendLine(" ");
+            sql.AppendLine("WHERE tableNumber=@tableNumber AND orderStatus=@currStatus");
+            MySqlConnection conn = dbConn.GetConnection();
+            try
+            {
+                sqlCmd = mySQL.cmd_set_connection(sql.ToString(), conn);
+                sqlCmd.Parameters.AddWithValue("@tableNumber", this.TableNumber);
+                sqlCmd.Parameters.AddWithValue("@end_datetime", this.End_datetime);
+                sqlCmd.Parameters.AddWithValue("@currStatus", "Active");
                 sqlCmd.Parameters.AddWithValue("@orderStatus", this.OrderStatus);
                 conn.Open();
                 result = sqlCmd.ExecuteNonQuery();

@@ -76,7 +76,7 @@
                                 <PagerStyle CssClass="GridPager" HorizontalAlign="Right" />
                             </asp:GridView>
                         </div>
-                        <asp:PlaceHolder ID="PlaceHolder_NoOrder" runat="server" Visible="false">No order found
+                        <asp:PlaceHolder ID="PlaceHolder_NoOrders" runat="server" Visible="false">No orders found
                         </asp:PlaceHolder>
                     </div>
                 </div>

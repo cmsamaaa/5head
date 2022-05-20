@@ -24,12 +24,12 @@ namespace FiveHead.Restaurant
         protected global::System.Web.UI.WebControls.GridView gv_Orders;
 
         /// <summary>
-        /// PlaceHolder_NoOrder control.
+        /// PlaceHolder_NoOrders control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.PlaceHolder PlaceHolder_NoOrder;
+        protected global::System.Web.UI.WebControls.PlaceHolder PlaceHolder_NoOrders;
     }
 }
