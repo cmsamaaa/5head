@@ -498,6 +498,8 @@ namespace FiveHead.Entity
             sql.AppendLine(" ");
             sql.AppendLine("FROM orders");
             sql.AppendLine(" ");
+            sql.AppendLine("WHERE NOT paymentStatus=@paymentStatus");
+            sql.AppendLine(" ");
             sql.AppendLine("GROUP BY tableNumber, CASE WHEN orderStatus=@orderStatus THEN end_datetime ELSE orderStatus END");
             sql.AppendLine(" ");
             sql.AppendLine("ORDER BY start_datetime DESC");
@@ -506,6 +508,7 @@ namespace FiveHead.Entity
             try
             {
                 da = mySQL.adapter_set_query(sql.ToString(), conn);
+                da.SelectCommand.Parameters.AddWithValue("paymentStatus", "Not Paid");
                 da.SelectCommand.Parameters.AddWithValue("orderStatus", "Completed");
                 da.Fill(ds);
             }
