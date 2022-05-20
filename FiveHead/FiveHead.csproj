@@ -1852,6 +1852,7 @@
     <Content Include="Restaurant\Login.aspx" />
     <Content Include="Restaurant\Logout.aspx" />
     <Content Include="Restaurant\EditCategory.aspx" />
+    <Content Include="Restaurant\SearchOrders.aspx" />
     <Content Include="Restaurant\vendors\base\vendor.bundle.base.css" />
     <Content Include="Restaurant\vendors\base\vendor.bundle.base.js" />
     <Content Include="Restaurant\vendors\chart.js\Chart.min.js" />
@@ -2011,6 +2012,13 @@
     </Compile>
     <Compile Include="Restaurant\EditProduct.aspx.designer.cs">
       <DependentUpon>EditProduct.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Restaurant\SearchOrders.aspx.cs">
+      <DependentUpon>SearchOrders.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Restaurant\SearchOrders.aspx.designer.cs">
+      <DependentUpon>SearchOrders.aspx</DependentUpon>
     </Compile>
     <Compile Include="Restaurant\ViewActiveOrders.aspx.cs">
       <DependentUpon>ViewActiveOrders.aspx</DependentUpon>

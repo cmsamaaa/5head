@@ -160,10 +160,20 @@ namespace FiveHead.Controller
 			return order.get_number_of_orders();
         }
 
+		public DataSet SearchOrders(int tableNum)
+        {
+			return order.SearchOrders(tableNum);
+        }
+
 		public DataSet GetAllActiveOrders()
         {
 			return order.GetAllActiveOrders();
         }
+
+		public DataSet GetOrderDetails(int tableNo, DateTime end_datetime)
+		{
+			return order.GetOrderDetails(tableNo, end_datetime);
+		}
 
 		public DataSet GetActiveOrderDetails(int tableNo)
 		{
@@ -173,6 +183,18 @@ namespace FiveHead.Controller
 		public double GetTotalBill(int tableNo, string orderStatus)
         {
 			DataSet ds = order.GetTotalBill(tableNo, orderStatus);
+			DataTable dt = ds.Tables[0];
+
+			double totalBill = 0;
+			foreach (DataRow dr in dt.Rows)
+				totalBill = totalBill + Convert.ToDouble(dr["finalPrice"].ToString());
+
+			return totalBill;
+		}
+
+		public double GetTotalBill(int tableNo, DateTime end_datetime)
+		{
+			DataSet ds = order.GetTotalBill(tableNo, end_datetime);
 			DataTable dt = ds.Tables[0];
 
 			double totalBill = 0;

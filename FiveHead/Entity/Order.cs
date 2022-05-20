@@ -486,6 +486,44 @@ namespace FiveHead.Entity
             return is_free;
         }
 
+        public DataSet SearchOrders(int tableNum)
+        {
+            StringBuilder sql;
+            MySqlDataAdapter da;
+            DataSet ds;
+
+            MySqlConnection conn = dbConn.GetConnection();
+            ds = new DataSet();
+            sql = new StringBuilder();
+            sql.AppendLine("SELECT DISTINCT tableNumber, finalPrice, paymentStatus, orderStatus, start_datetime, end_datetime");
+            sql.AppendLine(" ");
+            sql.AppendLine("FROM orders");
+            sql.AppendLine(" ");
+            sql.AppendLine("WHERE tableNumber=@tableNumber");
+            sql.AppendLine(" ");
+            sql.AppendLine("GROUP BY end_datetime");
+            sql.AppendLine(" ");
+            sql.AppendLine("ORDER BY orderStatus ASC");
+            conn.Open();
+
+            try
+            {
+                da = mySQL.adapter_set_query(sql.ToString(), conn);
+                da.SelectCommand.Parameters.AddWithValue("tableNumber", tableNum);
+                da.Fill(ds);
+            }
+            catch (Exception ex)
+            {
+                errMsg = ex.Message;
+            }
+            finally
+            {
+                dbConn.CloseConnection(conn);
+            }
+
+            return ds;
+        }
+
         public DataSet GetAllActiveOrders()
         {
             StringBuilder sql;
@@ -495,7 +533,7 @@ namespace FiveHead.Entity
             MySqlConnection conn = dbConn.GetConnection();
             ds = new DataSet();
             sql = new StringBuilder();
-            sql.AppendLine("SELECT DISTINCT tableNumber, finalPrice, paymentStatus, orderStatus");
+            sql.AppendLine("SELECT tableNumber, finalPrice, paymentStatus, orderStatus");
             sql.AppendLine(" ");
             sql.AppendLine("FROM orders");
             sql.AppendLine(" ");
@@ -559,6 +597,41 @@ namespace FiveHead.Entity
             return ds;
         }
 
+        public DataSet GetOrderDetails(int tableNo, DateTime end_datetime)
+        {
+            StringBuilder sql;
+            MySqlDataAdapter da;
+            DataSet ds;
+
+            MySqlConnection conn = dbConn.GetConnection();
+            ds = new DataSet();
+            sql = new StringBuilder();
+            sql.AppendLine("SELECT *");
+            sql.AppendLine(" ");
+            sql.AppendLine("FROM orders");
+            sql.AppendLine(" ");
+            sql.AppendLine("WHERE tableNumber=@tableNumber AND end_datetime=@end_datetime");
+            conn.Open();
+
+            try
+            {
+                da = mySQL.adapter_set_query(sql.ToString(), conn);
+                da.SelectCommand.Parameters.AddWithValue("tableNumber", tableNo);
+                da.SelectCommand.Parameters.AddWithValue("end_datetime", end_datetime);
+                da.Fill(ds);
+            }
+            catch (Exception ex)
+            {
+                errMsg = ex.Message;
+            }
+            finally
+            {
+                dbConn.CloseConnection(conn);
+            }
+
+            return ds;
+        }
+
         public DataSet GetTotalBill(int tableNo, string orderStatus)
         {
             StringBuilder sql;
@@ -580,6 +653,41 @@ namespace FiveHead.Entity
                 da = mySQL.adapter_set_query(sql.ToString(), conn);
                 da.SelectCommand.Parameters.AddWithValue("tableNumber", tableNo);
                 da.SelectCommand.Parameters.AddWithValue("orderStatus", orderStatus);
+                da.Fill(ds);
+            }
+            catch (Exception ex)
+            {
+                errMsg = ex.Message;
+            }
+            finally
+            {
+                dbConn.CloseConnection(conn);
+            }
+
+            return ds;
+        }
+
+        public DataSet GetTotalBill(int tableNo, DateTime end_datetime)
+        {
+            StringBuilder sql;
+            MySqlDataAdapter da;
+            DataSet ds;
+
+            MySqlConnection conn = dbConn.GetConnection();
+            ds = new DataSet();
+            sql = new StringBuilder();
+            sql.AppendLine("SELECT DISTINCT start_datetime, finalPrice");
+            sql.AppendLine(" ");
+            sql.AppendLine("FROM orders");
+            sql.AppendLine(" ");
+            sql.AppendLine("WHERE tableNumber=@tableNumber AND end_datetime=@end_datetime");
+            conn.Open();
+
+            try
+            {
+                da = mySQL.adapter_set_query(sql.ToString(), conn);
+                da.SelectCommand.Parameters.AddWithValue("tableNumber", tableNo);
+                da.SelectCommand.Parameters.AddWithValue("end_datetime", end_datetime);
                 da.Fill(ds);
             }
             catch (Exception ex)

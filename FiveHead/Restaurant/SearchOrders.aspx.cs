@@ -5,9 +5,9 @@ using System.Web.UI.WebControls;
 
 namespace FiveHead.Restaurant
 {
-    public partial class ViewActiveOrders : System.Web.UI.Page
+    public partial class SearchOrders : System.Web.UI.Page
     {
-        OrdersController ordersController;
+        OrdersController ordersController = new OrdersController();
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -19,14 +19,23 @@ namespace FiveHead.Restaurant
 
         private void bindGridView()
         {
+            int.TryParse(Request.QueryString["search"], out int tableNo);
+
             ordersController = new OrdersController();
-            DataSet ds = ordersController.GetAllActiveOrders();
+            DataSet ds = ordersController.SearchOrders(tableNo);
+
             DataTable dt = ds.Tables[0];
             dt.Columns.Add("message", typeof(string));
+            dt.Columns.Add("suspendVisible", typeof(bool));
 
             foreach (DataRow dr in dt.Rows)
             {
                 dr["message"] = "return confirm('Are you sure you want to suspend the order? This action cannot be reverted.')";
+
+                if (dr["orderStatus"].Equals("Completed"))
+                    dr["suspendVisible"] = false;
+                else
+                    dr["suspendVisible"] = true;
             }
 
             gv_Orders.DataSource = ds;
@@ -60,12 +69,15 @@ namespace FiveHead.Restaurant
             Label tableNumberLabel = (Label)gv_Orders.Rows[index].FindControl("lbl_TableNumber");
             int tableNumber = Convert.ToInt32(tableNumberLabel.Text);
 
+            Label datetimeLabel = (Label)gv_Orders.Rows[index].FindControl("lbl_EndDateTime");
+            DateTime end_datetime = Convert.ToDateTime(datetimeLabel.Text);
+
             int result = 0;
             switch (e.CommandName)
             {
                 case "View":
                     Session["view_TableNo"] = tableNumber;
-                    Session["view_End_Datetime"] = "Active";
+                    Session["view_End_Datetime"] = end_datetime;
                     Response.Redirect("ViewOrder.aspx", true);
                     break;
                 case "Suspend":
@@ -78,6 +90,14 @@ namespace FiveHead.Restaurant
                 default:
                     break;
             }
+        }
+
+        protected void btn_Search_Click(object sender, EventArgs e)
+        {
+            if (!int.TryParse(tb_Search.Value, out int tableNo))
+                Response.Redirect("SearchOrders.aspx?error=true", true);
+            else
+                Response.Redirect("SearchOrders.aspx?search=" + tableNo, true);
         }
     }
 }

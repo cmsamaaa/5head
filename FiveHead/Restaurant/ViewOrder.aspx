@@ -29,7 +29,7 @@
                             </div>
                         </div>
                         <div class="table-responsive pt-3">
-                            <asp:GridView ID="gv_Orders" runat="server" AutoGenerateColumns="False" CssClass="table table-bordered" OnRowCommand="gv_Orders_RowCommand" AllowPaging="True" OnPageIndexChanging="gv_Orders_PageIndexChanging" PageSize="10">
+                            <asp:GridView ID="gv_Orders" runat="server" AutoGenerateColumns="False" CssClass="table table-bordered" AllowPaging="True" OnPageIndexChanging="gv_Orders_PageIndexChanging" PageSize="10">
                                 <Columns>
                                     <asp:TemplateField HeaderText="ID" ItemStyle-CssClass="col-1">
                                         <ItemTemplate>
@@ -59,11 +59,6 @@
                                     <asp:TemplateField HeaderText="Order Status" ItemStyle-CssClass="col-1">
                                         <ItemTemplate>
                                             <asp:Label ID="lbl_OrderStatus" runat="server" Text='<%# Bind("orderStatus") %>'></asp:Label>
-                                        </ItemTemplate>
-                                    </asp:TemplateField>
-                                    <asp:TemplateField ItemStyle-CssClass="col-1">
-                                        <ItemTemplate>
-                                            <asp:Button ID="btn_Suspend" runat="server" Text='Suspend' CssClass='btn btn-danger' CommandName='Suspend' CommandArgument='<%#((GridViewRow)Container).RowIndex%>' OnClientClick='<%# Bind("message") %>' />
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                 </Columns>
