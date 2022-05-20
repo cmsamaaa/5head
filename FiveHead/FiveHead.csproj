@@ -1864,6 +1864,7 @@
     <Content Include="Restaurant\ViewActiveOrders.aspx" />
     <Content Include="Restaurant\ViewAllCategories.aspx" />
     <Content Include="Restaurant\ViewAllCoupons.aspx" />
+    <Content Include="Restaurant\ViewAllOrders.aspx" />
     <Content Include="Restaurant\ViewAllProducts.aspx" />
     <Content Include="Restaurant\ViewOrder.aspx" />
     <Content Include="Web.config" />
@@ -2040,6 +2041,13 @@
     </Compile>
     <Compile Include="Restaurant\ViewAllCoupons.aspx.designer.cs">
       <DependentUpon>ViewAllCoupons.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Restaurant\ViewAllOrders.aspx.cs">
+      <DependentUpon>ViewAllOrders.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Restaurant\ViewAllOrders.aspx.designer.cs">
+      <DependentUpon>ViewAllOrders.aspx</DependentUpon>
     </Compile>
     <Compile Include="Restaurant\ViewAllProducts.aspx.cs">
       <DependentUpon>ViewAllProducts.aspx</DependentUpon>

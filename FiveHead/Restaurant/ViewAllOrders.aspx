@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Restaurant/MasterPage_Restaurant.Master" AutoEventWireup="true" CodeBehind="SearchOrders.aspx.cs" Inherits="FiveHead.Restaurant.SearchOrders" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Restaurant/MasterPage_Restaurant.Master" AutoEventWireup="true" CodeBehind="ViewAllOrders.aspx.cs" Inherits="FiveHead.Restaurant.ViewAllOrders" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder_PageContent" runat="server">
@@ -7,9 +7,9 @@
             <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Search Orders</h4>
+                        <h4 class="card-title">Order History</h4>
                         <p class="card-description">
-                            Search for all orders by table number, sorted by order status in ascending order.
+                            List of all existing orders in the database.
                         </p>
                         <!-- Success Alert -->
                         <div class="row justify-content-center">
@@ -26,19 +26,6 @@
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="input-group col-sm-6">
-                                <div class="input-group-prepend bg-transparent">
-                                    <span class="input-group-text bg-transparent border-right-0">
-                                        <i class="mdi mdi-magnify text-primary"></i>
-                                    </span>
-                                </div>
-                                <input runat="server" type="text" class="form-control form-control-lg border-left-0 login-field" id="tb_Search" placeholder="Search by Table Number" />
-                            </div>
-                            <div class="input-group col-sm-6">
-                                <button runat="server" id="btn_Search" class="btn btn-primary" onserverclick="btn_Search_Click">Search</button>
                             </div>
                         </div>
                         <div class="table-responsive pt-3">
@@ -61,7 +48,7 @@
                                     </asp:TemplateField>
                                     <asp:TemplateField HeaderText="Total Bill">
                                         <ItemTemplate>
-                                            $ <asp:Label ID="lbl_TotalBill" runat="server" Text='<%# Eval("totalBill", "{0:0.00}") %>'></asp:Label>
+                                            $ <asp:Label ID="lbl_FinalPrice" runat="server" Text='<%# Eval("totalBill", "{0:0.00}") %>'></asp:Label>
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                     <asp:TemplateField HeaderText="Payment Status" ItemStyle-CssClass="col-2">
@@ -100,10 +87,6 @@
                 $('#success-suspend').show();
             if (queryStr_Suspend == "false")
                 $('#error-suspend').show();
-
-            const search = getParameterByName("search");
-            if (search != null)
-                $('#ContentPlaceHolder_PageContent_tb_Search').val(search);
         });
     </script>
 </asp:Content>

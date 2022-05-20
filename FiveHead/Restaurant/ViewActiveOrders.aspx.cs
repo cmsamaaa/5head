@@ -1,6 +1,7 @@
 ﻿using FiveHead.Controller;
 using System;
 using System.Data;
+using System.Web;
 using System.Web.UI.WebControls;
 
 namespace FiveHead.Restaurant
@@ -66,6 +67,7 @@ namespace FiveHead.Restaurant
                 case "View":
                     Session["view_TableNo"] = tableNumber;
                     Session["view_End_Datetime"] = "Active";
+                    Session["order_GoBack"] = HttpContext.Current.Request.Url.AbsolutePath;
                     Response.Redirect("ViewOrder.aspx", true);
                     break;
                 case "Suspend":

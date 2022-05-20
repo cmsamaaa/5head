@@ -9,7 +9,7 @@
                     <div class="card-body">
                         <h4 class="card-title">Order Details</h4>
                         <p class="card-description">
-                            List of all items for <strong>Table #<asp:Label ID="lbl_TableNo" runat="server" Text="0"></asp:Label></strong>.
+                            List of all items for <strong>Table #<asp:Label ID="lbl_TableNo" runat="server" Text="0"></asp:Label></strong> at <asp:Label ID="lbl_StartDatetime" runat="server" Text="20/05/2022"></asp:Label>.
                         </p>
                         <!-- Success Alert -->
                         <div class="row justify-content-center">
@@ -67,7 +67,7 @@
                         </div>
                         <div class="row pt-3 align-items-center">
                             <div class="col-6 text-left">
-                                <a href="ViewActiveOrders.aspx" class="btn btn-primary">Back</a>
+                                <asp:Button ID="btn_Back" runat="server" CssClass="btn btn-primary" Text="Back" OnClick="btn_Back_Click" />
                             </div>
                             <div class="col-6 text-right">
                                 <span><strong>Total Bill: $ <asp:Label ID="lbl_TotalBill" runat="server" Text="0.00"></asp:Label></strong></span>

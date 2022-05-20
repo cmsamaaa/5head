@@ -160,9 +160,14 @@ namespace FiveHead.Controller
 			return order.get_number_of_orders();
         }
 
-		public DataSet SearchOrders(int tableNum)
+		public DataSet GetAllOrders()
         {
-			return order.SearchOrders(tableNum);
+			return order.GetAllOrders();
+        }
+
+		public DataSet SearchOrders(int tableNo)
+        {
+			return order.SearchOrders(tableNo);
         }
 
 		public DataSet GetAllActiveOrders()
@@ -212,7 +217,7 @@ namespace FiveHead.Controller
 
 		public int SuspendOrder(int tableNumber)
 		{
-			order = new Order(tableNumber, "Suspended");
+			order = new Order(tableNumber, "Refunded", "Suspended", DateTime.Now);
 			return order.UpdateStatus("Active");
 		}
 

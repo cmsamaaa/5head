@@ -24,6 +24,15 @@ namespace FiveHead.Restaurant
         protected global::System.Web.UI.WebControls.Label lbl_TableNo;
 
         /// <summary>
+        /// lbl_StartDatetime control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_StartDatetime;
+
+        /// <summary>
         /// gv_Orders control.
         /// </summary>
         /// <remarks>
@@ -31,6 +40,15 @@ namespace FiveHead.Restaurant
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView gv_Orders;
+
+        /// <summary>
+        /// btn_Back control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btn_Back;
 
         /// <summary>
         /// lbl_TotalBill control.

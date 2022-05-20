@@ -38,22 +38,27 @@ namespace FiveHead.Restaurant
             {
                 DateTime.TryParse(Session["view_End_Datetime"].ToString(), out end_datetime);
                 ds = ordersController.GetOrderDetails(tableNo, end_datetime);
+                lbl_StartDatetime.Text = end_datetime.ToString();
             }
             else
+            {
                 ds = ordersController.GetActiveOrderDetails(tableNo);
+                lbl_StartDatetime.Text = DateTime.Now.ToString();
+            }
 
-            lbl_TableNo.Text = tableNo.ToString();
             DataTable dt = ds.Tables[0];
             dt.Columns.Add("message", typeof(string));
 
             foreach (DataRow dr in dt.Rows)
                 dr["message"] = "return confirm('Are you sure you want to suspend the order item? This action cannot be reverted.')";
 
-            if (dt.Rows[0]["orderStatus"].Equals("Completed"))
+            if (dt.Rows[0]["orderStatus"].Equals("Completed") || dt.Rows[0]["orderStatus"].Equals("Suspended"))
                 btn_Complete.Visible = false;
 
             gv_Orders.DataSource = ds;
             gv_Orders.DataBind();
+
+            lbl_TableNo.Text = tableNo.ToString();
         }
 
         private void bindTotalBill()
@@ -93,12 +98,9 @@ namespace FiveHead.Restaurant
                 Response.Redirect("ViewActiveOrders.aspx?completed=false&tableNo=" + tableNo, true);
         }
 
-        private void ShowMessage(string Message)
+        protected void btn_Back_Click(object sender, EventArgs e)
         {
-            if (!ClientScript.IsClientScriptBlockRegistered("MyMessage"))
-            {
-                ClientScript.RegisterClientScriptBlock(this.GetType(), "MyMessage", "alert('" + Message + "');", true);
-            }
+            Response.Redirect(Session["order_GoBack"].ToString(), true);
         }
     }
 }
