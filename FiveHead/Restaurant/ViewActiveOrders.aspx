@@ -53,7 +53,7 @@
                                     </asp:TemplateField>
                                     <asp:TemplateField HeaderText="Total Bill">
                                         <ItemTemplate>
-                                            $ <asp:Label ID="lbl_FinalPrice" runat="server" Text='<%# Eval("finalPrice", "{0:0.00}") %>'></asp:Label>
+                                            $ <asp:Label ID="lbl_TotalBill" runat="server" Text='<%# Eval("totalBill", "{0:0.00}") %>'></asp:Label>
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                     <asp:TemplateField HeaderText="Payment Status" ItemStyle-CssClass="col-2">

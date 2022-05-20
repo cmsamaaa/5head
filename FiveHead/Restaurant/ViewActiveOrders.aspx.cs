@@ -23,10 +23,12 @@ namespace FiveHead.Restaurant
             ordersController = new OrdersController();
             DataSet ds = ordersController.GetAllActiveOrders();
             DataTable dt = ds.Tables[0];
+            dt.Columns.Add("totalBill", typeof(double));
             dt.Columns.Add("message", typeof(string));
 
             foreach (DataRow dr in dt.Rows)
             {
+                dr["totalBill"] = ordersController.GetTotalBill(Convert.ToInt32(dr["tableNumber"]), "Active");
                 dr["message"] = "return confirm('Are you sure you want to suspend the order? This action cannot be reverted.')";
             }
 

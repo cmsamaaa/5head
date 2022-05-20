@@ -537,9 +537,15 @@ namespace FiveHead.Entity
             sql.AppendLine(" ");
             sql.AppendLine("FROM orders");
             sql.AppendLine(" ");
-            sql.AppendLine("WHERE tableNumber=@tableNumber");
+            sql.AppendLine("WHERE tableNumber=@tableNumber AND NOT paymentStatus=@paymentStatus");
             sql.AppendLine(" ");
-            sql.AppendLine("GROUP BY tableNumber, CASE WHEN orderStatus=@orderStatus THEN end_datetime ELSE orderStatus END");
+            sql.AppendLine("GROUP BY tableNumber, CASE");
+            sql.AppendLine(" ");
+            sql.AppendLine("WHEN orderStatus=@completedStatus THEN end_datetime");
+            sql.AppendLine(" ");
+            sql.AppendLine("WHEN orderStatus=@suspendStatus THEN end_datetime");
+            sql.AppendLine(" ");
+            sql.AppendLine("ELSE orderStatus END");
             sql.AppendLine(" ");
             sql.AppendLine("ORDER BY orderStatus ASC");
             conn.Open();
@@ -548,7 +554,9 @@ namespace FiveHead.Entity
             {
                 da = mySQL.adapter_set_query(sql.ToString(), conn);
                 da.SelectCommand.Parameters.AddWithValue("tableNumber", tableNo);
-                da.SelectCommand.Parameters.AddWithValue("orderStatus", "Completed");
+                da.SelectCommand.Parameters.AddWithValue("paymentStatus", "Not Paid");
+                da.SelectCommand.Parameters.AddWithValue("completedStatus", "Completed");
+                da.SelectCommand.Parameters.AddWithValue("suspendStatus", "Suspended");
                 da.Fill(ds);
             }
             catch (Exception ex)
