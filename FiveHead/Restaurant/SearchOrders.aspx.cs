@@ -41,7 +41,7 @@ namespace FiveHead.Restaurant
             gv_Orders.DataSource = ds;
             gv_Orders.DataBind();
 
-            if (ds.Tables[0].Rows.Count == 0)
+            if (ds.Tables[0].Rows.Count == 0 && !string.IsNullOrEmpty(Request.QueryString["search"]))
                 PlaceHolder_NoOrders.Visible = true;
         }
 

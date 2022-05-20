@@ -7,41 +7,10 @@
             <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Active Orders</h4>
+                        <h4 class="card-title">Search Orders</h4>
                         <p class="card-description">
-                            List of all on-going orders at the moment.
+                            Search for all orders by table number.
                         </p>
-                        <!-- Success Alert -->
-                        <div class="row justify-content-center">
-                            <div id="success-suspend" class="alert alert-success alert-dismissible fade show col-12 mt-4 success-alert-box" role="alert">
-                                <i class="fas fa-check"></i>
-                                Order has been <strong>suspended</strong>!
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div id="error-suspend" class="alert alert-danger alert-dismissible fade show col-12 mt-4 danger-alert-box" role="alert">
-                                <i class="fas fa-exclamation-triangle"></i>
-                                Failed to suspend order.
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div id="success-complete" class="alert alert-success alert-dismissible fade show col-12 mt-4 success-alert-box" role="alert">
-                                <i class="fas fa-check"></i>
-                                Order for <strong>Table #<span id="tableNo_1">0</span></strong> marked as completed!
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div id="error-complete" class="alert alert-danger alert-dismissible fade show col-12 mt-4 danger-alert-box" role="alert">
-                                <i class="fas fa-exclamation-triangle"></i>
-                                Failed to update order for <strong>Table #<span id="tableNo_2">0</span></strong>.
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                        </div>
                         <div class="form-group row">
                             <div class="input-group col-sm-6">
                                 <div class="input-group-prepend bg-transparent">
