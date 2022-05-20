@@ -1796,6 +1796,7 @@
     <Content Include="Restaurant\css\custom.css" />
     <Content Include="Restaurant\css\style.css" />
     <Content Include="Restaurant\Dashboard.aspx" />
+    <Content Include="Restaurant\DataReport.aspx" />
     <Content Include="Restaurant\Default.aspx" />
     <Content Include="Restaurant\EditCoupon.aspx" />
     <Content Include="Restaurant\EditProduct.aspx" />
@@ -1836,6 +1837,7 @@
     <Content Include="Restaurant\images\logo-mini.svg" />
     <Content Include="Restaurant\images\logo.svg" />
     <Content Include="Restaurant\images\undraw_profile.svg" />
+    <Content Include="Restaurant\images\undraw_special_event.svg" />
     <Content Include="Restaurant\js\chart.js" />
     <Content Include="Restaurant\js\Chart.min.js" />
     <Content Include="Restaurant\js\custom.js" />
@@ -1985,6 +1987,13 @@
     </Compile>
     <Compile Include="Restaurant\CreateProduct.aspx.designer.cs">
       <DependentUpon>CreateProduct.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Restaurant\DataReport.aspx.cs">
+      <DependentUpon>DataReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Restaurant\DataReport.aspx.designer.cs">
+      <DependentUpon>DataReport.aspx</DependentUpon>
     </Compile>
     <Compile Include="Restaurant\Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>

@@ -133,7 +133,7 @@
                         <!-- Restaurant Owner Navigation -->
                         <asp:PlaceHolder ID="PlaceHolder_Nav_Owner" runat="server" Visible="False">
                             <li class="nav-item">
-                                <a class="nav-link" href="#">
+                                <a class="nav-link" href="DataReport.aspx">
                                     <i class="mdi mdi-file menu-icon"></i>
                                     <span class="menu-title">Data Report</span>
                                 </a>
