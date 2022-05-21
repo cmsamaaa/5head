@@ -830,21 +830,23 @@ namespace FiveHead.Entity
         public string get_discount(string coupon_code)
         {
             /*
-             * Check and verify coupon code exists
-             * and
-             * return the discount amount
+             * Verify coupon code exists and is valid by referencing table 'coupons' 
+             * - Retrieve Discount Amount
              */
+
+
             /*
              * Get current orders
              */
 
             // Define SQL query statement
-            string sql_stmt = "SELECT discounts FROM coupon WHERE code = '" + coupon_code + "'" + ";";
+            string sql_stmt = "SELECT discount FROM coupons WHERE code = '" + coupon_code + "'" + ";";
 
             // Initialize Variables
             DataSet ds = new DataSet(); // Container to store Data (generally from a Database)
             MySqlConnection conn = dbConn.GetConnection();
             MySqlCommand cmd = new MySqlCommand(sql_stmt, conn);
+            MySqlDataReader reader;
             string res = "";
 
             try
@@ -852,17 +854,16 @@ namespace FiveHead.Entity
                 // Open Database connection
                 conn.Open();
 
-                // Execute Query
-                cmd.ExecuteNonQuery();
+                // Initialize Dat Reader
+                reader = cmd.ExecuteReader();
 
                 // Fetch query result
-                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                da.Fill(dt);
-
-                foreach (DataRow dr in dt.Rows)
+                if (reader.HasRows)
                 {
-                    res = dr["coupon"].ToString();
+                    while (reader.Read())
+                    {
+                        res = reader.GetString(0);
+                    }
                 }
             }
             catch (Exception ex)

@@ -21,8 +21,8 @@ namespace FiveHead
 			{
 				// Check if page is first time loading
 				// Will only execute the first time when the page loads
-				
 			}
+
 			ViewAllMenuItems();
 		}
 

@@ -75,7 +75,28 @@ namespace FiveHead
 
 			int ret_Code = ordersController.ProcessPayment(tableNum, "Active", contactDetails, end_datetime);
 
-            return ret_Code;
+			/* 
+			 * Alert Box to popup
+			 * - shows confirmation message
+			 */
+			string msg = "";
+			if(ret_Code == 0)
+            {
+				/*
+				 * Payment Success
+				 */
+				msg = "Payment is succesful. Thank you for shopping with us!.";
+            }
+            else
+            {
+				/*
+				 * Payment Error
+				 */
+				msg = "There has been an error with payment.";
+            }
+			Response.Write("<script>" + "alert(" + "'" + msg + "'" + ");" + "</script>");
+
+			return ret_Code;
         }
 		public void ViewAllOrders()
 		{
@@ -150,9 +171,21 @@ namespace FiveHead
 				}
 
 				// Fill up user info
-				double total_Price = double.Parse(all_orders[0][11]);
-				double discounts = double.Parse(Session["discount"].ToString());
-				double final_Price = total_Price - discounts;
+				string total_Price = Session["total_Price"].ToString();
+                string discount_str = Session["discount"].ToString();
+                int discounts = 0;
+                if (discount_str != "0" || discount_str != "") 
+				{
+                    if (int.TryParse(discount_str, out discounts))
+                    {
+                        System.Diagnostics.Debug.WriteLine("Conversion to Integer is successful.");
+                    }
+                    else
+                    {
+                        System.Diagnostics.Debug.WriteLine("Error converting to Integer.");
+                    }
+                }
+				string final_Price = Session["discounted_Price"].ToString();
 				lbl_total_Price_Value.InnerText = "$" + total_Price.ToString();
 				lbl_discount_Value.InnerText = "$" + discounts.ToString();
 				lbl_final_Price_Value.InnerText = "$" + final_Price.ToString();

@@ -69,15 +69,6 @@ namespace FiveHead
         protected global::System.Web.UI.WebControls.DropDownList ddl_filter_Type;
 
         /// <summary>
-        /// lb_filter_Text control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lb_filter_Text;
-
-        /// <summary>
         /// tb_filter_Text control.
         /// </summary>
         /// <remarks>

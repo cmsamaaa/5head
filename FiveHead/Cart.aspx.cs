@@ -71,7 +71,7 @@ namespace FiveHead
 				table_Shopping_Cart.Visible = false;
 			}
 
-			// Get Final Price
+			// Get Total Price
 			float final_Price = ordersController.CalculateFinalPrice(cart);
 			StringBuilder table_Text = new StringBuilder();
 			table_Text.AppendLine("Final Price: " + final_Price.ToString());
@@ -110,11 +110,32 @@ namespace FiveHead
 				}
 			}
 
-            /*
+			// Get Discount and write to session
+			string discount = "0";
+			if (coupon_Code != "")
+			{
+				discount = ordersController.GetDiscount(coupon_Code);
+			}
+
+			// Validate Discount
+			int discount_int = 0;
+			double disc_Price = 0.0;
+			if(int.TryParse(discount, out discount_int))
+            {
+				// Calculate Discounted Price
+				disc_Price = final_Price - discount_int;
+			}
+			double disc_price_Rounded = Math.Round((Double)disc_Price, 2); // Round price to 2 decimal places
+			if (disc_price_Rounded < 0) // Data Validation : No negative values
+			{
+				disc_price_Rounded = 0.0;
+			}
+
+			/*
                 * Get other details and
                 * populate final cart
                 */
-            if (cart != null)
+			if (cart != null)
 			{
 				/*
 				 * Populate Final Cart
@@ -187,7 +208,7 @@ namespace FiveHead
 						tmp.Add(end_Datetime); // Default to '[START_DATETIME]', to be updated when payment is made, alongside Status
 						tmp.Add(curr_prodStatus);
 						tmp.Add("Not Active");
-						tmp.Add(final_Price.ToString());
+						tmp.Add(disc_price_Rounded.ToString());
 						tmp.Add("Not Provided"); // Default to 'Not Provided', to be updated when payment is made, alongside Status
 
 						// Write to final cart
@@ -201,21 +222,16 @@ namespace FiveHead
 					}
 				}
 
-				// Get Discount and write to session
-				if (coupon_Code == "")
-				{
-					Session["discount"] = "0.0";
-				}
-				else
-				{
-					Session["discount"] = ordersController.GetDiscount(coupon_Code);
-				}
-
 				// Check if Session["tableNum"] already exists
 				int ret_Code = -1;
 				if (Session["tableNum"] == null)
 				{
 					ret_Code = ordersController.CheckoutCart(coupon_Code, conf_cart);
+
+					// Write prices to Session
+					Session["total_Price"] = final_Price.ToString();
+					Session["discount"] = discount.ToString();
+					Session["discounted_Price"] = disc_price_Rounded;
 
 					// Write Table Number to Session
 					Session["tableNum"] = tableNum;

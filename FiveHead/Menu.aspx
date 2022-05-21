@@ -32,7 +32,7 @@
         </asp:DropDownList>
 
         <!-- Filter Text -->
-        <label id="lb_filter_Text" runat="server">Filter Text: </label>
+        <label id="lb_filter_Text">Filter Text: </label>
         <input type="text" id="tb_filter_Text" runat="server" />
         
         <!-- Start Filter -->
