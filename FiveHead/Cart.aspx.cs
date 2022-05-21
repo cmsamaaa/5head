@@ -77,7 +77,11 @@ namespace FiveHead
 			table_Text.AppendLine("Final Price: " + final_Price.ToString());
 
 			// Get Start DateTime
-			string start_Datetime = Session["start_datetime"].ToString();
+			string start_Datetime = "";
+			if (Session["start_datetime"] != null)
+            {
+				start_Datetime = Session["start_datetime"].ToString();
+			}
 			string end_Datetime = start_Datetime;
 
 			// Data Verification

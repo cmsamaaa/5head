@@ -23,7 +23,7 @@
         </asp:Table>
      </div>
 
-    <div id="filter" runat="server">
+    <div id="filter">
         <!-- DropDownList for Filter Type -->
         <label id="lb_filter_Type" runat="server">Filter Type: </label>
         <asp:DropDownList id="ddl_filter_Type" runat="server">

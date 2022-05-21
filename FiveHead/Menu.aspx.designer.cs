@@ -42,15 +42,6 @@ namespace FiveHead
         protected global::System.Web.UI.WebControls.Table table_MenuItems;
 
         /// <summary>
-        /// filter control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl filter;
-
-        /// <summary>
         /// lb_filter_Type control.
         /// </summary>
         /// <remarks>
