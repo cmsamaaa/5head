@@ -42,6 +42,24 @@ namespace FiveHead.Restaurant
         protected global::System.Web.UI.HtmlControls.HtmlSelect ddl_Category;
 
         /// <summary>
+        /// img_ProductImage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image img_ProductImage;
+
+        /// <summary>
+        /// fileUpload_Image control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FileUpload fileUpload_Image;
+
+        /// <summary>
         /// btn_Create control.
         /// </summary>
         /// <remarks>

@@ -42,24 +42,38 @@
                                 </button>
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label for="ContentPlaceHolder_PageContent_tb_ProductName" class="col-sm-3 col-form-label">Product Name</label>
-                            <div class="col-sm-9">
-                                <input runat="server" type="text" class="form-control" id="tb_ProductName" placeholder="Product Name">
+                        <div class="row">
+                            <div class="col-8">
+                                <div class="form-group row">
+                                    <label for="ContentPlaceHolder_PageContent_tb_ProductName" class="col-sm-3 col-form-label">Product Name</label>
+                                    <div class="col-sm-9">
+                                        <input runat="server" type="text" class="form-control" id="tb_ProductName" placeholder="Product Name">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="ContentPlaceHolder_PageContent_tb_Price" class="col-sm-3 col-form-label">Price</label>
+                                    <div class="col-sm-9">
+                                        <input runat="server" type="text" class="form-control" id="tb_Price" placeholder="Price">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="ContentPlaceHolder_PageContent_ddl_Category" class="col-sm-3 col-form-label">Category</label>
+                                    <div class="col-sm-9">
+                                        <select runat="server" class="form-control" id="ddl_Category">
+                                            <option selected disabled>Category</option>
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="ContentPlaceHolder_PageContent_tb_Price" class="col-sm-3 col-form-label">Price</label>
-                            <div class="col-sm-9">
-                                <input runat="server" type="text" class="form-control" id="tb_Price" placeholder="Price">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="ContentPlaceHolder_PageContent_ddl_Category" class="col-sm-3 col-form-label">Category</label>
-                            <div class="col-sm-9">
-                                <select runat="server" class="form-control" id="ddl_Category">
-                                    <option selected disabled>Category</option>
-                                </select>
+                            <div class="col-4">
+                                <div class="form-group row">
+                                    <div class="col-sm-12 mb-4">
+                                        <asp:Image ID="img_ProductImage" runat="server" CssClass="img-fluid" ImageUrl="images/no-image.jpg" />
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <asp:FileUpload ID="fileUpload_Image" runat="server" ClientIDMode="Static" onchange="this.form.submit()"/>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <button runat="server" id="btn_Update" class="btn btn-primary mr-2" onserverclick="btn_Update_Click">Update</button>

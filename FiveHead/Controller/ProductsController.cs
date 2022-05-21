@@ -9,9 +9,9 @@ namespace FiveHead.Controller
     {
         Product product = new Product();
 
-        public int CreateProduct(string productName, double price, int categoryID)
+        public int CreateProduct(string productName, byte[] image, double price, int categoryID)
         {
-            product = new Product(productName, price, categoryID);
+            product = new Product(productName, image, price, categoryID);
             return product.CreateProduct();
         }
 
@@ -40,9 +40,9 @@ namespace FiveHead.Controller
             return product.GetProductByID(productID);
         }
 
-        public int UpdateProduct(int productID, string productName, double price, int categoryID)
+        public int UpdateProduct(int productID, string productName, byte[] image, double price, int categoryID)
         {
-            Product product = new Product(productID, productName, price, categoryID);
+            Product product = new Product(productID, productName, image, price, categoryID);
             return product.UpdateProduct();
         }
 

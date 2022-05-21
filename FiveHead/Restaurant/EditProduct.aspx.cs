@@ -1,6 +1,8 @@
 ﻿using FiveHead.Controller;
 using FiveHead.Entity;
 using System;
+using System.IO;
+using System.Web;
 using System.Web.UI.WebControls;
 
 namespace FiveHead.Restaurant
@@ -25,6 +27,16 @@ namespace FiveHead.Restaurant
                     Response.Redirect("ViewAllCategories.aspx", true);
                 }
             }
+
+            if (IsPostBack && fileUpload_Image.PostedFile != null)
+            {
+                if (fileUpload_Image.PostedFile.FileName.Length > 0)
+                {
+                    byte[] bytes = GetImageBytes(fileUpload_Image.PostedFile);
+                    Session["uploadedImage"] = Convert.ToBase64String(bytes);
+                    ByteToImage(bytes);
+                }
+            }
         }
 
         private void SetMenuCategories()
@@ -40,8 +52,21 @@ namespace FiveHead.Restaurant
 
             Product product = productsController.GetProductByID(productID);
             tb_ProductName.Value = product.ProductName;
-            tb_Price.Value = String.Format("{0:0.00}", product.Price);
+            img_ProductImage.ImageUrl = string.Format("data:image/png;base64,{0}", Convert.ToBase64String(product.Image));
+            tb_Price.Value = string.Format("{0:0.00}", product.Price);
             ddl_Category.Value = product.CategoryID.ToString();
+        }
+
+        private byte[] GetImageBytes(HttpPostedFile postedFile)
+        {
+            Stream fs = postedFile.InputStream;
+            BinaryReader br = new BinaryReader(fs);
+            return br.ReadBytes((Int32)fs.Length);
+        }
+
+        public void ByteToImage(byte[] blob)
+        {
+            img_ProductImage.ImageUrl = string.Format("data:image/png;base64,{0}", Convert.ToBase64String(blob));
         }
 
         protected void btn_Update_Click(object sender, EventArgs e)
@@ -53,14 +78,18 @@ namespace FiveHead.Restaurant
                 Response.Redirect(string.Format("EditProduct.aspx?price=invalid"), true);
 
             int productID = Convert.ToInt32(Session["edit_ProductID"].ToString());
+            byte[] productImg = Convert.FromBase64String(Session["UploadedImage"].ToString());
             string productName = tb_ProductName.Value;
             price = Convert.ToDouble(tb_Price.Value);
             int categoryID = Convert.ToInt32(ddl_Category.Value);
 
             productsController = new ProductsController();
-            int result = productsController.UpdateProduct(productID, productName, price, categoryID);
+            int result = productsController.UpdateProduct(productID, productName, productImg, price, categoryID);
             if (result == 1)
+            {
+                Session["UploadedImage"] = null;
                 Response.Redirect("EditProduct.aspx?update=true", true);
+            }
             else
                 Response.Redirect(string.Format("EditProduct.aspx?update=false&prod={0}&price={1}&cat={2}", productName, price, categoryID), true);
         }

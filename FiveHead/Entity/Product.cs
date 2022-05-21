@@ -10,6 +10,7 @@ namespace FiveHead.Entity
     {
         private int productID;
         private string productName;
+        private byte[] image;
         private double price;
         private bool deactivated;
         private int categoryID;
@@ -35,22 +36,23 @@ namespace FiveHead.Entity
             this.Price = price;
         }
 
-        public Product(string productName, double price, int categoryID) : this(productName, price)
+        public Product(string productName, byte[] image, double price, int categoryID) : this(productName, price)
         {
+            this.Image = image;
             this.CategoryID = categoryID;
         }
 
-        public Product(int productID, string productName, double price, int categoryID) : this(productName, price, categoryID)
+        public Product(int productID, string productName, byte[] image, double price, int categoryID) : this(productName, image, price, categoryID)
         {
             this.ProductID = productID;
         }
 
-        public Product(int productID, string productName, double price, bool deactivated, int categoryID) : this(productID, productName, price, categoryID)
+        public Product(int productID, string productName, byte[] image, double price, bool deactivated, int categoryID) : this(productID, productName, image, price, categoryID)
         {
             this.Deactivated = deactivated;
         }
 
-        public Product(Product product) : this(product.ProductID, product.ProductName, product.Price, product.Deactivated, product.CategoryID)
+        public Product(Product product) : this(product.ProductID, product.ProductName, product.Image, product.Price, product.Deactivated, product.CategoryID)
         {
             if (product == null)
                 throw new ArgumentNullException();
@@ -58,6 +60,7 @@ namespace FiveHead.Entity
 
         public int ProductID { get => productID; set => productID = value; }
         public string ProductName { get => productName; set => productName = value; }
+        public byte[] Image { get => image; set => image = value; }
         public double Price { get => price; set => price = value; }
         public bool Deactivated { get => deactivated; set => deactivated = value; }
         public int CategoryID { get => categoryID; set => categoryID = value; }
@@ -76,14 +79,15 @@ namespace FiveHead.Entity
             result = 0;
 
             sql = new StringBuilder();
-            sql.AppendLine("INSERT INTO Products (productName, price, categoryID)");
+            sql.AppendLine("INSERT INTO Products (productName, image, price, categoryID)");
             sql.AppendLine(" ");
-            sql.AppendLine("VALUES (@productName, @price, @categoryID)");
+            sql.AppendLine("VALUES (@productName, @image, @price, @categoryID)");
             MySqlConnection conn = dbConn.GetConnection();
             try
             {
                 sqlCmd = mySQL.cmd_set_connection(sql.ToString(), conn);
                 sqlCmd.Parameters.AddWithValue("@productName", this.ProductName);
+                sqlCmd.Parameters.AddWithValue("@image", this.Image);
                 sqlCmd.Parameters.AddWithValue("@price", this.Price);
                 sqlCmd.Parameters.AddWithValue("@categoryID", this.CategoryID);
                 conn.Open();
@@ -214,7 +218,7 @@ namespace FiveHead.Entity
             sql = new StringBuilder();
             sql.AppendLine("UPDATE Products");
             sql.AppendLine(" ");
-            sql.AppendLine("SET productName=@productName, price=@price, categoryID=@categoryID");
+            sql.AppendLine("SET productName=@productName, image=@image, price=@price, categoryID=@categoryID");
             sql.AppendLine(" ");
             sql.AppendLine("WHERE productID=@productID");
             MySqlConnection conn = dbConn.GetConnection();
@@ -223,6 +227,7 @@ namespace FiveHead.Entity
                 sqlCmd = mySQL.cmd_set_connection(sql.ToString(), conn);
                 sqlCmd.Parameters.AddWithValue("@productID", this.ProductID);
                 sqlCmd.Parameters.AddWithValue("@productName", this.ProductName);
+                sqlCmd.Parameters.AddWithValue("@image", this.Image);
                 sqlCmd.Parameters.AddWithValue("@price", this.price);
                 sqlCmd.Parameters.AddWithValue("@categoryID", this.categoryID);
                 conn.Open();

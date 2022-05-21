@@ -1836,6 +1836,7 @@
     <Content Include="Restaurant\images\logo-black.svg" />
     <Content Include="Restaurant\images\logo-mini.svg" />
     <Content Include="Restaurant\images\logo.svg" />
+    <Content Include="Restaurant\images\no-image.jpg" />
     <Content Include="Restaurant\images\undraw_profile.svg" />
     <Content Include="Restaurant\images\undraw_special_event.svg" />
     <Content Include="Restaurant\js\chart.js" />
