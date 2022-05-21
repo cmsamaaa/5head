@@ -1,6 +1,11 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Restaurant/MasterPage_Restaurant.Master" AutoEventWireup="true" CodeBehind="CreateProduct.aspx.cs" Inherits="FiveHead.Restaurant.CreateProduct" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <style type="text/css">
+        .preview {
+            color: #4d83ff;
+        }
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder_PageContent" runat="server">
     <div class="content-wrapper">
@@ -73,6 +78,9 @@
                                     </div>
                                     <div class="col-sm-9">
                                         <asp:FileUpload ID="fileUpload_Image" runat="server" ClientIDMode="Static" onchange="this.form.submit()"/>
+                                    </div>
+                                    <div class="col-sm-12 mt-4">
+                                        <asp:Label ID="lbl_Preview" runat="server" CssClass="preview" Text="Image preview displayed!" Visible="false"></asp:Label>
                                     </div>
                                 </div>
                             </div>

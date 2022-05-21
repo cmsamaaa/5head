@@ -25,7 +25,8 @@ namespace FiveHead.Restaurant
                 {
                     byte[] bytes = GetImageBytes(fileUpload_Image.PostedFile);
                     Session["uploadedImage"] = Convert.ToBase64String(bytes);
-                    ByteToImage(bytes);
+                    img_ProductImage.ImageUrl = string.Format("data:image/png;base64,{0}", Convert.ToBase64String(bytes));
+                    lbl_Preview.Visible = true;
                 }
             }
         }
@@ -41,11 +42,6 @@ namespace FiveHead.Restaurant
             Stream fs = postedFile.InputStream;
             BinaryReader br = new BinaryReader(fs);
             return br.ReadBytes((Int32)fs.Length);
-        }
-
-        public void ByteToImage(byte[] blob)
-        {
-            img_ProductImage.ImageUrl = string.Format("data:image/png;base64,{0}", Convert.ToBase64String(blob));
         }
 
         protected void btn_Create_Click(object sender, EventArgs e)
