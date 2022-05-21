@@ -87,31 +87,13 @@ namespace FiveHead
         protected global::System.Web.UI.HtmlControls.HtmlInputText tb_coupon_Code;
 
         /// <summary>
-        /// lbl_prodID_to_remove control.
+        /// btn_ClearCart control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lbl_prodID_to_remove;
-
-        /// <summary>
-        /// tb_prodID_to_remove control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText tb_prodID_to_remove;
-
-        /// <summary>
-        /// btn_RemoveFromCart control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlButton btn_RemoveFromCart;
+        protected global::System.Web.UI.HtmlControls.HtmlButton btn_ClearCart;
 
         /// <summary>
         /// lbl_Info control.

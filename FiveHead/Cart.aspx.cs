@@ -226,18 +226,28 @@ namespace FiveHead
 				int ret_Code = -1;
 				if (Session["tableNum"] == null)
 				{
-					ret_Code = ordersController.CheckoutCart(coupon_Code, conf_cart);
+					if (conf_cart.Count > 0)
+					{
+						/*
+						 * At least 1 item in cart
+						 */
+						ret_Code = ordersController.CheckoutCart(coupon_Code, conf_cart);
 
-					// Write prices to Session
-					Session["total_Price"] = final_Price.ToString();
-					Session["discount"] = discount.ToString();
-					Session["discounted_Price"] = disc_price_Rounded;
+						// Write prices to Session
+						Session["total_Price"] = final_Price.ToString();
+						Session["discount"] = discount.ToString();
+						Session["discounted_Price"] = disc_price_Rounded;
 
-					// Write Table Number to Session
-					Session["tableNum"] = tableNum;
+						// Write Table Number to Session
+						Session["tableNum"] = tableNum;
 
-					// Write Checked-out cart
-					Session["checked_out_cart"] = conf_cart;
+						// Write Checked-out cart
+						Session["checked_out_cart"] = conf_cart;
+					}
+					else
+                    {
+						lbl_Info.InnerText = "No items found in cart" + "\n";
+                    }
 				}
                 else
                 {
@@ -278,10 +288,20 @@ namespace FiveHead
 		}
 		protected void btn_remove_from_Cart(object sender, EventArgs e)
         {
-			string prodID_to_remove = tb_prodID_to_remove.Value;
+			//string prodID_to_remove = tb_prodID_to_remove.Value;
+			Button btn_item_to_Remove = (Button)sender; // Declare and Initialize Button sender object
+			string button_ROWID = btn_item_to_Remove.ID; // Get ID of the selected button
+			// int ROWID_to_remove = tb_prodID_to_remove
 
 			// Remove From Cart
-			RemoveFromCart(prodID_to_remove);
+			RemoveFromCartByPosition(int.Parse(button_ROWID));
+        }
+		protected void btn_clear_all_in_Cart(object sender, EventArgs e)
+        {
+			/*
+			 * Clear all items in cart
+			 */
+			ClearCart();
         }
 		protected void btn_go_to_Menu(object sender, EventArgs e)
 		{
@@ -300,6 +320,7 @@ namespace FiveHead
 			List<List<String>> cart = (List<List<String>>)Session["cart"];
 			List<List<String>> dataset = new List<List<String>>(); // Create master dataset for getting all rows to populate datagridview table
 			int cart_size = 0;
+			List<Button> all_buttons = new List<Button>();
 
 			// Reset Table
 			table_Shopping_Cart.Rows.Clear();
@@ -333,6 +354,15 @@ namespace FiveHead
 					string productName = curr_row[2];
 					string price = curr_row[3];
 					string status = curr_row[4];
+					Button new_button = new Button(); // Create a new button
+
+					// Design new button
+					new_button.ID = i.ToString();
+					new_button.Attributes.Add("onserverclick", "btn_remove_from_Cart");
+					new_button.Click += new EventHandler(btn_remove_from_Cart);
+					new_button.Attributes.Add("runat", "server");
+					new_button.Text = "Remove from Cart";
+					lbl_Info.InnerText += "ID : " + i.ToString() + "\n";
 
 					// Add every index as a new line in the StringBuilder / table entry
 					tmp.Add((i + 1).ToString());
@@ -344,13 +374,16 @@ namespace FiveHead
 
 					// Add temporary dataset to list of rows
 					dataset.Add(tmp);
+
+					// Add newly created button to all_buttons
+					all_buttons.Add(new_button);
 				}
 
 				/*
 				 * Headers 
 				 */
 				// Create Table Header
-				List<String> HeaderText = new List<String>() { "s/n", "Product ID", "Category ID", "Product Name", "Price", "Payment Status" };
+				List<String> HeaderText = new List<String>() { "s/n", "Product ID", "Category ID", "Product Name", "Price", "Payment Status", "Button" };
 
 				// Create new Table Header Row
 				TableHeaderRow header = new TableHeaderRow();
@@ -393,6 +426,11 @@ namespace FiveHead
 						// Add Cell to row
 						new_tablerow.Cells.Add(new_cell);
 					}
+
+					// Append Button to table row
+					TableCell btn_cell = new TableCell(); // Create new cell for Button
+					btn_cell.Controls.Add(all_buttons[i]); // Add Control to Cell
+					new_tablerow.Cells.Add(btn_cell); // Add Button Cell to TableRow
 
 					// Append Rows to table
 					table_Shopping_Cart.Rows.Add(new_tablerow);
@@ -475,6 +513,100 @@ namespace FiveHead
 
 				// Store new cart
 				Session["cart"] = cart_tmp;
+			}
+
+			ViewAllInCart();
+
+			return res_Code;
+		}
+		public int RemoveFromCartByPosition(int ROWID)
+		{
+			/*
+			 * Remove item from Session["cart"] by row number
+			 */
+			List<List<String>> cart = (List<List<String>>)Session["cart"];
+			List<List<String>> dataset = new List<List<String>>(); // Create master dataset for getting all rows to populate datagridview table
+			int cart_size = 0;
+			int res_Code = 1;
+
+			// Reset Table
+			table_Shopping_Cart.Rows.Clear();
+
+			// Null Check
+			if (cart == null)
+			{
+				cart = new List<List<String>>();
+			}
+			else
+			{
+				cart_size = cart.Count;
+			}
+			StringBuilder text_to_show = new StringBuilder(); // Use StringBuilder to append and get all strings to display in Shopping Cart ListView
+
+			if (cart_size > 0)
+			{
+				// Create Temporary cart for manipulation
+				List<List<String>> cart_tmp = cart;
+
+				// Get Initial Cart Size
+				int old_cart_size = cart_tmp.Count;
+
+				// Remove ROW from cart
+				if (ROWID > -1)
+				{
+					// Check if cart is big
+					cart_tmp.RemoveAt(ROWID);
+				}
+				else
+				{
+					lbl_Info.InnerText = "Product requested to remove is not valid.";
+				}
+
+				// Get New Cart Size
+				int new_cart_size = cart_tmp.Count;
+
+				// If cart size is smaller than initial cart size, return true (0)
+				if (new_cart_size == old_cart_size - 1)
+				{
+					res_Code = 0;
+				}
+
+				// Store new cart
+				Session["cart"] = cart_tmp;
+			}
+
+			ViewAllInCart();
+
+			return res_Code;
+		}
+		public int ClearCart()
+        {
+			/*
+			 * Clear all items in cart
+			 */
+			List<List<String>> cart = (List<List<String>>)Session["cart"];
+			List<List<String>> dataset = new List<List<String>>(); // Create master dataset for getting all rows to populate datagridview table
+			int cart_size = 0;
+			int res_Code = 1;
+
+			// Reset Table
+			table_Shopping_Cart.Rows.Clear();
+
+			// Null Check
+			if (cart == null)
+			{
+				cart = new List<List<String>>();
+			}
+			else
+			{
+				cart_size = cart.Count;
+			}
+			StringBuilder text_to_show = new StringBuilder(); // Use StringBuilder to append and get all strings to display in Shopping Cart ListView
+
+			if (cart_size > 0)
+			{
+				// Reset cart
+				Session["cart"] = new List<List<String>>();
 			}
 
 			ViewAllInCart();

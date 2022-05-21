@@ -58,9 +58,10 @@
             <!--
                 Remove Product from Cart
             -->
-            <label id="lbl_prodID_to_remove" runat="server">Product ID to Remove: </label>
+<%--            <label id="lbl_prodID_to_remove" runat="server">Product ID to Remove: </label>
             <input type="text" id="tb_prodID_to_remove" runat="server" />
-            <button id="btn_RemoveFromCart" onserverclick="btn_remove_from_Cart" runat="server">Remove Item from Cart</button>
+            <button id="btn_RemoveFromCart" onserverclick="btn_remove_from_Cart" runat="server">Remove Item from Cart</button>--%>
+            <button id="btn_ClearCart" onserverclick="btn_clear_all_in_Cart" runat="server">Clear all in Cart</button>
 
             <br />
             <br />
