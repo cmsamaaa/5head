@@ -9,7 +9,7 @@ using System.Text;
 
 namespace FiveHead
 {
-    public partial class Menu : System.Web.UI.Page
+    public partial class Menu_OLD : System.Web.UI.Page
     {
         // Global Variables
         OrdersController ordersController = new OrdersController();         // For handling Orders (Customer)

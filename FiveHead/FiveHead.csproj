@@ -1787,9 +1787,16 @@
     <Content Include="Admin\ViewAllAccounts.aspx" />
     <Content Include="Admin\ViewAllProfiles.aspx" />
     <Content Include="Default.aspx" />
+    <Content Include="Menu\AddCart.aspx" />
+    <Content Include="Menu\Cart.aspx" />
+    <Content Include="Menu\css\cart.css" />
+    <Content Include="Menu\css\main.css" />
+    <Content Include="Menu\css\product.css" />
+    <Content Include="Menu\js\main.js" />
+    <Content Include="Menu\Menu.aspx" />
     <Content Include="PaymentSummary.aspx" />
-    <Content Include="Menu.aspx" />
-    <Content Include="Cart.aspx" />
+    <Content Include="Menu_OLD.aspx" />
+    <Content Include="Cart_OLD.aspx" />
     <Content Include="Restaurant\CreateCategory.aspx" />
     <Content Include="Restaurant\CreateCoupon.aspx" />
     <Content Include="Restaurant\CreateProduct.aspx" />
@@ -1962,6 +1969,34 @@
     <Compile Include="Entity\Coupon.cs" />
     <Compile Include="Entity\Order.cs" />
     <Compile Include="Entity\Product.cs" />
+    <Compile Include="Menu\AddCart.aspx.cs">
+      <DependentUpon>AddCart.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Menu\AddCart.aspx.designer.cs">
+      <DependentUpon>AddCart.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Menu\Cart.aspx.cs">
+      <DependentUpon>Cart.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Menu\Cart.aspx.designer.cs">
+      <DependentUpon>Cart.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Menu\MasterPage_Menu.Master.cs">
+      <DependentUpon>MasterPage_Menu.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Menu\MasterPage_Menu.Master.designer.cs">
+      <DependentUpon>MasterPage_Menu.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Menu\Menu.aspx.cs">
+      <DependentUpon>Menu.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Menu\Menu.aspx.designer.cs">
+      <DependentUpon>Menu.aspx</DependentUpon>
+    </Compile>
     <Compile Include="PaymentSummary.aspx.cs">
       <DependentUpon>PaymentSummary.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2092,19 +2127,19 @@
     <Compile Include="Entity\Account.cs" />
     <Compile Include="Entity\Staff.cs" />
     <Compile Include="Entity\Profile.cs" />
-    <Compile Include="Cart.aspx.cs">
-      <DependentUpon>Cart.aspx</DependentUpon>
+    <Compile Include="Cart_OLD.aspx.cs">
+      <DependentUpon>Cart_OLD.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Cart.aspx.designer.cs">
-      <DependentUpon>Cart.aspx</DependentUpon>
+    <Compile Include="Cart_OLD.aspx.designer.cs">
+      <DependentUpon>Cart_OLD.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Menu.aspx.cs">
-      <DependentUpon>Menu.aspx</DependentUpon>
+    <Compile Include="Menu_OLD.aspx.cs">
+      <DependentUpon>Menu_OLD.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Menu.aspx.designer.cs">
-      <DependentUpon>Menu.aspx</DependentUpon>
+    <Compile Include="Menu_OLD.aspx.designer.cs">
+      <DependentUpon>Menu_OLD.aspx</DependentUpon>
     </Compile>
     <Compile Include="MasterPage_Login.Master.cs">
       <DependentUpon>MasterPage_Login.Master</DependentUpon>
@@ -2300,6 +2335,7 @@
     <Content Include="Admin\vendor\fontawesome-free\package.json" />
     <Content Include="Admin\vendor\jquery\jquery.min.map" />
     <Content Include="Admin\vendor\jquery\jquery.slim.min.map" />
+    <Content Include="Menu\MasterPage_Menu.Master" />
     <None Include="packages.config" />
     <Content Include="Restaurant\css\maps\style.css.map" />
     <Content Include="Restaurant\fonts\Roboto\.DS_Store" />

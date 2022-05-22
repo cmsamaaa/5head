@@ -8,7 +8,7 @@ namespace FiveHead
         {
             if (!IsPostBack)
             {
-                Response.Redirect("Menu.aspx", true);
+                Response.Redirect("Menu/Menu.aspx", true);
             }
         }
     }

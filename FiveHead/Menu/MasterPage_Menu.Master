@@ -1,0 +1,48 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="MasterPage_Menu.master.cs" Inherits="FiveHead.Menu.MasterPage_Menu" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title>5Head Menu</title>
+    <link rel="stylesheet" href="css/main.css">
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div class="backdrop"></div>
+        <header class="main-header">
+            <button id="side-menu-toggle" type="button">Menu</button>
+            <nav class="main-header__nav">
+                <ul class="main-header__item-list">
+                    <li class="main-header__item">
+                        <a class="active" href="Menu.aspx">Menu</a>
+                    </li>
+                    <li class="main-header__item">
+                        <a class="" href="Cart.aspx">Cart</a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+
+        <nav class="mobile-nav">
+            <ul class="mobile-nav__item-list">
+                <li class="mobile-nav__item">
+                    <a class="active" href="Menu.aspx">Menu</a>
+                </li>
+                <li class="mobile-nav__item">
+                    <a class="" href="Cart.aspx">Cart</a>
+                </li>
+            </ul>
+        </nav>
+        <main>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder_PageContent" runat="server">
+            </asp:ContentPlaceHolder>
+        </main>
+        <script src="js/main.js"></script>
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder_Scripts" runat="server">
+        </asp:ContentPlaceHolder>
+    </form>
+</body>
+</html>

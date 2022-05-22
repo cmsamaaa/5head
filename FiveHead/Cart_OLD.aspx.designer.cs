@@ -11,8 +11,17 @@ namespace FiveHead
 {
 
 
-    public partial class Menu
+    public partial class Cart_OLD
     {
+
+        /// <summary>
+        /// form1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
         /// output control.
@@ -33,75 +42,93 @@ namespace FiveHead
         protected global::System.Web.UI.WebControls.Label lbl_Debug_Output;
 
         /// <summary>
-        /// table_MenuItems control.
+        /// table_Shopping_Cart control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Table table_MenuItems;
+        protected global::System.Web.UI.WebControls.Table table_Shopping_Cart;
 
         /// <summary>
-        /// lb_filter_Type control.
+        /// lb_table_Number control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lb_filter_Type;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lb_table_Number;
 
         /// <summary>
-        /// ddl_filter_Type control.
+        /// tb_table_Number control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddl_filter_Type;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText tb_table_Number;
 
         /// <summary>
-        /// tb_filter_Text control.
+        /// lb_coupon_Code control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText tb_filter_Text;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lb_coupon_Code;
 
         /// <summary>
-        /// btn_FilterMenuItems control.
+        /// tb_coupon_Code control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlButton btn_FilterMenuItems;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText tb_coupon_Code;
 
         /// <summary>
-        /// button control.
+        /// btn_ClearCart control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl button;
+        protected global::System.Web.UI.HtmlControls.HtmlButton btn_ClearCart;
 
         /// <summary>
-        /// btn_ViewAll control.
+        /// lbl_Info control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlButton btn_ViewAll;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lbl_Info;
 
         /// <summary>
-        /// btn_GoToCart control.
+        /// buttons control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlButton btn_GoToCart;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl buttons;
+
+        /// <summary>
+        /// btn_Checkout_Cart control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlButton btn_Checkout_Cart;
+
+        /// <summary>
+        /// btn_GoTo_Menu control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlButton btn_GoTo_Menu;
     }
 }
