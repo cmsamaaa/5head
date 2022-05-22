@@ -1855,6 +1855,7 @@
     <Content Include="Restaurant\Login.aspx" />
     <Content Include="Restaurant\Logout.aspx" />
     <Content Include="Restaurant\EditCategory.aspx" />
+    <Content Include="Restaurant\RestaurantOwner.aspx" />
     <Content Include="Restaurant\SearchOrders.aspx" />
     <Content Include="Restaurant\vendors\base\vendor.bundle.base.css" />
     <Content Include="Restaurant\vendors\base\vendor.bundle.base.js" />
@@ -2023,6 +2024,13 @@
     </Compile>
     <Compile Include="Restaurant\EditProduct.aspx.designer.cs">
       <DependentUpon>EditProduct.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Restaurant\RestaurantOwner.aspx.cs">
+      <DependentUpon>RestaurantOwner.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Restaurant\RestaurantOwner.aspx.designer.cs">
+      <DependentUpon>RestaurantOwner.aspx</DependentUpon>
     </Compile>
     <Compile Include="Restaurant\SearchOrders.aspx.cs">
       <DependentUpon>SearchOrders.aspx</DependentUpon>

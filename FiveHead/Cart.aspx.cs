@@ -366,7 +366,6 @@ namespace FiveHead
 					new_button.Click += new EventHandler(btn_remove_from_Cart);
 					new_button.Attributes.Add("runat", "server");
 					new_button.Text = "Remove from Cart";
-					lbl_Info.InnerText += "ID : " + i.ToString() + "\n";
 
 					// Add every index as a new line in the StringBuilder / table entry
 					tmp.Add((i + 1).ToString());

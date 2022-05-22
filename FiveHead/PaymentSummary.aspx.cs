@@ -94,7 +94,17 @@ namespace FiveHead
 				 */
 				msg = "There has been an error with payment.";
             }
-			Response.Write("<script>" + "alert(" + "'" + msg + "'" + ");" + "</script>");
+
+			// Popup alert box
+			StringBuilder alert_msg = new StringBuilder();
+			alert_msg.Append("<script='text/javascript'>");
+			alert_msg.Append("alert(");
+			alert_msg.Append("'" + msg + "'");
+			alert_msg.Append(");");
+			alert_msg.Append("</script>");
+
+			// Register Script
+			ClientScript.RegisterClientScriptBlock(this.GetType(), "alert", alert_msg.ToString());
 
 			return ret_Code;
         }
