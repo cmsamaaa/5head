@@ -19,7 +19,9 @@
             </div>
             <div class="form-control coupon__input">
                 <h4>Total Bill: <asp:Label ID="lbl_TotalBill" runat="server"></asp:Label></h4>
-                <asp:Button ID="btn_Clear" CssClass="btn-custom danger" runat="server" Text="Clear Cart" OnClick="btn_Clear_Click" />
+            </div>
+            <div class="form-control coupon__input">
+                <asp:Button ID="btn_Clear" CssClass="btn-custom danger" runat="server" Text="Clear" OnClick="btn_Clear_Click" />
                 <asp:Button ID="btn_Order" CssClass="btn-custom" runat="server" Text="Place Order" OnClick="btn_Order_Click" />
             </div>
         </div>

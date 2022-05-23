@@ -179,12 +179,17 @@ namespace FiveHead.Menu
             }
 
             string code = tb_Coupon.Value + "";
+            double totalBill = 0.00;
             couponsController = new CouponsController();
             Coupon coupon = couponsController.GetCouponByCode(code.Trim());
             if (coupon == null)
+            {
                 code = "";
+                totalBill = GetCartBill();
+            }
+            else
+                totalBill = GetCartDiscountedBill(coupon);
 
-            double totalBill = GetCartDiscountedBill(coupon);
             string contact = tb_Contact.Value + "";
 
             result = 0;
