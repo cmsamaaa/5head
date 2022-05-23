@@ -3,13 +3,21 @@
     <link rel="stylesheet" href="css/cart.css">
     <link rel="stylesheet" href="css/forms.css">
     <link rel="stylesheet" href="css/product.css">
+
+    <style type="text/css">
+        .btn-stretch {
+            width: 100% !important;
+        }
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder_PageContent" runat="server">
     <ul class='cart__item-list' runat="server" id="list_Orders"></ul>
     <div class='centered coupon__group-control'>
         <div class="form-control coupon__input">
             <h4>Total Bill: <asp:Label ID="lbl_TotalBill" runat="server"></asp:Label></h4>
-            <asp:Button ID="btn_Payment" CssClass="btn-custom" runat="server" Text="Make Payment" OnClick="btn_Payment_Click" />
+        </div>
+        <div class="form-control coupon__input">
+            <asp:Button ID="btn_Payment" CssClass="btn-custom btn-stretch" runat="server" Text="Make Payment" OnClick="btn_Payment_Click" />
         </div>
     </div>
 </asp:Content>
