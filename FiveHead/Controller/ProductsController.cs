@@ -35,6 +35,26 @@ namespace FiveHead.Controller
                 return null;
         }
 
+        public List<Product> GetAllActiveProducts()
+        {
+            DataSet ds = product.GetAllActiveProducts();
+
+            if (ds.Tables[0].Rows.Count > 0)
+                return ds.Tables[0].ToList<Product>();
+            else
+                return null;
+        }
+
+        public List<Product> List_SearchAllProducts(string search)
+        {
+            DataSet ds = product.SearchAllActiveProducts(search);
+
+            if (ds.Tables[0].Rows.Count > 0)
+                return ds.Tables[0].ToList<Product>();
+            else
+                return null;
+        }
+
         public Product GetProductByID(int productID)
         {
             return product.GetProductByID(productID);
