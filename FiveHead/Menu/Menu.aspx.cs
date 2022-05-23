@@ -4,11 +4,13 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Web.UI.WebControls;
 
 namespace FiveHead.Menu
 {
     public partial class Menu : System.Web.UI.Page
     {
+        CategoriesController categoriesController;
         ProductsController productsController;
 
         protected void Page_Load(object sender, EventArgs e)
@@ -16,6 +18,7 @@ namespace FiveHead.Menu
             if (!IsPostBack)
             {
                 BindProducts();
+                SetMenuCategories();
             }
             
             if(IsPostBack)
@@ -33,7 +36,7 @@ namespace FiveHead.Menu
             productsController = new ProductsController();
             StringBuilder html = new StringBuilder();
 
-            List<Product> products = productsController.GetAllProducts();
+            List<Product> products = productsController.GetAllActiveProducts();
 
             if (products == null)
             {
@@ -72,6 +75,12 @@ namespace FiveHead.Menu
             list_Products.InnerHtml = html.ToString();
         }
 
+        private void SetMenuCategories()
+        {
+            categoriesController = new CategoriesController();
+            categoriesController.GetAllCategories().ForEach(category => ddl_Category.Items.Add(new ListItem(category.CategoryName, category.CategoryID.ToString())));
+        }
+
         private void AddToCart()
         {
             int productID = Convert.ToInt32(Regex.Replace(Request.Form["productID"], @"[^0-9a-zA-Z\._]", ""));
@@ -96,6 +105,57 @@ namespace FiveHead.Menu
             }
         }
 
+        protected void btn_Filter_Click(object sender, EventArgs e)
+        {
+            bool isValid = int.TryParse(ddl_Category.Value + "", out int categoryID);
+            if (!isValid)
+                return;
+
+            list_Products.InnerHtml = "";
+            productsController = new ProductsController();
+            StringBuilder html = new StringBuilder();
+
+            string search = tb_Search.Value + "";
+            List<Product> products = productsController.GetAllActiveProductByCategoryID(categoryID);
+
+            PlaceHolder_Empty.Visible = false;
+            if (products == null)
+            {
+                PlaceHolder_Empty.Visible = true;
+                return;
+            }
+
+            products.ForEach(product => {
+                int productID = product.ProductID;
+                string productName = product.ProductName;
+                string image = string.Format("data:image/png;base64,{0}", Convert.ToBase64String(product.Image));
+                double price = product.Price;
+
+                html.AppendLine("<article class='card product-item'>");
+                html.AppendLine("<header class='card__header'>");
+                html.AppendLine("<h1 class='product__title'>");
+                html.AppendLine(productName);
+                html.AppendLine("</h1>");
+                html.AppendLine("</header>");
+                html.AppendLine("<div class='card__image'>");
+                html.AppendLine(string.Format("<img src='{0}' alt='{1}'>", image, productName));
+                html.AppendLine("</div>");
+                html.AppendLine("<div class='card__content'>");
+                html.AppendLine("<h2 class='product__price'>$");
+                html.AppendLine(string.Format("{0:0.00}", price));
+                html.AppendLine("</h2>");
+                html.AppendLine("</div>");
+                html.AppendLine("<div class='card__actions'>");
+                html.AppendLine("<input type='hidden' name='actionCommand' id='actionCommand' />");
+                html.AppendLine("<input type='hidden' name='productID' id='productID' />");
+                html.AppendLine(string.Format("<a href='#' class='btn-custom' onclick=\"doPostBack('add', {0}); return false;\">Add to Cart</a>", productID));
+                html.AppendLine("</div>");
+                html.AppendLine("</article>");
+            });
+
+            list_Products.InnerHtml = html.ToString();
+        }
+
         protected void btn_Search_Click(object sender, EventArgs e)
         {
             list_Products.InnerHtml = "";
@@ -103,7 +163,7 @@ namespace FiveHead.Menu
             StringBuilder html = new StringBuilder();
 
             string search = tb_Search.Value + "";
-            List<Product> products = productsController.List_SearchAllProducts(search.Trim());
+            List<Product> products = productsController.SearchAllActiveProducts(search.Trim());
 
             PlaceHolder_Empty.Visible = false;
             if (products == null)

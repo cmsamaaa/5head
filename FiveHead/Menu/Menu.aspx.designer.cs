@@ -42,6 +42,24 @@ namespace FiveHead.Menu
         protected global::System.Web.UI.HtmlControls.HtmlButton btn_Clear;
 
         /// <summary>
+        /// ddl_Category control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlSelect ddl_Category;
+
+        /// <summary>
+        /// btn_Filter control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlButton btn_Filter;
+
+        /// <summary>
         /// list_Products control.
         /// </summary>
         /// <remarks>

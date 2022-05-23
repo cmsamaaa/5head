@@ -45,7 +45,17 @@ namespace FiveHead.Controller
                 return null;
         }
 
-        public List<Product> List_SearchAllProducts(string search)
+        public List<Product> GetAllActiveProductByCategoryID(int categoryID)
+        {
+            DataSet ds = product.GetAllActiveProductByCategoryID(categoryID);
+
+            if (ds.Tables[0].Rows.Count > 0)
+                return ds.Tables[0].ToList<Product>();
+            else
+                return null;
+        }
+
+        public List<Product> SearchAllActiveProducts(string search)
         {
             DataSet ds = product.SearchAllActiveProducts(search);
 

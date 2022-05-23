@@ -170,6 +170,40 @@ namespace FiveHead.Entity
             return ds;
         }
 
+        public DataSet GetAllActiveProductByCategoryID(int categoryID)
+        {
+            StringBuilder sql;
+            MySqlDataAdapter da;
+            DataSet ds;
+
+            MySqlConnection conn = dbConn.GetConnection();
+            ds = new DataSet();
+            sql = new StringBuilder();
+            sql.AppendLine("SELECT *");
+            sql.AppendLine(" ");
+            sql.AppendLine("FROM Products");
+            sql.AppendLine(" ");
+            sql.AppendLine("WHERE categoryID=@categoryID");
+            conn.Open();
+
+            try
+            {
+                da = mySQL.adapter_set_query(sql.ToString(), conn);
+                da.SelectCommand.Parameters.AddWithValue("categoryID", categoryID);
+                da.Fill(ds);
+            }
+            catch (Exception ex)
+            {
+                errMsg = ex.Message;
+            }
+            finally
+            {
+                dbConn.CloseConnection(conn);
+            }
+
+            return ds;
+        }
+
         public DataSet SearchAllProducts(string search)
         {
             StringBuilder sql;
