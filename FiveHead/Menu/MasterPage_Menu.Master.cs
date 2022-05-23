@@ -11,7 +11,10 @@ namespace FiveHead.Menu
             {
                 string path = HttpContext.Current.Request.Url.AbsolutePath;
                 if (path.Equals("/Menu/EnterTable.aspx"))
+                {
+                    ContentPlaceHolder_Navbar.Visible = false;
                     return;
+                }
 
                 if (Session["tableNo"] == null)
                     Response.Redirect("EnterTable.aspx", true);

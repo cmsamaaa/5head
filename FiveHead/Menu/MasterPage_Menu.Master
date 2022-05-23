@@ -12,30 +12,33 @@
 <body>
     <form id="form1" runat="server">
         <div class="backdrop"></div>
-        <header class="main-header">
-            <button id="side-menu-toggle" type="button">Menu</button>
-            <nav class="main-header__nav">
-                <ul class="main-header__item-list">
-                    <li class="main-header__item">
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder_Navbar" runat="server">
+            <header class="main-header">
+                <button id="side-menu-toggle" type="button">Menu</button>
+                <nav class="main-header__nav">
+                    <ul class="main-header__item-list">
+                        <li class="main-header__item">
+                            <a class="active" href="Menu.aspx">Menu</a>
+                        </li>
+                        <li class="main-header__item">
+                            <a class="" href="Cart.aspx">Cart</a>
+                        </li>
+                    </ul>
+                </nav>
+            </header>
+
+            <nav class="mobile-nav">
+                <ul class="mobile-nav__item-list">
+                    <li class="mobile-nav__item">
                         <a class="active" href="Menu.aspx">Menu</a>
                     </li>
-                    <li class="main-header__item">
+                    <li class="mobile-nav__item">
                         <a class="" href="Cart.aspx">Cart</a>
                     </li>
                 </ul>
             </nav>
-        </header>
-
-        <nav class="mobile-nav">
-            <ul class="mobile-nav__item-list">
-                <li class="mobile-nav__item">
-                    <a class="active" href="Menu.aspx">Menu</a>
-                </li>
-                <li class="mobile-nav__item">
-                    <a class="" href="Cart.aspx">Cart</a>
-                </li>
-            </ul>
-        </nav>
+        </asp:ContentPlaceHolder>
+        
         <main>
             <asp:ContentPlaceHolder ID="ContentPlaceHolder_PageContent" runat="server">
             </asp:ContentPlaceHolder>

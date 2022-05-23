@@ -1,13 +1,13 @@
 ﻿using System;
 
-namespace FiveHead
+namespace FiveHead.Menu
 {
     public partial class Default : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
-                Response.Redirect("Menu/Menu.aspx", true);
+                Response.Redirect("Menu.aspx", true);
         }
     }
 }

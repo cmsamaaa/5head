@@ -1793,14 +1793,12 @@
     <Content Include="Menu\css\forms.css" />
     <Content Include="Menu\css\main.css" />
     <Content Include="Menu\css\product.css" />
+    <Content Include="Menu\Default.aspx" />
     <Content Include="Menu\EnterTable.aspx" />
     <Content Include="Menu\js\custom.js" />
     <Content Include="Menu\js\main.js" />
     <Content Include="Menu\Menu.aspx" />
     <Content Include="Menu\PaymentSuccess.aspx" />
-    <Content Include="PaymentSummary.aspx" />
-    <Content Include="Menu_OLD.aspx" />
-    <Content Include="Cart_OLD.aspx" />
     <Content Include="Restaurant\CreateCategory.aspx" />
     <Content Include="Restaurant\CreateCoupon.aspx" />
     <Content Include="Restaurant\CreateProduct.aspx" />
@@ -1987,6 +1985,13 @@
     <Compile Include="Menu\Cart.aspx.designer.cs">
       <DependentUpon>Cart.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Menu\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Menu\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Menu\EnterTable.aspx.cs">
       <DependentUpon>EnterTable.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2014,13 +2019,6 @@
     </Compile>
     <Compile Include="Menu\PaymentSuccess.aspx.designer.cs">
       <DependentUpon>PaymentSuccess.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="PaymentSummary.aspx.cs">
-      <DependentUpon>PaymentSummary.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="PaymentSummary.aspx.designer.cs">
-      <DependentUpon>PaymentSummary.aspx</DependentUpon>
     </Compile>
     <Compile Include="Restaurant\CreateCategory.aspx.cs">
       <DependentUpon>CreateCategory.aspx</DependentUpon>
@@ -2145,20 +2143,6 @@
     <Compile Include="Entity\Account.cs" />
     <Compile Include="Entity\Staff.cs" />
     <Compile Include="Entity\Profile.cs" />
-    <Compile Include="Cart_OLD.aspx.cs">
-      <DependentUpon>Cart_OLD.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Cart_OLD.aspx.designer.cs">
-      <DependentUpon>Cart_OLD.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Menu_OLD.aspx.cs">
-      <DependentUpon>Menu_OLD.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Menu_OLD.aspx.designer.cs">
-      <DependentUpon>Menu_OLD.aspx</DependentUpon>
-    </Compile>
     <Compile Include="MasterPage_Login.Master.cs">
       <DependentUpon>MasterPage_Login.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
