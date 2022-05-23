@@ -24,6 +24,42 @@ namespace FiveHead.Menu
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl list_Cart;
 
         /// <summary>
+        /// PlaceHolder_Content control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.PlaceHolder PlaceHolder_Content;
+
+        /// <summary>
+        /// tb_Coupon control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText tb_Coupon;
+
+        /// <summary>
+        /// btn_Coupon control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlButton btn_Coupon;
+
+        /// <summary>
+        /// lbl_TotalBill control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_TotalBill;
+
+        /// <summary>
         /// btn_Order control.
         /// </summary>
         /// <remarks>

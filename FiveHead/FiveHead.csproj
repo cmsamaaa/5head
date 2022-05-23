@@ -1789,6 +1789,7 @@
     <Content Include="Default.aspx" />
     <Content Include="Menu\Cart.aspx" />
     <Content Include="Menu\css\cart.css" />
+    <Content Include="Menu\css\forms.css" />
     <Content Include="Menu\css\main.css" />
     <Content Include="Menu\css\product.css" />
     <Content Include="Menu\js\main.js" />

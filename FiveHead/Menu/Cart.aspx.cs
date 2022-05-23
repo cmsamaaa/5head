@@ -10,6 +10,7 @@ namespace FiveHead.Menu
     public partial class Cart : System.Web.UI.Page
     {
         ProductsController productsController;
+        CouponsController couponsController;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -36,26 +37,54 @@ namespace FiveHead.Menu
 
             if (cart == null || cart.Count == 0)
             {
-                btn_Order.Visible = false;
+                PlaceHolder_Content.Visible = false;
                 PlaceHolder_Empty.Visible = true;
                 return;
             }
 
+            double totalBill = 0.00;
             foreach (KeyValuePair<int, int> item in cart)
             {
                 productsController = new ProductsController();
                 Product product = productsController.GetProductByID(item.Key);
 
                 html.AppendLine("<li class='cart__item'>");
-                html.AppendLine(string.Format("<h1>{0}</h1>", product.ProductName));
-                html.AppendLine(string.Format("<h2>Quantity: {0}</h2>", item.Value));
+                html.AppendLine(string.Format("<h2>{0}</h2>", product.ProductName));
+                html.AppendLine(string.Format("<h4>${0:0.00}</h4>", product.Price));
+                html.AppendLine(string.Format("<h4>Qty: {0}</h4>", item.Value));
                 html.AppendLine("<input type='hidden' name='actionCommand' id='actionCommand' />");
                 html.AppendLine("<input type='hidden' name='productID' id='productID' />");
                 html.AppendLine(string.Format("<a href='#' class='btn-custom danger' onclick=\"doPostBack('remove', {0}); return false;\">Remove</a>", product.ProductID));
                 html.AppendLine("</li>");
+
+                totalBill += product.Price * item.Value;
             }
 
             list_Cart.InnerHtml = html.ToString();
+            lbl_TotalBill.Text = string.Format("${0:0.00}", totalBill);
+        }
+
+        private double GetCartBill()
+        {
+            Dictionary<int, int> cart = (Dictionary<int, int>)Session["cartSession"];
+
+            if (cart == null || cart.Count == 0)
+            {
+                PlaceHolder_Content.Visible = false;
+                PlaceHolder_Empty.Visible = true;
+                return 0;
+            }
+
+            double totalBill = 0.00;
+            foreach (KeyValuePair<int, int> item in cart)
+            {
+                productsController = new ProductsController();
+                Product product = productsController.GetProductByID(item.Key);
+
+                totalBill += product.Price * item.Value;
+            }
+
+            return totalBill;
         }
 
         private void RemoveFromCart()
@@ -78,6 +107,36 @@ namespace FiveHead.Menu
             Session["cartSession"] = cart;
 
             BindCart();
+        }
+
+        protected void btn_Coupon_Click(object sender, EventArgs e)
+        {
+            couponsController = new CouponsController();
+            string code = tb_Coupon.Value + "";
+             
+            Coupon coupon = couponsController.GetCouponByCode(code.Trim());
+            if (coupon == null)
+                return;
+
+            int discount = coupon.Discount;
+            if (coupon.Deactivated)
+                discount = 0;
+
+            double totalBill = GetCartBill();
+            double newBill = Math.Round(totalBill * (100 - discount) / 100, 2);
+
+            if (discount > 0)
+                lbl_TotalBill.Text = string.Format("${0:0.00} (-{1}%)", newBill, discount, code.Trim());
+            else
+                ShowMessage("The coupon code has already expired!");
+        }
+
+        private void ShowMessage(string Message)
+        {
+            if (!ClientScript.IsClientScriptBlockRegistered("MyMessage"))
+            {
+                ClientScript.RegisterClientScriptBlock(this.GetType(), "MyMessage", "alert('" + Message + "');", true);
+            }
         }
     }
 }
