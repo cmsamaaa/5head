@@ -20,7 +20,11 @@ namespace FiveHead.Menu
             
             if(IsPostBack)
             {
-                AddToCart();
+                string actionCommand = Request.Form["actionCommand"] + "";
+                actionCommand = Regex.Replace(actionCommand, @"[^0-9a-zA-Z\._]", "");
+
+                if (actionCommand.Equals("add"))
+                    AddToCart();
             }
         }
 
@@ -60,7 +64,7 @@ namespace FiveHead.Menu
                 html.AppendLine("<div class='card__actions'>");
                 html.AppendLine("<input type='hidden' name='actionCommand' id='actionCommand' />");
                 html.AppendLine("<input type='hidden' name='productID' id='productID' />");
-                html.AppendLine(string.Format("<a href='#' class='btn-custom' onclick=\"doPostBack('remove', {0}); return false;\">Add to Cart</a>", productID));
+                html.AppendLine(string.Format("<a href='#' class='btn-custom' onclick=\"doPostBack('add', {0}); return false;\">Add to Cart</a>", productID));
                 html.AppendLine("</div>");
                 html.AppendLine("</article>");
             });
@@ -70,14 +74,8 @@ namespace FiveHead.Menu
 
         private void AddToCart()
         {
-            string actionCommand = Request.Form["actionCommand"] + "";
-            actionCommand = Regex.Replace(actionCommand, @"[^0-9a-zA-Z\._]", "");
-
-            if (!actionCommand.Equals("remove"))
-                return;
-
             int productID = Convert.ToInt32(Regex.Replace(Request.Form["productID"], @"[^0-9a-zA-Z\._]", ""));
-            if (Session["cartSession"] == null)
+            if ((Dictionary<int, int>)Session["cartSession"] == null)
             {
                 Dictionary<int, int> cart = new Dictionary<int, int>();
                 cart.Add(productID, 1);
@@ -86,12 +84,7 @@ namespace FiveHead.Menu
             else
             {
                 Dictionary<int, int> cart = (Dictionary<int, int>)Session["cartSession"];
-                bool isExisting = false;
-
-                foreach (KeyValuePair<int, int> item in cart)
-                    isExisting = productID == item.Key ? true : false;
-
-                if (isExisting)
+                if (cart.ContainsKey(productID))
                 {
                     int value = cart[productID];
                     cart[productID] = value + 1;
