@@ -14,3 +14,9 @@ function menuToggleClickHandler() {
 
 backdrop.addEventListener('click', backdropClickHandler);
 menuToggle.addEventListener('click', menuToggleClickHandler);
+
+function doPostBack(actionCommand, productID) {
+    document.getElementById('actionCommand').value = actionCommand;
+    document.getElementById('productID').value = productID;
+    document.forms[0].submit();
+}

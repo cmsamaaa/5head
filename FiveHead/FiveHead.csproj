@@ -1787,7 +1787,6 @@
     <Content Include="Admin\ViewAllAccounts.aspx" />
     <Content Include="Admin\ViewAllProfiles.aspx" />
     <Content Include="Default.aspx" />
-    <Content Include="Menu\AddCart.aspx" />
     <Content Include="Menu\Cart.aspx" />
     <Content Include="Menu\css\cart.css" />
     <Content Include="Menu\css\main.css" />
@@ -1969,13 +1968,6 @@
     <Compile Include="Entity\Coupon.cs" />
     <Compile Include="Entity\Order.cs" />
     <Compile Include="Entity\Product.cs" />
-    <Compile Include="Menu\AddCart.aspx.cs">
-      <DependentUpon>AddCart.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Menu\AddCart.aspx.designer.cs">
-      <DependentUpon>AddCart.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Menu\Cart.aspx.cs">
       <DependentUpon>Cart.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

@@ -3,6 +3,7 @@ using FiveHead.Entity;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace FiveHead.Menu
 {
@@ -15,6 +16,11 @@ namespace FiveHead.Menu
             if (!IsPostBack)
             {
                 BindProducts();
+            }
+            
+            if(IsPostBack)
+            {
+                AddToCart();
             }
         }
 
@@ -52,12 +58,49 @@ namespace FiveHead.Menu
                 html.AppendLine("</h2>");
                 html.AppendLine("</div>");
                 html.AppendLine("<div class='card__actions'>");
-                html.AppendLine(string.Format("<a href='AddCart.aspx?id={0}' target='_blank' class='btn-custom' onclick=\"window.open(this.href, 'Add to Cart', 'left=10,top=10,width=20,height=20,toolbar=1,resizable=0'); return false;\"'>Add to Cart</a>", productID));
+                html.AppendLine("<input type='hidden' name='actionCommand' id='actionCommand' />");
+                html.AppendLine("<input type='hidden' name='productID' id='productID' />");
+                html.AppendLine(string.Format("<a href='#' class='btn-custom' onclick=\"doPostBack('remove', {0}); return false;\">Add to Cart</a>", productID));
                 html.AppendLine("</div>");
                 html.AppendLine("</article>");
             });
 
             list_Products.InnerHtml = html.ToString();
+        }
+
+        private void AddToCart()
+        {
+            string actionCommand = Request.Form["actionCommand"] + "";
+            actionCommand = Regex.Replace(actionCommand, @"[^0-9a-zA-Z\._]", "");
+
+            if (!actionCommand.Equals("remove"))
+                return;
+
+            int productID = Convert.ToInt32(Regex.Replace(Request.Form["productID"], @"[^0-9a-zA-Z\._]", ""));
+            if (Session["cartSession"] == null)
+            {
+                Dictionary<int, int> cart = new Dictionary<int, int>();
+                cart.Add(productID, 1);
+                Session["cartSession"] = cart;
+            }
+            else
+            {
+                Dictionary<int, int> cart = (Dictionary<int, int>)Session["cartSession"];
+                bool isExisting = false;
+
+                foreach (KeyValuePair<int, int> item in cart)
+                    isExisting = productID == item.Key ? true : false;
+
+                if (isExisting)
+                {
+                    int value = cart[productID];
+                    cart[productID] = value + 1;
+                }
+                else
+                    cart.Add(productID, 1);
+
+                Session["cartSession"] = cart;
+            }
         }
     }
 }
