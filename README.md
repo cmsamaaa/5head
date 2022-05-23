@@ -47,7 +47,7 @@
     Password: 123
 	
 	Owner Account (required to see and use owner features)
-    Username: manager
+    Username: owner
     Password: 111
 
     Manager Account (required to see and use manager features)
