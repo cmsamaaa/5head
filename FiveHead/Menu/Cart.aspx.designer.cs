@@ -69,6 +69,15 @@ namespace FiveHead.Menu
         protected global::System.Web.UI.WebControls.Label lbl_TotalBill;
 
         /// <summary>
+        /// btn_Clear control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btn_Clear;
+
+        /// <summary>
         /// btn_Order control.
         /// </summary>
         /// <remarks>

@@ -50,7 +50,7 @@ namespace FiveHead.Menu
                 Product product = productsController.GetProductByID(item.Key);
 
                 html.AppendLine("<li class='cart__item'>");
-                html.AppendLine(string.Format("<h2>{0}</h2>", product.ProductName));
+                html.AppendLine(string.Format("<h2 style='width:10rem;'>{0}</h2>", product.ProductName));
                 html.AppendLine(string.Format("<h4>${0:0.00}/qty</h4>", product.Price));
                 html.AppendLine(string.Format("<h4>Qty: {0}</h4>", item.Value));
                 html.AppendLine("<input type='hidden' name='actionCommand' id='actionCommand' />");
@@ -150,6 +150,12 @@ namespace FiveHead.Menu
                 lbl_TotalBill.Text = string.Format("${0:0.00} (-{1}%)", newBill, discount, code.Trim());
             else
                 ShowMessage("The coupon code has already expired!");
+        }
+
+        protected void btn_Clear_Click(object sender, EventArgs e)
+        {
+            Session["cartSession"] = null;
+            BindCart();
         }
 
         protected void btn_Order_Click(object sender, EventArgs e)

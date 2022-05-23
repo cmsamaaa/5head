@@ -9,7 +9,7 @@
     <div class="form-control coupon__input">
         <input runat="server" class="input-box" type="text" name="tb_Search" id="tb_Search" placeholder="Product Name"/>
         <button id="btn_Search" runat="server" class="btn-custom" onserverclick="btn_Search_Click">Search</button>
-        <button id="btn_Clear" runat="server" class="btn-custom" onserverclick="btn_Clear_Click">Clear</button>
+        <button id="btn_Clear" runat="server" class="btn-custom danger" onserverclick="btn_Clear_Click">Clear</button>
     </div>
     <div class="form-control coupon__input">
         <select runat="server" class="input-box" id="ddl_Category">

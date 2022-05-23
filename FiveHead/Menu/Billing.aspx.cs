@@ -37,7 +37,7 @@ namespace FiveHead.Menu
             foreach(Order order in orders)
             {
                 html.AppendLine("<li class='cart__item'>");
-                html.AppendLine(string.Format("<h2>{0}</h2>", order.ProductName));
+                html.AppendLine(string.Format("<h2 style='width:10rem;'>{0}</h2>", order.ProductName));
                 html.AppendLine(string.Format("<h4>${0:0.00}/qty</h4>", order.Price));
                 html.AppendLine(string.Format("<h4>Qty: {0}</h4>", order.ProductQty));
                 html.AppendLine("</li>");
