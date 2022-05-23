@@ -40,14 +40,14 @@ namespace FiveHead.Restaurant
                 if (!deactivated)
                 {
                     dr["suspend"] = "Suspend";
-                    dr["message"] = "return confirm('Are you sure you want to suspend the category?')";
+                    dr["message"] = "return confirm('Are you sure you want to suspend the menu item?')";
                     dr["css"] = "btn btn-danger";
                     dr["editVisible"] = true;
                 }
                 else
                 {
                     dr["suspend"] = "Re-activate";
-                    dr["message"] = "return confirm('Are you sure you want to re-activate the category?')";
+                    dr["message"] = "return confirm('Are you sure you want to re-activate the menu item?')";
                     dr["css"] = "btn btn-success";
                     dr["editVisible"] = false;
                 }
