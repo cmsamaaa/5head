@@ -6,7 +6,9 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder_PageContent" runat="server">
     <div class="grid" runat="server" id="list_Products"></div>
     <asp:PlaceHolder ID="PlaceHolder_Empty" runat="server" Visible="false">
-        <h1>No Products Found!</h1>
+        <div class="centered">
+            <h1>No Products Found!</h1>
+        </div>
     </asp:PlaceHolder>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder_Scripts" runat="server">

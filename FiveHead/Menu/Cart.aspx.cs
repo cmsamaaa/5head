@@ -51,7 +51,7 @@ namespace FiveHead.Menu
 
                 html.AppendLine("<li class='cart__item'>");
                 html.AppendLine(string.Format("<h2>{0}</h2>", product.ProductName));
-                html.AppendLine(string.Format("<h4>${0:0.00}</h4>", product.Price));
+                html.AppendLine(string.Format("<h4>${0:0.00}/qty</h4>", product.Price));
                 html.AppendLine(string.Format("<h4>Qty: {0}</h4>", item.Value));
                 html.AppendLine("<input type='hidden' name='actionCommand' id='actionCommand' />");
                 html.AppendLine("<input type='hidden' name='productID' id='productID' />");
@@ -154,12 +154,16 @@ namespace FiveHead.Menu
 
         protected void btn_Order_Click(object sender, EventArgs e)
         {
+
             Dictionary<int, int> cart = (Dictionary<int, int>)Session["cartSession"];
             List<Product> products = new List<Product>();
-            bool sessionExist = int.TryParse(Session["tableNo"].ToString(), out int tableNo);
+            bool sessionExist = int.TryParse(Session["tableNo"] + "", out int tableNo);
 
             if (cart == null || cart.Count == 0 || !sessionExist)
                 return;
+
+            ordersController = new OrdersController();
+            int result = ordersController.ClearPendingOrders(tableNo);
 
             foreach (KeyValuePair<int, int> item in cart)
             {
@@ -177,7 +181,7 @@ namespace FiveHead.Menu
             double totalBill = GetCartDiscountedBill(coupon);
             string contact = tb_Contact.Value + "";
 
-            int result = 0;
+            result = 0;
             foreach(Product product in products)
             {
                 ordersController = new OrdersController();
@@ -185,9 +189,9 @@ namespace FiveHead.Menu
             }
 
             if (result == products.Count)
-                ShowMessage("success");
+                Response.Redirect("Billing.aspx", true);
             else
-                ShowMessage("error");
+                ShowMessage("Failed to place the order. Please find the staff for assistance!");
         }
     }
 }

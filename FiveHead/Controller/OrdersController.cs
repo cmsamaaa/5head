@@ -1,4 +1,5 @@
 ﻿using FiveHead.Entity;
+using FiveHead.Scripts.Libraries;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -21,6 +22,29 @@ namespace FiveHead.Controller
         {
 			order = new Order(tableNumber, product.ProductID, product.CategoryID, product.ProductName, productQty, product.Price, DateTime.Now, DateTime.Now, finalPrice, couponCode, contacts);
 			return order.CreateOrder();
+        }
+
+		public List<Order> GetPaymentBill(int tableNumber)
+        {
+			order = new Order();
+			DataSet ds = order.GetPaymentBill(tableNumber, "Not Paid");
+
+			if (ds.Tables[0].Rows.Count > 0)
+				return ds.Tables[0].ToList<Order>();
+			else
+				return null;
+		}
+
+		public int UpdatePayment(int tableNo)
+        {
+			order = new Order(tableNo, "Paid");
+			return order.UpdatePayment();
+		}
+
+		public int ClearPendingOrders(int tableNumber)
+        {
+			order = new Order(tableNumber, "Not Paid");
+			return order.DeleteOrders();
         }
 
 		// Functions

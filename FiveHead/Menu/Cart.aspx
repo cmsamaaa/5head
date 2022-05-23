@@ -24,8 +24,15 @@
         </div>
     </asp:PlaceHolder>
     <asp:PlaceHolder ID="PlaceHolder_Empty" runat="server" Visible="false">
-        <h1>No Products in Cart!</h1>
+        <div class="centered">
+            <h1>No Products in Cart!</h1>
+        </div>
     </asp:PlaceHolder>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder_Scripts" runat="server">
+    <script>
+        const paymentStr = getParameterByName("payment");
+        if (paymentStr == "true")
+            alert("Payment successful!");
+    </script>
 </asp:Content>

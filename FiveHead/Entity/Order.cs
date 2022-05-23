@@ -37,6 +37,12 @@ namespace FiveHead.Entity
             this.OrderID = orderID;
         }
 
+        public Order(int tableNumber, string paymentStatus)
+        {
+            this.TableNumber = tableNumber;
+            this.PaymentStatus = paymentStatus;
+        }
+
         public Order(int tableNumber, string orderStatus, DateTime end_datetime)
         {
             this.TableNumber = tableNumber;
@@ -64,12 +70,19 @@ namespace FiveHead.Entity
             this.Contacts = contacts;
         }
 
-        public Order(Order order) : this(order.OrderID)
+        public Order(int orderID, int tableNumber, int productID, int categoryID, string productName, int productQty, double price, DateTime start_datetime, DateTime end_datetime, string paymentStatus, string orderStatus, double finalPrice, string couponCode, string contacts) 
+            : this(tableNumber, productID, categoryID, productName, productQty, price, start_datetime, end_datetime, finalPrice, couponCode, contacts)
+        {
+            this.OrderID = orderID;
+            this.PaymentStatus = paymentStatus;
+            this.OrderStatus =  orderStatus;
+        }
+
+        public Order(Order order) 
+            : this(order.orderID, order.tableNumber, order.productID, order.categoryID, order.productName, order.productQty, order.price, order.start_datetime, order.end_datetime, order.paymentStatus, order.orderStatus, order.finalPrice, order.couponCode, order.contacts)
         {
             if(order == null)
-            {
                 throw new ArgumentNullException();
-            }
         }
 
         public int OrderID { get => orderID; set => orderID = value; }
@@ -127,6 +140,114 @@ namespace FiveHead.Entity
                 sqlCmd.Parameters.AddWithValue("@finalPrice", this.finalPrice);
                 sqlCmd.Parameters.AddWithValue("@couponCode", this.couponCode);
                 sqlCmd.Parameters.AddWithValue("@contacts", this.contacts);
+                conn.Open();
+                result = sqlCmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                errMsg = ex.Message;
+            }
+            finally
+            {
+                dbConn.CloseConnection(conn);
+            }
+
+            return result;
+        }
+
+        public DataSet GetPaymentBill(int tableNumber, string paymentStatus)
+        {
+            StringBuilder sql;
+            MySqlDataAdapter da;
+            DataSet ds;
+
+            MySqlConnection conn = dbConn.GetConnection();
+            ds = new DataSet();
+            sql = new StringBuilder();
+            sql.AppendLine("SELECT *");
+            sql.AppendLine(" ");
+            sql.AppendLine("FROM Orders");
+            sql.AppendLine(" ");
+            sql.AppendLine("WHERE tableNumber=@tableNumber AND paymentStatus=@paymentStatus");
+            conn.Open();
+
+            try
+            {
+                da = mySQL.adapter_set_query(sql.ToString(), conn);
+                da.SelectCommand.Parameters.AddWithValue("tableNumber", tableNumber);
+                da.SelectCommand.Parameters.AddWithValue("paymentStatus", paymentStatus);
+                da.Fill(ds);
+            }
+            catch (Exception ex)
+            {
+                errMsg = ex.Message;
+            }
+            finally
+            {
+                dbConn.CloseConnection(conn);
+            }
+
+            return ds;
+        }
+
+        public int UpdatePayment()
+        {
+            StringBuilder sql;
+            MySqlCommand sqlCmd;
+            int result;
+
+            result = 0;
+
+            sql = new StringBuilder();
+            sql.AppendLine("UPDATE Orders");
+            sql.AppendLine(" ");
+            sql.AppendLine("SET paymentStatus=@newPaymentStatus, orderStatus=@orderStatus, end_datetime=@end_datetime");
+            sql.AppendLine(" ");
+            sql.AppendLine("WHERE tableNumber=@tableNumber AND paymentStatus=@paymentStatus");
+            MySqlConnection conn = dbConn.GetConnection();
+            try
+            {
+                sqlCmd = mySQL.cmd_set_connection(sql.ToString(), conn);
+                sqlCmd.Parameters.AddWithValue("@tableNumber", this.TableNumber);
+                sqlCmd.Parameters.AddWithValue("@end_datetime", DateTime.Now);
+                sqlCmd.Parameters.AddWithValue("@paymentStatus", "Not Paid");
+                sqlCmd.Parameters.AddWithValue("@newPaymentStatus", this.PaymentStatus);
+                sqlCmd.Parameters.AddWithValue("@orderStatus", "Active");
+                conn.Open();
+                result = sqlCmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                errMsg = ex.Message;
+            }
+            finally
+            {
+                dbConn.CloseConnection(conn);
+            }
+
+            return result;
+        }
+
+        public int DeleteOrders()
+        {
+            StringBuilder sql;
+            MySqlCommand sqlCmd;
+            int result;
+
+            result = 0;
+
+            sql = new StringBuilder();
+            sql.AppendLine("DELETE");
+            sql.AppendLine(" ");
+            sql.AppendLine("FROM Orders");
+            sql.AppendLine(" ");
+            sql.AppendLine("WHERE tableNumber=@tableNumber AND paymentStatus=@paymentStatus");
+            MySqlConnection conn = dbConn.GetConnection();
+            try
+            {
+                sqlCmd = mySQL.cmd_set_connection(sql.ToString(), conn);
+                sqlCmd.Parameters.AddWithValue("@tableNumber", this.TableNumber);
+                sqlCmd.Parameters.AddWithValue("@paymentStatus", this.PaymentStatus);
                 conn.Open();
                 result = sqlCmd.ExecuteNonQuery();
             }

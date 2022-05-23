@@ -1787,14 +1787,17 @@
     <Content Include="Admin\ViewAllAccounts.aspx" />
     <Content Include="Admin\ViewAllProfiles.aspx" />
     <Content Include="Default.aspx" />
+    <Content Include="Menu\Billing.aspx" />
     <Content Include="Menu\Cart.aspx" />
     <Content Include="Menu\css\cart.css" />
     <Content Include="Menu\css\forms.css" />
     <Content Include="Menu\css\main.css" />
     <Content Include="Menu\css\product.css" />
     <Content Include="Menu\EnterTable.aspx" />
+    <Content Include="Menu\js\custom.js" />
     <Content Include="Menu\js\main.js" />
     <Content Include="Menu\Menu.aspx" />
+    <Content Include="Menu\PaymentSuccess.aspx" />
     <Content Include="PaymentSummary.aspx" />
     <Content Include="Menu_OLD.aspx" />
     <Content Include="Cart_OLD.aspx" />
@@ -1970,6 +1973,13 @@
     <Compile Include="Entity\Coupon.cs" />
     <Compile Include="Entity\Order.cs" />
     <Compile Include="Entity\Product.cs" />
+    <Compile Include="Menu\Billing.aspx.cs">
+      <DependentUpon>Billing.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Menu\Billing.aspx.designer.cs">
+      <DependentUpon>Billing.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Menu\Cart.aspx.cs">
       <DependentUpon>Cart.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1997,6 +2007,13 @@
     </Compile>
     <Compile Include="Menu\Menu.aspx.designer.cs">
       <DependentUpon>Menu.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Menu\PaymentSuccess.aspx.cs">
+      <DependentUpon>PaymentSuccess.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Menu\PaymentSuccess.aspx.designer.cs">
+      <DependentUpon>PaymentSuccess.aspx</DependentUpon>
     </Compile>
     <Compile Include="PaymentSummary.aspx.cs">
       <DependentUpon>PaymentSummary.aspx</DependentUpon>

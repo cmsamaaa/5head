@@ -41,6 +41,7 @@
             </asp:ContentPlaceHolder>
         </main>
         <script src="js/main.js"></script>
+        <script src="js/custom.js"></script>
         <asp:ContentPlaceHolder ID="ContentPlaceHolder_Scripts" runat="server">
         </asp:ContentPlaceHolder>
     </form>
