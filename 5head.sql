@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: May 21, 2022 at 02:03 PM
+-- Generation Time: May 23, 2022 at 12:01 PM
 -- Server version: 8.0.21
 -- PHP Version: 7.3.21
 
@@ -117,11 +117,12 @@ CREATE TABLE IF NOT EXISTS `orders` (
   `start_datetime` datetime NOT NULL,
   `end_datetime` datetime NOT NULL,
   `paymentStatus` varchar(200) DEFAULT 'Not Paid',
-  `orderStatus` varchar(200) DEFAULT 'Not Active',
+  `orderStatus` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT 'Not Active',
   `finalPrice` double NOT NULL,
+  `couponCode` varchar(200) DEFAULT NULL,
   `contacts` varchar(200) NOT NULL,
   PRIMARY KEY (`orderID`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=47 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
