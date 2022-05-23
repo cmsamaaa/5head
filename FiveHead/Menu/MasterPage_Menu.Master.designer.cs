@@ -42,6 +42,42 @@ namespace FiveHead.Menu
         protected global::System.Web.UI.WebControls.ContentPlaceHolder ContentPlaceHolder_Navbar;
 
         /// <summary>
+        /// nav_menu control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor nav_menu;
+
+        /// <summary>
+        /// nav_cart control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor nav_cart;
+
+        /// <summary>
+        /// nav_menu_mobile control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor nav_menu_mobile;
+
+        /// <summary>
+        /// nav_cart_mobile control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor nav_cart_mobile;
+
+        /// <summary>
         /// ContentPlaceHolder_PageContent control.
         /// </summary>
         /// <remarks>

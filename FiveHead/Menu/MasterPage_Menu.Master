@@ -18,10 +18,10 @@
                 <nav class="main-header__nav">
                     <ul class="main-header__item-list">
                         <li class="main-header__item">
-                            <a class="active" href="Menu.aspx">Menu</a>
+                            <a runat="server" id="nav_menu" href="Menu.aspx">Menu</a>
                         </li>
                         <li class="main-header__item">
-                            <a class="" href="Cart.aspx">Cart</a>
+                            <a runat="server" id="nav_cart" href="Cart.aspx">Cart</a>
                         </li>
                     </ul>
                 </nav>
@@ -30,10 +30,10 @@
             <nav class="mobile-nav">
                 <ul class="mobile-nav__item-list">
                     <li class="mobile-nav__item">
-                        <a class="active" href="Menu.aspx">Menu</a>
+                        <a runat="server" id="nav_menu_mobile" href="Menu.aspx">Menu</a>
                     </li>
                     <li class="mobile-nav__item">
-                        <a class="" href="Cart.aspx">Cart</a>
+                        <a runat="server" id="nav_cart_mobile" href="Cart.aspx">Cart</a>
                     </li>
                 </ul>
             </nav>
