@@ -22,6 +22,11 @@
   outline-color: #00695c;
 }
 
+.tableNo__input {
+    width: 10rem;
+    height: 2rem;
+}
+
 .coupon__group-control {
     list-style: none;
     margin: 0;

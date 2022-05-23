@@ -21,6 +21,7 @@ namespace FiveHead.Entity
         private string paymentStatus;
         private string orderStatus;
         private double finalPrice;
+        private string couponCode;
         private string contacts;
 
         /*
@@ -48,6 +49,21 @@ namespace FiveHead.Entity
             this.PaymentStatus = paymentStatus;
         }
 
+        public Order(int tableNumber, int productID, int categoryID, string productName, int productQty, double price, DateTime start_datetime, DateTime end_datetime, double finalPrice, string couponCode, string contacts)
+        {
+            this.TableNumber = tableNumber;
+            this.ProductID = productID;
+            this.CategoryID = categoryID;
+            this.ProductName = productName;
+            this.ProductQty = productQty;
+            this.Price = price;
+            this.Start_datetime = start_datetime;
+            this.End_datetime = end_datetime;
+            this.FinalPrice = finalPrice;
+            this.CouponCode = couponCode;
+            this.Contacts = contacts;
+        }
+
         public Order(Order order) : this(order.OrderID)
         {
             if(order == null)
@@ -68,6 +84,7 @@ namespace FiveHead.Entity
         public string PaymentStatus { get => paymentStatus; set => paymentStatus = value; }
         public string OrderStatus { get => orderStatus; set => orderStatus = value; }
         public double FinalPrice { get => finalPrice; set => finalPrice = value; }
+        public string CouponCode { get => couponCode; set => couponCode = value; }
         public string Contacts { get => contacts; set => contacts = value; }
 
         /*
@@ -82,6 +99,49 @@ namespace FiveHead.Entity
          */
 
         // Order Functions
+
+        public int CreateOrder()
+        {
+            StringBuilder sql;
+            MySqlCommand sqlCmd;
+            int result;
+
+            result = 0;
+
+            sql = new StringBuilder();
+            sql.AppendLine("INSERT INTO Orders (tableNumber, productID, categoryID, productName, productQty, price, start_datetime, end_datetime, finalPrice, couponCode, contacts)");
+            sql.AppendLine(" ");
+            sql.AppendLine("VALUES (@tableNumber, @productID, @categoryID, @productName, @productQty, @price, @start_datetime, @end_datetime, @finalPrice, @couponCode, @contacts)");
+            MySqlConnection conn = dbConn.GetConnection();
+            try
+            {
+                sqlCmd = mySQL.cmd_set_connection(sql.ToString(), conn);
+                sqlCmd.Parameters.AddWithValue("@tableNumber", this.TableNumber);
+                sqlCmd.Parameters.AddWithValue("@productID", this.ProductID);
+                sqlCmd.Parameters.AddWithValue("@categoryID", this.CategoryID);
+                sqlCmd.Parameters.AddWithValue("@productName", this.ProductName);
+                sqlCmd.Parameters.AddWithValue("@productQty", this.ProductQty);
+                sqlCmd.Parameters.AddWithValue("@price", this.Price);
+                sqlCmd.Parameters.AddWithValue("@start_datetime", this.start_datetime);
+                sqlCmd.Parameters.AddWithValue("@end_datetime", this.end_datetime);
+                sqlCmd.Parameters.AddWithValue("@finalPrice", this.finalPrice);
+                sqlCmd.Parameters.AddWithValue("@couponCode", this.couponCode);
+                sqlCmd.Parameters.AddWithValue("@contacts", this.contacts);
+                conn.Open();
+                result = sqlCmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                errMsg = ex.Message;
+            }
+            finally
+            {
+                dbConn.CloseConnection(conn);
+            }
+
+            return result;
+        }
+
         public int insert_Orders(
             int orderID, int tableNumber, int productID, int categoryID, 
             string productName, int productQty, double price, string start_datetime, 

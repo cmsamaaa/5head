@@ -9,8 +9,9 @@ namespace FiveHead.Menu
 {
     public partial class Cart : System.Web.UI.Page
     {
-        ProductsController productsController;
         CouponsController couponsController;
+        OrdersController ordersController;
+        ProductsController productsController;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -54,7 +55,7 @@ namespace FiveHead.Menu
                 html.AppendLine(string.Format("<h4>Qty: {0}</h4>", item.Value));
                 html.AppendLine("<input type='hidden' name='actionCommand' id='actionCommand' />");
                 html.AppendLine("<input type='hidden' name='productID' id='productID' />");
-                html.AppendLine(string.Format("<a href='#' class='btn-custom danger' onclick=\"doPostBack('remove', {0}); return false;\">Remove</a>", product.ProductID));
+                html.AppendLine(string.Format("<a href='#' class='btn-custom danger' onclick=\"doPostBack('remove', {0}); return false;\"><i class=\"fa fa-trash\" aria-hidden=\"true\"></i></a>", product.ProductID));
                 html.AppendLine("</li>");
 
                 totalBill += product.Price * item.Value;
@@ -109,6 +110,14 @@ namespace FiveHead.Menu
             BindCart();
         }
 
+        private void ShowMessage(string Message)
+        {
+            if (!ClientScript.IsClientScriptBlockRegistered("MyMessage"))
+            {
+                ClientScript.RegisterClientScriptBlock(this.GetType(), "MyMessage", "alert('" + Message + "');", true);
+            }
+        }
+
         protected void btn_Coupon_Click(object sender, EventArgs e)
         {
             couponsController = new CouponsController();
@@ -131,12 +140,43 @@ namespace FiveHead.Menu
                 ShowMessage("The coupon code has already expired!");
         }
 
-        private void ShowMessage(string Message)
+        protected void btn_Order_Click(object sender, EventArgs e)
         {
-            if (!ClientScript.IsClientScriptBlockRegistered("MyMessage"))
+            Dictionary<int, int> cart = (Dictionary<int, int>)Session["cartSession"];
+            List<Product> products = new List<Product>();
+            bool sessionExist = int.TryParse(Session["tableNo"].ToString(), out int tableNo);
+
+            if (cart == null || cart.Count == 0 || !sessionExist)
+                return;
+
+            foreach (KeyValuePair<int, int> item in cart)
             {
-                ClientScript.RegisterClientScriptBlock(this.GetType(), "MyMessage", "alert('" + Message + "');", true);
+                productsController = new ProductsController();
+                Product product = productsController.GetProductByID(item.Key);
+                products.Add(product);
             }
+
+            double totalBill = GetCartBill();
+
+            string code = tb_Coupon.Value + "";
+            couponsController = new CouponsController();
+            Coupon coupon = couponsController.GetCouponByCode(code.Trim());
+            if (coupon == null)
+                code = "";
+
+            string contact = tb_Contact.Value + "";
+
+            int result = 0;
+            foreach(Product product in products)
+            {
+                ordersController = new OrdersController();
+                result += ordersController.CreateOrder(product, tableNo, cart[product.ProductID], totalBill, code, contact);
+            }
+
+            if (result == products.Count)
+                ShowMessage("success");
+            else
+                ShowMessage("error");
         }
     }
 }

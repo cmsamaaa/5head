@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace FiveHead.Menu
 {
@@ -11,7 +7,15 @@ namespace FiveHead.Menu
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!IsPostBack)
+            {
+                string path = HttpContext.Current.Request.Url.AbsolutePath;
+                if (path.Equals("/Menu/EnterTable.aspx"))
+                    return;
 
+                if (Session["tableNo"] == null)
+                    Response.Redirect("EnterTable.aspx", true);
+            }
         }
     }
 }

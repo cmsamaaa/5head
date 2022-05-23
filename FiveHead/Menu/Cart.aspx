@@ -4,6 +4,7 @@
     <link rel="stylesheet" href="css/cart.css">
     <link rel="stylesheet" href="css/forms.css">
     <link rel="stylesheet" href="css/product.css">
+    <link rel="stylesheet" href="/Admin/vendor/fontawesome-free/css/all.min.css" type="text/css" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder_PageContent" runat="server">
     <ul class='cart__item-list' runat="server" id="list_Cart"></ul>
@@ -14,10 +15,12 @@
                 <button id="btn_Coupon" runat="server" class="btn-custom" onserverclick="btn_Coupon_Click">Use Coupon</button>
             </div>
             <div class="form-control coupon__input">
-                <h4>Total Bill: <asp:Label ID="lbl_TotalBill" runat="server"></asp:Label></h4>
-                <asp:Button ID="btn_Order" CssClass="btn-custom" runat="server" Text="Place Order" />
+                <input runat="server" class="input-box" type="text" name="tb_Contact" id="tb_Contact" placeholder="Enter contact information"/>
             </div>
-            
+            <div class="form-control coupon__input">
+                <h4>Total Bill: <asp:Label ID="lbl_TotalBill" runat="server"></asp:Label></h4>
+                <asp:Button ID="btn_Order" CssClass="btn-custom" runat="server" Text="Place Order" OnClick="btn_Order_Click" />
+            </div>
         </div>
     </asp:PlaceHolder>
     <asp:PlaceHolder ID="PlaceHolder_Empty" runat="server" Visible="false">

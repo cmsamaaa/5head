@@ -1792,6 +1792,7 @@
     <Content Include="Menu\css\forms.css" />
     <Content Include="Menu\css\main.css" />
     <Content Include="Menu\css\product.css" />
+    <Content Include="Menu\EnterTable.aspx" />
     <Content Include="Menu\js\main.js" />
     <Content Include="Menu\Menu.aspx" />
     <Content Include="PaymentSummary.aspx" />
@@ -1975,6 +1976,13 @@
     </Compile>
     <Compile Include="Menu\Cart.aspx.designer.cs">
       <DependentUpon>Cart.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Menu\EnterTable.aspx.cs">
+      <DependentUpon>EnterTable.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Menu\EnterTable.aspx.designer.cs">
+      <DependentUpon>EnterTable.aspx</DependentUpon>
     </Compile>
     <Compile Include="Menu\MasterPage_Menu.Master.cs">
       <DependentUpon>MasterPage_Menu.Master</DependentUpon>

@@ -51,6 +51,15 @@ namespace FiveHead.Menu
         protected global::System.Web.UI.HtmlControls.HtmlButton btn_Coupon;
 
         /// <summary>
+        /// tb_Contact control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText tb_Contact;
+
+        /// <summary>
         /// lbl_TotalBill control.
         /// </summary>
         /// <remarks>

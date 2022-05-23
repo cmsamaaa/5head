@@ -17,6 +17,12 @@ namespace FiveHead.Controller
 			// Initialize
         }
 
+		public int CreateOrder(Product product, int tableNumber, int productQty, double finalPrice, string couponCode, string contacts)
+        {
+			order = new Order(tableNumber, product.ProductID, product.CategoryID, product.ProductName, productQty, product.Price, DateTime.Now, DateTime.Now, finalPrice, couponCode, contacts);
+			return order.CreateOrder();
+        }
+
 		// Functions
 		public int CheckoutCart(string coupon_Code, List<List<String>> cart)
 		{
