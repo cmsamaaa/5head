@@ -88,6 +88,19 @@ namespace FiveHead.Menu
             return totalBill;
         }
 
+        private double GetCartDiscountedBill(Coupon coupon)
+        {
+            if (coupon == null)
+                return 0;
+
+            int discount = coupon.Discount;
+            if (coupon.Deactivated)
+                discount = 0;
+
+            double totalBill = GetCartBill();
+            return Math.Round(totalBill * (100 - discount) / 100, 2);
+        }
+
         private void RemoveFromCart()
         {
             if ((Dictionary<int, int>)Session["cartSession"] == null)
@@ -124,15 +137,14 @@ namespace FiveHead.Menu
             string code = tb_Coupon.Value + "";
              
             Coupon coupon = couponsController.GetCouponByCode(code.Trim());
+            double newBill = GetCartDiscountedBill(coupon);
+
             if (coupon == null)
                 return;
 
             int discount = coupon.Discount;
             if (coupon.Deactivated)
                 discount = 0;
-
-            double totalBill = GetCartBill();
-            double newBill = Math.Round(totalBill * (100 - discount) / 100, 2);
 
             if (discount > 0)
                 lbl_TotalBill.Text = string.Format("${0:0.00} (-{1}%)", newBill, discount, code.Trim());
@@ -156,14 +168,13 @@ namespace FiveHead.Menu
                 products.Add(product);
             }
 
-            double totalBill = GetCartBill();
-
             string code = tb_Coupon.Value + "";
             couponsController = new CouponsController();
             Coupon coupon = couponsController.GetCouponByCode(code.Trim());
             if (coupon == null)
                 code = "";
 
+            double totalBill = GetCartDiscountedBill(coupon);
             string contact = tb_Contact.Value + "";
 
             int result = 0;
