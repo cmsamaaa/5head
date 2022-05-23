@@ -1305,6 +1305,138 @@ namespace FiveHead.Entity
 
             return dataset;
         }
+        public List<List<String>> get_weekly_visits(string contacts)
+        {
+            /*
+             * Get Total visits per week
+             */
+
+            // Variables
+            int number_of_rows = -1; // Default to -1
+            List<List<String>> dataset = new List<List<String>>(); // Container to store results of SQL Query
+
+            // Define Connection String
+            string sql_stmt = "SELECT contacts, start_datetime, end_datetime, COUNT(DISTINCT start_datetime) As weekly_Count" + " " + 
+                "FROM orders" + " " +
+                "WHERE" + " " +
+                "contacts = " + "'" + contacts + "'" + " " +
+                "GROUP BY " + "WEEK(start_datetime);";
+            MySqlConnection conn = dbConn.GetConnection();
+            MySqlCommand cmd = new MySqlCommand(sql_stmt, conn);
+
+            try
+            {
+                // Open Database connection
+                conn.Open();
+
+                // Execute Query
+                cmd.ExecuteNonQuery();
+
+                // Fetch query result
+                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+
+                foreach (DataRow dr in dt.Rows)
+                {
+                    List<String> curr_row = new List<String>(); // List Object of type List<String> to store current row
+
+                    // Read Data
+                    // Get Values from column names
+                    string tmp_contacts = dr["contacts"].ToString();
+                    string tmp_startDateTime = dr["start_datetime"].ToString();
+                    string tmp_endDateTime = dr["end_datetime"].ToString();
+                    string tmp_Count = dr["weekly_Count"].ToString();
+
+                    // Append values received from current row column values
+                    curr_row.Add(tmp_contacts);
+                    curr_row.Add(tmp_startDateTime);
+                    curr_row.Add(tmp_endDateTime);
+                    curr_row.Add(tmp_Count);
+
+                    // Append current row to result dataset
+                    dataset.Add(curr_row);
+
+                    number_of_rows += 1;
+                }
+            }
+            catch (Exception ex)
+            {
+                errMsg = ex.Message.ToString();
+            }
+            finally
+            {
+                dbConn.CloseConnection(conn);
+            }
+
+            return dataset;
+        }
+        public List<List<String>> get_monthly_visits(string contacts)
+        {
+            /*
+             * Get Total visits per month
+             */
+
+            // Variables
+            int number_of_rows = -1; // Default to -1
+            List<List<String>> dataset = new List<List<String>>(); // Container to store results of SQL Query
+
+            // Define Connection String
+            string sql_stmt = "SELECT contacts, start_datetime, end_datetime, COUNT(DISTINCT start_datetime) As monthly_Count" + " " + 
+                "FROM orders" + " " +
+                "WHERE" + " " +
+                "contacts = " + "'" + contacts + "'" + " " +
+                "GROUP BY " + "MONTH(start_datetime);";
+            MySqlConnection conn = dbConn.GetConnection();
+            MySqlCommand cmd = new MySqlCommand(sql_stmt, conn);
+
+            try
+            {
+                // Open Database connection
+                conn.Open();
+
+                // Execute Query
+                cmd.ExecuteNonQuery();
+
+                // Fetch query result
+                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+
+                foreach (DataRow dr in dt.Rows)
+                {
+                    List<String> curr_row = new List<String>(); // List Object of type List<String> to store current row
+
+                    // Read Data
+                    // Get Values from column names
+                    string tmp_contacts = dr["contacts"].ToString();
+                    string tmp_startDateTime = dr["start_datetime"].ToString();
+                    string tmp_endDateTime = dr["end_datetime"].ToString();
+                    string tmp_Count = dr["monthly_Count"].ToString();
+
+                    // Append values received from current row column values
+                    curr_row.Add(tmp_contacts);
+                    curr_row.Add(tmp_startDateTime);
+                    curr_row.Add(tmp_endDateTime);
+                    curr_row.Add(tmp_Count);
+
+                    // Append current row to result dataset
+                    dataset.Add(curr_row);
+
+                    number_of_rows += 1;
+                }
+            }
+            catch (Exception ex)
+            {
+                errMsg = ex.Message.ToString();
+            }
+            finally
+            {
+                dbConn.CloseConnection(conn);
+            }
+
+            return dataset;
+        }
         public List<String> get_last_Entry(string contact)
         {
             /*

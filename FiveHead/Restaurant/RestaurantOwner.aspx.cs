@@ -135,7 +135,7 @@ namespace FiveHead.Restaurant
              * Headers 
              */
             // Create Table Header
-            List<String> HeaderText = new List<String>() { "s/n", "Contact", "Total Visits", "Total Spending", "Average Spending" };
+            List<String> HeaderText = new List<String>() { "s/n", "Contact", "Total Visits", "Total Spending", "Average Overall Spending" };
 
             // Create new Table Header Row
             TableHeaderRow header = new TableHeaderRow();
@@ -177,6 +177,150 @@ namespace FiveHead.Restaurant
                 tbl_avgSpending.Rows.Add(tr);
             }
         }
+        public void DisplayTotalOrders()
+        {
+            /*
+             * Display Daily Orders
+             */
+
+            // Initialize Variables
+            List<List<String>> frequency_of_Orders_Total = new List<List<String>>(); // Average Spending (Daily)
+
+            // Create Table Header
+            List<String> HeaderText = new List<String>();
+
+            // Tables
+            Table tbl_orderFreq_Total = table_total_Orders;       // Table for Frequency of Orders (Daily)
+
+            // Get all contacts
+            List<String> all_contacts = ordersController.GetAllContacts();
+
+            /*
+             * Reset and Clear
+             */
+            tbl_orderFreq_Total.Rows.Clear();
+
+            /*
+             * Frequency of Orders - Total
+             */
+            // Get all contact's frequency of orders
+            for (int i = 0; i < all_contacts.Count; i++)
+            {
+                // Local loop list
+                List<String> contact_map = new List<string>();
+                double daily_avg_spendings = 0.0;
+                double weekly_avg_spendings = 0.0;
+                double monthly_avg_spendings = 0.0;
+
+                // Get Current Contact
+                string curr_contact = all_contacts[i];
+
+                // Get Number of Visits
+                int number_of_visits = ordersController.GetNumberOfVisitsByContacts(curr_contact);
+
+                // Calculate Daily Average Spending
+                List<List<String>> daily_avg_spendings_report = ordersController.GetDailyAverageSpend(curr_contact);
+                for (int j = 0; j < daily_avg_spendings_report.Count; j++)
+                {
+                    List<String> curr_row = daily_avg_spendings_report[j];
+
+                    String curr_start_Day = curr_row[1];
+                    String curr_end_Day = curr_row[2];
+                    String curr_avg_Spending = curr_row[3];
+
+                    daily_avg_spendings = double.Parse(curr_avg_Spending);
+                }
+
+                // Calculate Weekly Average Spending
+                List<List<String>> weekly_avg_spendings_report = ordersController.GetWeeklyAverageSpend(curr_contact);
+                for (int j = 0; j < weekly_avg_spendings_report.Count; j++)
+                {
+                    List<String> curr_row = weekly_avg_spendings_report[j];
+
+                    String curr_start_Day = curr_row[1];
+                    String curr_end_Day = curr_row[2];
+                    String curr_avg_Spending = curr_row[3];
+
+                    weekly_avg_spendings = double.Parse(curr_avg_Spending);
+                }
+
+                // Calculate Monthly Average Spending
+                List<List<String>> monthly_avg_spendings_report = ordersController.GetMonthlyAverageSpend(curr_contact);
+                for (int j = 0; j < monthly_avg_spendings_report.Count; j++)
+                {
+                    List<String> curr_row = monthly_avg_spendings_report[j];
+
+                    String curr_start_Day = curr_row[1];
+                    String curr_end_Day = curr_row[2];
+                    String curr_avg_Spending = curr_row[3];
+
+                    monthly_avg_spendings = double.Parse(curr_avg_Spending);
+                }
+
+                // Calculate Last Visit
+                int days_since_last_visit = ordersController.CalculateDaysSinceLastVisit(curr_contact);
+
+                // Map Average spending to current contact
+                contact_map.Add((i + 1).ToString());            // Row number
+                contact_map.Add(curr_contact);                  // Contact
+                contact_map.Add(number_of_visits.ToString());           // Number of Total Visits
+                contact_map.Add(days_since_last_visit.ToString());       // Days since last visit
+                contact_map.Add(Math.Round(daily_avg_spendings, 2).ToString());    // Daily Average Spending
+                contact_map.Add(Math.Round(weekly_avg_spendings, 2).ToString());    // Weekly Average Spending
+                contact_map.Add(Math.Round(monthly_avg_spendings, 2).ToString());   // Monthly Average Spending
+
+                // Add Local list to Average Spending 
+                frequency_of_Orders_Total.Add(contact_map);
+            }
+
+
+            /*
+             * Headers 
+             */
+
+            // Define Header Rows
+            HeaderText = new List<String>() { "s/n", "Contact", "Total Visits", "Number of Days since last visit", "Daily Average Spendings", "Weekly Average Spendings", "Monthly Average Spendings" };
+
+            // Create new Table Header Row
+            TableHeaderRow header_Daily = new TableHeaderRow();
+            for (int i = 0; i < HeaderText.Count; i++)
+            {
+                // Create new cell
+                TableCell curr_header = new TableCell();
+
+                // Populate Cell
+                curr_header.Text = HeaderText[i];
+
+                // Add Cell to Header Row
+                header_Daily.Cells.Add(curr_header);
+            }
+
+            // Add Header Row to Table
+            tbl_orderFreq_Total.Rows.Add(header_Daily);
+
+            for (int i = 0; i < frequency_of_Orders_Total.Count; i++)
+            {
+                TableRow tr = new TableRow();
+                List<String> curr_row = frequency_of_Orders_Total[i];
+
+                for (int j = 0; j < curr_row.Count; j++)
+                {
+                    /*
+                     * Get Cells in current row
+                     */
+                    TableCell new_cell = new TableCell();
+
+                    //table_MenuItems.Text += " | " + curr_row[j].ToString().Replace(Environment.NewLine, "<br/>");
+                    new_cell.Text = curr_row[j];
+
+                    // Add Cell to row
+                    tr.Cells.Add(new_cell);
+                }
+
+                // Append Rows to table
+                tbl_orderFreq_Total.Rows.Add(tr);
+            }
+        }
         public void DisplayDailyOrders()
         {
             /*
@@ -190,7 +334,7 @@ namespace FiveHead.Restaurant
             List<String> HeaderText = new List<String>();
 
             // Tables
-            Table tbl_orderFreq_Daily = table_frequency_Orders_Daily;       // Table for Frequency of Orders (Daily)
+            Table tbl_orderFreq_Daily = new Table();       // Table for Frequency of Orders (Daily)
 
             // Get all contacts
             List<String> all_contacts = ordersController.GetAllContacts();
@@ -305,7 +449,7 @@ namespace FiveHead.Restaurant
             List<String> HeaderText = new List<String>();
 
             // Tables
-            Table tbl_orderFreq_Weekly = table_frequency_Orders_Weekly;       // Table for Frequency of Orders (Weekly)
+            Table tbl_orderFreq_Weekly = new Table();       // Table for Frequency of Orders (Weekly)
 
             // Get all contacts
             List<String> all_contacts = ordersController.GetAllContacts();
@@ -344,7 +488,7 @@ namespace FiveHead.Restaurant
 
                     weekly_avg_spendings = double.Parse(curr_avg_Spending);
                 }
-                weekly_visits = 0;
+                weekly_visits = ordersController.CalculateWeeklyVisits(curr_contact);
 
                 // Map Average spending to current contact
                 contact_map.Add((i + 1).ToString());            // Row number
@@ -418,7 +562,7 @@ namespace FiveHead.Restaurant
             List<String> HeaderText = new List<String>();
 
             // Tables
-            Table tbl_orderFreq_Monthly = table_frequency_Orders_Monthly;       // Table for Frequency of Orders (Monthly)
+            Table tbl_orderFreq_Monthly = new Table();       // Table for Frequency of Orders (Monthly)
 
             // Get all contacts
             List<String> all_contacts = ordersController.GetAllContacts();
@@ -457,7 +601,7 @@ namespace FiveHead.Restaurant
 
                     monthly_avg_spendings = double.Parse(curr_avg_Spending);
                 }
-                monthly_visits = 0;
+                monthly_visits = ordersController.CalculateMonthlyVisits(curr_contact);
 
                 // Map Average spending to current contact
                 contact_map.Add((i + 1).ToString());            // Row number
@@ -523,10 +667,18 @@ namespace FiveHead.Restaurant
             /*
              * Display Report Table for Frequency of Orders
              * 
+             * - Total
              * - Daily
              * - Monthly
              * - Yearly
              */
+
+            /*
+             * Frequency of Orders - Total
+             */
+            DisplayTotalOrders();
+
+            //=================================================================================================================
 
             /*
              * Frequency of Orders - Daily

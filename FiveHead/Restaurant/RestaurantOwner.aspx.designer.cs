@@ -105,31 +105,13 @@ namespace FiveHead.Restaurant
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl div_freq_orders;
 
         /// <summary>
-        /// table_frequency_Orders_Daily control.
+        /// table_total_Orders control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Table table_frequency_Orders_Daily;
-
-        /// <summary>
-        /// table_frequency_Orders_Weekly control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Table table_frequency_Orders_Weekly;
-
-        /// <summary>
-        /// table_frequency_Orders_Monthly control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Table table_frequency_Orders_Monthly;
+        protected global::System.Web.UI.WebControls.Table table_total_Orders;
 
         /// <summary>
         /// div_preferences control.

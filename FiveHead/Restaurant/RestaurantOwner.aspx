@@ -57,6 +57,11 @@
                 <h2>Frequency of Orders:</h2>
                 <br />
 
+                <h3 style="margin: 2% 2% 2% 2%;">Total:</h3>
+                <asp:Table ID="table_total_Orders" class="tables" GridLines="Both" runat="server"></asp:Table>
+
+<%--                <br />
+
                 <h3 style="margin: 2% 2% 2% 2%;">Daily:</h3>
                 <asp:Table ID="table_frequency_Orders_Daily" class="tables" GridLines="Both" runat="server"></asp:Table>
 
@@ -68,7 +73,7 @@
                 <br />
 
                 <h3 style="margin: 2% 2% 2% 2%;">Monthly:</h3>
-                <asp:Table ID="table_frequency_Orders_Monthly" class="tables" GridLines="Both" runat="server"></asp:Table>
+                <asp:Table ID="table_frequency_Orders_Monthly" class="tables" GridLines="Both" runat="server"></asp:Table>--%>
             </div>
 
             <div id="div_preferences" runat="server">

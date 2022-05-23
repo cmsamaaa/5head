@@ -415,53 +415,17 @@ namespace FiveHead.Controller
 			DateTime prev_end_dt;
 
 			// Get all visits
-			List<List<String>> visits = order.get_visit_datetime(contacts);
+			List<List<String>> visits = order.get_weekly_visits(contacts);
 
 			// Calculate Weekly
 			for (int i = 0; i < visits.Count; i++)
 			{
 				List<String> curr_row_visit = visits[i]; // Current Visit details by Contact
 
-				/* Split Start date-time string into array
-				 * 0 : Date
-				 * 1 : Time
-				 */
-				string start_dt = curr_row_visit[2].ToString(); // Start DateTime
-				string[] start_dt_arr = start_dt.Split(' ');    // Start DateTime array
+				// Count
+				int count = int.Parse(curr_row_visit[3]);
 
-				// Split Date into individual components (Year, Month, Date)
-				string[] start_date_arr = start_dt_arr[0].Split('/');
-				int start_Date = int.Parse(start_date_arr[0]);
-				int start_Month = int.Parse(start_date_arr[1]);
-				int start_Year = int.Parse(start_date_arr[2]);
-
-				/* Split End date-time string into array
-				 * 0 : Date
-				 * 1 : Time
-				 */
-				string end_dt = curr_row_visit[3].ToString();   // End DateTime
-				string[] end_dt_arr = end_dt.Split(' ');
-
-				// Split Date into individual components (Year, Month, Date)
-				string[] end_date_arr = end_dt_arr[0].Split('/');
-				int end_Date = int.Parse(end_date_arr[0]);
-				int end_Month = int.Parse(end_date_arr[1]);
-				int end_Year = int.Parse(end_date_arr[2]);
-
-				// Compare DateTime
-				// If 0 : Same Date
-				// If < 0 : Date Start is earlier than Date End
-				// If > 0 : Date Start is later than Date End
-				DateTime dStart = new DateTime(start_Year, start_Month, start_Date);
-				prev_start_dt = dStart;
-				DateTime dEnd = new DateTime(end_Year, end_Month, end_Date);
-				prev_end_dt = dEnd;
-
-				if (prev_start_dt == dStart.AddDays(7))
-				{
-					/* Same Date */
-					weekly_visits++;
-				}
+				weekly_visits += count;
 			}
 
 			return weekly_visits;
@@ -476,53 +440,17 @@ namespace FiveHead.Controller
 			DateTime prev_end_dt;
 
 			// Get all visits
-			List<List<String>> visits = order.get_visit_datetime(contacts);
+			List<List<String>> visits = order.get_monthly_visits(contacts);
 
 			// Calculate Monthly
 			for (int i = 0; i < visits.Count; i++)
 			{
 				List<String> curr_row_visit = visits[i]; // Current Visit details by Contact
 
-				/* Split Start date-time string into array
-				 * 0 : Date
-				 * 1 : Time
-				 */
-				string start_dt = curr_row_visit[2].ToString(); // Start DateTime
-				string[] start_dt_arr = start_dt.Split(' ');    // Start DateTime array
+				// Count
+				int count = int.Parse(curr_row_visit[3]);
 
-				// Split Date into individual components (Year, Month, Date)
-				string[] start_date_arr = start_dt_arr[0].Split('/');
-				int start_Date = int.Parse(start_date_arr[0]);
-				int start_Month = int.Parse(start_date_arr[1]);
-				int start_Year = int.Parse(start_date_arr[2]);
-
-				/* Split End date-time string into array
-				 * 0 : Date
-				 * 1 : Time
-				 */
-				string end_dt = curr_row_visit[3].ToString();   // End DateTime
-				string[] end_dt_arr = end_dt.Split(' ');
-
-				// Split Date into individual components (Year, Month, Date)
-				string[] end_date_arr = end_dt_arr[0].Split('/');
-				int end_Date = int.Parse(end_date_arr[0]);
-				int end_Month = int.Parse(end_date_arr[1]);
-				int end_Year = int.Parse(end_date_arr[2]);
-
-				// Compare DateTime
-				// If 0 : Same Date
-				// If < 0 : Date Start is earlier than Date End
-				// If > 0 : Date Start is later than Date End
-				DateTime dStart = new DateTime(start_Year, start_Month, start_Date);
-				prev_start_dt = dStart;
-				DateTime dEnd = new DateTime(end_Year, end_Month, end_Date);
-				prev_end_dt = dEnd;
-
-				if (prev_start_dt == dStart.AddMonths(1))
-				{
-					/* Same Date */
-					monthly_visits++;
-				}
+				monthly_visits += count;
 			}
 
 			return monthly_visits;
