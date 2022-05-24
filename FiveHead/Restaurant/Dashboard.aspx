@@ -47,7 +47,7 @@
                                     This is the dashboard for <strong>Restaurant Managers</strong> to create/modify menu, prices and coupons.
                                 </asp:PlaceHolder>
                                 <asp:PlaceHolder ID="PlaceHolder_Owner" runat="server" Visible="false">
-                                    This is the dashboard for <strong>Restaurant Owners</strong> to organise customers' data.
+                                    This is the dashboard for <strong>Restaurant Owners</strong> to view and organise customers' data to improve and grow the business.
                                 </asp:PlaceHolder>
                             </div>
                         </div>

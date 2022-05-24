@@ -1809,35 +1809,6 @@
     <Content Include="Restaurant\Default.aspx" />
     <Content Include="Restaurant\EditCoupon.aspx" />
     <Content Include="Restaurant\EditProduct.aspx" />
-    <Content Include="Restaurant\images\auth\lockscreen-bg.jpg" />
-    <Content Include="Restaurant\images\auth\register-bg.jpg" />
-    <Content Include="Restaurant\images\faces\face1.jpg" />
-    <Content Include="Restaurant\images\faces\face10.jpg" />
-    <Content Include="Restaurant\images\faces\face11.jpg" />
-    <Content Include="Restaurant\images\faces\face12.jpg" />
-    <Content Include="Restaurant\images\faces\face13.jpg" />
-    <Content Include="Restaurant\images\faces\face14.jpg" />
-    <Content Include="Restaurant\images\faces\face15.jpg" />
-    <Content Include="Restaurant\images\faces\face16.jpg" />
-    <Content Include="Restaurant\images\faces\face17.jpg" />
-    <Content Include="Restaurant\images\faces\face18.jpg" />
-    <Content Include="Restaurant\images\faces\face19.jpg" />
-    <Content Include="Restaurant\images\faces\face2.jpg" />
-    <Content Include="Restaurant\images\faces\face20.jpg" />
-    <Content Include="Restaurant\images\faces\face21.jpg" />
-    <Content Include="Restaurant\images\faces\face22.jpg" />
-    <Content Include="Restaurant\images\faces\face23.jpg" />
-    <Content Include="Restaurant\images\faces\face24.jpg" />
-    <Content Include="Restaurant\images\faces\face25.jpg" />
-    <Content Include="Restaurant\images\faces\face26.jpg" />
-    <Content Include="Restaurant\images\faces\face27.jpg" />
-    <Content Include="Restaurant\images\faces\face3.jpg" />
-    <Content Include="Restaurant\images\faces\face4.jpg" />
-    <Content Include="Restaurant\images\faces\face5.jpg" />
-    <Content Include="Restaurant\images\faces\face6.jpg" />
-    <Content Include="Restaurant\images\faces\face7.jpg" />
-    <Content Include="Restaurant\images\faces\face8.jpg" />
-    <Content Include="Restaurant\images\faces\face9.jpg" />
     <Content Include="Restaurant\images\favicon.png" />
     <Content Include="Restaurant\images\login\galaxy-brain-2.png" />
     <Content Include="Restaurant\images\login\galaxy-brain-1.png" />
@@ -1864,7 +1835,6 @@
     <Content Include="Restaurant\Login.aspx" />
     <Content Include="Restaurant\Logout.aspx" />
     <Content Include="Restaurant\EditCategory.aspx" />
-    <Content Include="Restaurant\RestaurantOwner.aspx" />
     <Content Include="Restaurant\SearchOrders.aspx" />
     <Content Include="Restaurant\vendors\base\vendor.bundle.base.css" />
     <Content Include="Restaurant\vendors\base\vendor.bundle.base.js" />
@@ -2075,13 +2045,6 @@
     </Compile>
     <Compile Include="Restaurant\EditProduct.aspx.designer.cs">
       <DependentUpon>EditProduct.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Restaurant\RestaurantOwner.aspx.cs">
-      <DependentUpon>RestaurantOwner.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Restaurant\RestaurantOwner.aspx.designer.cs">
-      <DependentUpon>RestaurantOwner.aspx</DependentUpon>
     </Compile>
     <Compile Include="Restaurant\SearchOrders.aspx.cs">
       <DependentUpon>SearchOrders.aspx</DependentUpon>

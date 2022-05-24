@@ -284,8 +284,6 @@ namespace FiveHead.Controller
 			 * Calculate weekly visits
 			 */
 			int weekly_visits = 0;
-			DateTime prev_start_dt;
-			DateTime prev_end_dt;
 
 			// Get all visits
 			List<List<String>> visits = order.get_weekly_visits(contacts);
@@ -309,8 +307,6 @@ namespace FiveHead.Controller
 			 * Calculate monthly visits
 			 */
 			int monthly_visits = 0;
-			DateTime prev_start_dt;
-			DateTime prev_end_dt;
 
 			// Get all visits
 			List<List<String>> visits = order.get_monthly_visits(contacts);

@@ -604,7 +604,6 @@ namespace FiveHead.Entity
              */
 
             // Variables
-            int number_of_rows = -1; // Default to -1
             string count = "0";
             string sql_stmt = "SELECT Count(DISTINCT start_datetime, end_datetime) As Count FROM orders" + " WHERE " + 
                 "contacts = " + "'" + contacts + "'" + ";"; // Define Connection String
@@ -707,7 +706,6 @@ namespace FiveHead.Entity
              */
 
             // Variables
-            int number_of_rows = -1; // Default to -1
             List<List<String>> dataset = new List<List<String>>(); // Container to store results of SQL Query
 
             // Define Connection String
@@ -1221,7 +1219,6 @@ namespace FiveHead.Entity
              * to get the customer's preference 
              */
             // Variables
-            int number_of_rows = -1; // Default to -1
             int customer_Preference = 0;
 
             // Define Connection String
