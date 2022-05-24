@@ -56,6 +56,7 @@ namespace FiveHead.Restaurant
             img_ProductImage.ImageUrl = string.Format("data:image/png;base64,{0}", Convert.ToBase64String(product.Image));
             tb_Price.Value = string.Format("{0:0.00}", product.Price);
             ddl_Category.Value = product.CategoryID.ToString();
+            Session["UploadedImage"] = Convert.ToBase64String(product.Image);
         }
 
         private byte[] GetImageBytes(HttpPostedFile postedFile)
@@ -73,7 +74,10 @@ namespace FiveHead.Restaurant
             if (!double.TryParse(tb_Price.Value, out double price))
                 Response.Redirect(string.Format("EditProduct.aspx?price=invalid"), true);
 
-            int productID = Convert.ToInt32(Session["edit_ProductID"].ToString());
+            if (string.IsNullOrEmpty(Session["edit_ProductID"] + ""))
+                Response.Redirect("ViewAllProducts.aspx", true);
+
+            int productID = Convert.ToInt32(Session["edit_ProductID"].ToString().Trim());
             byte[] productImg = Convert.FromBase64String(Session["UploadedImage"].ToString());
             string productName = tb_ProductName.Value;
             price = Convert.ToDouble(tb_Price.Value);
