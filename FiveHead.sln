@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32407.343
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FiveHead", "FiveHead.csproj", "{4A6366C8-EFF5-426A-A3EB-0EE29DE152EB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FiveHead", "FiveHead\FiveHead.csproj", "{4A6366C8-EFF5-426A-A3EB-0EE29DE152EB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FiveHead.Tests", "..\FiveHead.Tests\FiveHead.Tests.csproj", "{F8649C78-ED65-423C-9A72-E0F3960C667B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FiveHead.Tests", "FiveHead.Tests\FiveHead.Tests.csproj", "{F8649C78-ED65-423C-9A72-E0F3960C667B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
