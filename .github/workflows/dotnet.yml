@@ -26,6 +26,8 @@ jobs:
               run: dotnet restore
             - name: Build
               run: msbuild /t:Publish /p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingeFile=true /p:PackageLocation="FiveHead"
+            - name: Build Test
+              run: msbuild /t:Publish /p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingeFile=true /p:PackageLocation="FiveHead.Tests"
             - uses: actions/upload-artifact@v2
               with:
                   name: FiveHead
