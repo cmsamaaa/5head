@@ -28,7 +28,13 @@ jobs:
               run: msbuild /t:Publish /p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingeFile=true /p:PackageLocation="FiveHead"
             - name: Build Test
               run: msbuild /t:Publish /p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingeFile=true /p:PackageLocation="FiveHead.Tests"
-            - uses: actions/upload-artifact@v2
+            - name: Publish FiveHead
+              uses: actions/upload-artifact@v2
               with:
                   name: FiveHead
                   path: FiveHead
+            - name: Publish FiveHead.Tests
+              uses: actions/upload-artifact@v2
+              with:
+                  name: FiveHead.Tests
+                  path: FiveHead.Tests
