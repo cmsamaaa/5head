@@ -15,7 +15,7 @@
                     <div class="card-body">
                         <h4 class="card-title">Update Coupon</h4>
                         <p class="card-description">
-                            Create a coupon for restaurant promotions
+                            Edit an existing coupon for restaurant promotions
                         </p>
                         <!-- Alert Message -->
                         <div class="row justify-content-center">
