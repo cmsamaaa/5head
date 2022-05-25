@@ -1,23 +1,32 @@
 name: .NET
 
 on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+    push:
+        branches: [main]
+    pull_request:
+        branches: [main]
 
 jobs:
-  build:
+    build:
+        runs-on: ubuntu-latest
 
-    runs-on: ubuntu-latest
-
-    steps:
-    - uses: actions/checkout@v3
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v2
-      with:
-        dotnet-version: 5.0.x
-    - name: Restore dependencies
-      run: dotnet restore
-    - name: Build
-      run: msbuild /t:Publish /p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingeFile=true /p:PackageLocation="FiveHead"
+        steps:
+            - uses: actions/checkout@v3
+            - uses: actions/cache@v3
+              with:
+                  path: ~/.nuget/packages
+                  key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
+                  restore-keys: |
+                      ${{ runner.os }}-nuget-
+            - name: Setup .NET
+              uses: actions/setup-dotnet@v2
+              with:
+                  dotnet-version: 5.0.x
+            - name: Restore dependencies
+              run: dotnet restore
+            - name: Build
+              run: msbuild /t:Publish /p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingeFile=true /p:PackageLocation="FiveHead"
+            - uses: actions/upload-artifact@v2
+              with:
+                  name: Build-${{ matrix.targetPlatform }}
+                  path: build/${{ matrix.targetPlatform }}
