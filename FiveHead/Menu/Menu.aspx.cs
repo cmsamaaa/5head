@@ -78,7 +78,11 @@ namespace FiveHead.Menu
         private void SetMenuCategories()
         {
             categoriesController = new CategoriesController();
-            categoriesController.GetAllCategories().ForEach(category => ddl_Category.Items.Add(new ListItem(category.CategoryName, category.CategoryID.ToString())));
+            categoriesController.GetAllCategories().ForEach(category =>
+            {
+                if (!category.Deactivated)
+                    ddl_Category.Items.Add(new ListItem(category.CategoryName, category.CategoryID.ToString()));
+            });
         }
 
         private void AddToCart()
