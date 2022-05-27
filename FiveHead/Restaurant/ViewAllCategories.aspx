@@ -56,7 +56,7 @@
                                             <asp:Label ID="lbl_CategoryName" runat="server" Text='<%# Bind("categoryName") %>'></asp:Label>
                                         </ItemTemplate>
                                     </asp:TemplateField>
-                                    <asp:TemplateField ItemStyle-CssClass="col-2">
+                                    <asp:TemplateField ItemStyle-CssClass="col-3">
                                         <ItemTemplate>
                                             <asp:Button ID="btn_Edit" runat="server" Text="Edit" CssClass="btn btn-primary mr-4" CommandName="Edit" CommandArgument='<%#((GridViewRow)Container).RowIndex%>' Visible='<%# Bind("editVisible") %>' />
                                             <asp:Button ID="btn_Suspend" runat="server" Text='<%# Bind("suspend") %>' CssClass='<%# Bind("css") %>' CommandName='<%# Bind("suspend") %>' CommandArgument='<%#((GridViewRow)Container).RowIndex%>' OnClientClick='<%# Bind("message") %>' />

@@ -62,7 +62,7 @@
                                     <asp:Label ID="lbl_ProfileID" runat="server" Text='<%# Bind("profileID") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:TemplateField HeaderText="Profile Name" ItemStyle-CssClass="col-4">
+                            <asp:TemplateField HeaderText="Profile Name">
                                 <ItemTemplate>
                                     <asp:Label ID="lbl_ProfileName" runat="server" Text='<%# Bind("profileName") %>'></asp:Label>
                                 </ItemTemplate>

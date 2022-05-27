@@ -66,7 +66,7 @@
                                             <asp:Label ID="lbl_OrderStatus" runat="server" Text='<%# Bind("orderStatus") %>'></asp:Label>
                                         </ItemTemplate>
                                     </asp:TemplateField>
-                                    <asp:TemplateField ItemStyle-CssClass="col-2">
+                                    <asp:TemplateField ItemStyle-CssClass="col-3">
                                         <ItemTemplate>
                                             <asp:Button ID="btn_View" runat="server" Text='View' CssClass="btn btn-success mr-4" CommandName='View' CommandArgument='<%#((GridViewRow)Container).RowIndex%>' />
                                             <asp:Button ID="btn_Suspend" runat="server" Text='Suspend' CssClass='btn btn-danger' CommandName='Suspend' CommandArgument='<%#((GridViewRow)Container).RowIndex%>' OnClientClick='<%# Bind("message") %>' />
