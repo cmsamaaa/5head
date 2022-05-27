@@ -57,11 +57,3 @@
     Staff Account (required to see and use staff features)
     Username: staff
     Password: 333
-
-### Requirements
-
-To insert project requirements here
-
-### Dependencies
-
-    MySQL.Data
